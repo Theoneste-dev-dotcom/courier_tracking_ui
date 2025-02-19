@@ -67,6 +67,16 @@ const routes = [
     name: "Shipments",
   },
   {
+    path: "/admin/branches",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Branches",
+  },
+  {
+    path: "/admin/users",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Users",
+  },
+  {
     path: "",
     icon: applyIconClass(DocumentDuplicateIcon),
     name: "Pages",

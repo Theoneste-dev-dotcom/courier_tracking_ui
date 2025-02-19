@@ -1,5 +1,5 @@
 import React from 'react'
-import InternalPage from '@/pages/protected/Leads'
+import InternalPage from '@/pages/protected/Users'
 const page = () => {
   return (
     <div>
