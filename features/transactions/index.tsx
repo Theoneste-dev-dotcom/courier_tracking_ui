@@ -96,7 +96,7 @@ function Transactions(){
                             trans.map((l, k) => {
                                 return(
                                     <tr key={k}>
-                                    <td>
+                                    <td className="text-base-content">
                                         <div className="flex items-center space-x-3">
                                             <div className="avatar">
                                                 <div className="mask mask-circle w-12 h-12">
@@ -108,10 +108,10 @@ function Transactions(){
                                             </div>
                                         </div>
                                     </td>
-                                    <td>{l.email}</td>
-                                    <td>{l.location}</td>
-                                    <td>${l.amount}</td>
-                                    <td>{moment(l.date).format("D MMM")}</td>
+                                    <td className="text-base-content">{l.email}</td>
+                                    <td className="text-base-content">{l.location}</td>
+                                    <td className="text-base-content">${l.amount}</td>
+                                    <td className="text-base-content">{moment(l.date).format("D MMM")}</td>
                                     </tr>
                                 )
                             })

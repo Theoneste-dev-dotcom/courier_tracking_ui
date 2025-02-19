@@ -1,9 +1,11 @@
 import React from 'react'
 import Layout from '@/containers/Layout'
-const AppRootLayout = () => {
+const AppRootLayout = ({children} :{children: React.ReactNode}) => {
   return (
     <div>
-      <Layout/>
+      <Layout>
+        {children}
+      </Layout>
     </div>
   )
 }

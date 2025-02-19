@@ -3,17 +3,22 @@ import headerSlice from '../features/common/headerSlice'
 import modalSlice from '../features/common/modalSlice'
 import rightDrawerSlice from '../features/common/rightDrawerSlice'
 import leadsSlice from '../features/leads/leadSlice'
+import { shipmentApi } from '@/features/shippings/shipments_slice'
 
 const combinedReducer = {
   header : headerSlice,
   rightDrawer : rightDrawerSlice,
   modal : modalSlice,
-  lead : leadsSlice
+  lead : leadsSlice,
+  [shipmentApi.reducerPath]: shipmentApi.reducer,
 }
 
 export const makeStore = () => {
   return configureStore({
-    reducer : combinedReducer
+    reducer : combinedReducer,
+    middleware: (getDefaultMiddleare) => {
+      return getDefaultMiddleare().concat(shipmentApi.middleware)
+    }
   })
 }
 

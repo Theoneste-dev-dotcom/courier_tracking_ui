@@ -19,6 +19,7 @@ import KeyIcon from '@heroicons/react/24/outline/KeyIcon'
 import DocumentDuplicateIcon from '@heroicons/react/24/outline/DocumentDuplicateIcon'
 import { HiArrowRightOnRectangle } from "react-icons/hi2";
 
+
 type IconComponentProps = React.SVGAttributes<SVGElement> & {
   className?: string;
 };
@@ -31,34 +32,39 @@ const applyIconClass = (IconComponent:React.ComponentType<IconComponentProps>, i
 
 const routes = [
   {
-    path: "/app/dashboard",
+    path: "/admin/dashboard",
     icon: applyIconClass(Squares2X2Icon),
-    name: "Dashboard",
+    name: "OverView",
   },
   {
-    path: "/app/leads",
+    path: "/admin/users",
     icon: applyIconClass(InboxArrowDownIcon),
-    name: "Leads",
+    name: "Users",
   },
   {
-    path: "/app/transactions",
+    path: "/admin/transactions",
     icon: applyIconClass(CurrencyDollarIcon),
     name: "Transactions",
   },
   {
-    path: "/app/charts",
+    path: "/admin/charts",
     icon: applyIconClass(ChartBarIcon),
     name: "Analytics",
   },
   {
-    path: "/app/integration",
+    path: "/admin/integration",
     icon: applyIconClass(BoltIcon),
     name: "Integration",
   },
   {
-    path: "/app/calendar",
+    path: "/admin/calendar",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Calendar",
+  },
+  {
+    path: "/admin/shipments",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Shipments",
   },
   {
     path: "",
@@ -81,12 +87,12 @@ const routes = [
         name: "Forgot Password",
       },
       {
-        path: "/app/blank",
+        path: "/admin/blank",
         icon: applyIconClass(DocumentIcon, true),
         name: "Blank Page",
       },
       {
-        path: "/app/404",
+        path: "/admin/404",
         icon: applyIconClass(ExclamationTriangleIcon, true),
         name: "404",
       },
@@ -98,17 +104,17 @@ const routes = [
     name: "Settings",
     submenu: [
       {
-        path: "/app/settings-profile",
+        path: "/admin/settings-profile",
         icon: applyIconClass(UserIcon, true),
         name: "Profile",
       },
       {
-        path: "/app/settings-billing",
+        path: "/admin/settings-billing",
         icon: applyIconClass(WalletIcon, true),
         name: "Billing",
       },
       {
-        path: "/app/settings-team",
+        path: "/admin/settings-team",
         icon: applyIconClass(UsersIcon, true),
         name: "Team Members",
       },
