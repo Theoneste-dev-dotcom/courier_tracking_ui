@@ -10,6 +10,7 @@ import { roles } from "@/utils/roles";
 import { useSignupMutation } from "./authSlice";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { Eye, EyeOff } from "lucide-react";
 
 function Register() {
   const router = useRouter();
@@ -22,9 +23,11 @@ function Register() {
 
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [registerObj, setRegisterObj] = useState(INITIAL_REGISTER_OBJ);
 
-  const [register, {data, isError, isLoading, isSuccess}] = useSignupMutation();
+  const [register, { data, isError, isLoading, isSuccess }] =
+    useSignupMutation();
 
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -52,14 +55,15 @@ function Register() {
 
       // const response = await axios.post("http://localhost:3001/users", payload);
 
-      const respo = await register(payload);
-      console.log(respo)
-      if(isSuccess){
-        alert('User registered Successfully')
+      const respo = await register(payload).unwrap();
+      router.push("/login");
+
+      if (isSuccess) {
+        alert("User registered Successfully");
       }
-     
-      if(isError) {
-        alert("failed to register user")
+
+      if (isError) {
+        alert("failed to register user");
       }
       // if (response.data.success == false) {
       //   alert(response.data.message);
@@ -85,7 +89,7 @@ function Register() {
             <LandingIntro />
           </div>
           <div className="py-24 px-10">
-            <h2 className="text-2xl text-gray-800 font-semibold mb-2 text-center">
+            <h2 className="text-2xl dark:text-gray-200 text-gray-800 font-semibold mb-2 text-center">
               Register
             </h2>
             <form onSubmit={(e) => submitForm(e)}>
@@ -106,14 +110,25 @@ function Register() {
                   updateFormValue={updateFormValue}
                 />
 
-                <InputText
-                  defaultValue={registerObj.password}
-                  type="password"
-                  updateType="password"
-                  containerStyle="mt-4"
-                  labelTitle="Password"
-                  updateFormValue={updateFormValue}
-                />
+                <div className="relative">
+                  
+                  <InputText
+                    defaultValue={registerObj.password}
+                    type={showPassword ? "text" : "password"}
+                    updateType="password"
+                    containerStyle="mt-4"
+                    labelTitle="Password"
+                    updateFormValue={updateFormValue}
+                  />
+
+                  <button
+                    type="button"
+                    className="absolute md:right-4 right-4 md:top-2/3 top-2/3 transform -translate-y-1/2 text-gray-600"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
 
                 <SelectBox
                   defaultValue={registerObj.role}

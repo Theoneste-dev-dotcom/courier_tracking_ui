@@ -1,12 +1,9 @@
-import React from 'react'
-import Dashboard from '@/pages/protected/Calendar'
+import React from "react";
+import Calender from "@/pages/protected/Calendar";
+import InternalPage from "@/pages/protected/Dashboard";
+const D = () => {
+  
+  return <InternalPage />;
+};
 
-const page = () => {
-  return (
-    <div>
-    <Dashboard/>
-    </div>
-  )
-}
-
-export default page
+export default D;

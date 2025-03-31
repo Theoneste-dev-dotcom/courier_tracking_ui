@@ -42,7 +42,7 @@ export enum RoleEnum {
 interface AuthState {
   token: string | null;
   user: {
-    id: string;
+    id?: string;
     username: string;
     email: string;
     role: string;
@@ -64,32 +64,12 @@ const authSlice = createSlice({
     setCredentials: (state, action) => {
       state.token = action.payload.token;
       state.user = action.payload.user;
-
-      if(typeof window !== "undefined") {
-        localStorage.setItem("token", action.payload.token)
-        localStorage.setItem("user", JSON.stringify(action.payload.user))
-      }
     },
     clearCredentials: (state) => {
       state.token = null;
       state.user = null;
-
-      if (typeof window !== "undefined") {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-      }
     },
-    loadUserFromStorage: (state) => {
-      if (typeof window !== "undefined") {
-        const storedToken = localStorage.getItem("token");
-        const storedUser = localStorage.getItem("user");
-
-        if (storedToken && storedUser) {
-          state.token = storedToken;
-          state.user = JSON.parse(storedUser);
-        }
-      }
-    },
+   
   },
 });
 
@@ -114,6 +94,6 @@ export const authApi = createApi({
   }),
 });
 
-export const { setCredentials, clearCredentials, loadUserFromStorage } = authSlice.actions;
+export const { setCredentials, clearCredentials } = authSlice.actions;
 export default authSlice.reducer;
 export const { useLoginMutation, useSignupMutation } = authApi;

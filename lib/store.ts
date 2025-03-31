@@ -5,8 +5,9 @@ import rightDrawerSlice from '../features/common/rightDrawerSlice'
 import leadsSlice from '../features/leads/leadSlice'
 import { shipmentApi } from '@/features/shippings/shipments_slice'
 import { authApi } from '@/features/user/authSlice'
-
+import authReducer from '@/features/user/authSlice'
 const combinedReducer = {
+  auth: authReducer,
   header : headerSlice,
   rightDrawer : rightDrawerSlice,
   modal : modalSlice,

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react"; // Import icons
 import { useLoginMutation } from "./authSlice";
-import { setCredentials, loadUserFromStorage } from "./authSlice";
+import { setCredentials} from "./authSlice";
 import { useDispatch, UseDispatch } from "react-redux";
 
 function Login() {
@@ -50,7 +50,7 @@ function Login() {
           password: loginObj.password,
         };
 
-        const res = await login(payload);
+        const res = await login(payload).unwrap();
 
         if (isSuccess) {
         //   alert("logged in");
@@ -63,7 +63,9 @@ function Login() {
           };
 
           dispatch(setCredentials({ token: data.token, responseUser }));
-          
+
+          localStorage.setItem('user', JSON.stringify(responseUser))     
+          localStorage.setItem('token', data.token)     
           router.push("admin/welcome")
         }
 
