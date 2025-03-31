@@ -36,11 +36,7 @@ const routes = [
     icon: applyIconClass(Squares2X2Icon),
     name: "OverView",
   },
-  {
-    path: "/admin/users",
-    icon: applyIconClass(InboxArrowDownIcon),
-    name: "Users",
-  },
+
   {
     path: "/admin/transactions",
     icon: applyIconClass(CurrencyDollarIcon),
@@ -49,13 +45,9 @@ const routes = [
   {
     path: "/admin/charts",
     icon: applyIconClass(ChartBarIcon),
-    name: "Analytics",
+    name: "Analytic",
   },
-  {
-    path: "/admin/integration",
-    icon: applyIconClass(BoltIcon),
-    name: "Integration",
-  },
+
   {
     path: "/admin/calendar",
     icon: applyIconClass(CalendarDaysIcon),
@@ -65,16 +57,55 @@ const routes = [
     path: "/admin/shipments",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Shipments",
+    submenu: [
+      {
+          path: "/admin/shipments",
+          icon: applyIconClass(TableCellsIcon),
+          name: "All Shipments", 
+      },
+      {
+          path: "/admin/shipments/add_new",
+          icon: applyIconClass(TableCellsIcon),
+          name: "Add new  Shipments", 
+      },
+    ]
   },
   {
-    path: "/admin/branches",
+    path: "",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Branches",
+    submenu :[
+        {
+          path: "/admin/branches",
+          icon: applyIconClass(TableCellsIcon),
+          name: "All Branches",
+        },
+        {
+          path: "/admin/branches/add_new",
+          icon: applyIconClass(TableCellsIcon),
+          name: "Add New Branches",
+        },
+
+
+    ],
   },
   {
-    path: "/admin/users",
+    path: "",
     icon: applyIconClass(CalendarDaysIcon),
-    name: "Users",
+    name: "Drivers",
+    submenu: [
+       {
+        path: "/admin/users",
+        icon: applyIconClass(TableCellsIcon),
+        name: "All Users",
+       },
+       {
+        path: "/admin/users/add_new",
+        icon: applyIconClass(TableCellsIcon),
+        name: "Add New User",
+       },
+
+    ]
   },
   {
     path: "",

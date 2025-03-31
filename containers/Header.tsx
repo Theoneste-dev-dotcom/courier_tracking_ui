@@ -80,10 +80,10 @@ const Header = () => {
           </label>
           <ul tabIndex={0} className="menu dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <Link href="/app/settings-profile">Profile Settings</Link>
+              <Link href="/admin/settings-profile">Profile Settings</Link>
             </li>
             <li>
-              <Link href="/app/settings-billing">Bill History</Link>
+              <Link href="/admin/settings-billing">Bill History</Link>
             </li>
             <div className="divider my-1"></div>
             <li>

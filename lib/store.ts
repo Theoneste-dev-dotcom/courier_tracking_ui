@@ -4,6 +4,7 @@ import modalSlice from '../features/common/modalSlice'
 import rightDrawerSlice from '../features/common/rightDrawerSlice'
 import leadsSlice from '../features/leads/leadSlice'
 import { shipmentApi } from '@/features/shippings/shipments_slice'
+import { authApi } from '@/features/user/authSlice'
 
 const combinedReducer = {
   header : headerSlice,
@@ -11,14 +12,18 @@ const combinedReducer = {
   modal : modalSlice,
   lead : leadsSlice,
   [shipmentApi.reducerPath]: shipmentApi.reducer,
+  [authApi.reducerPath] : authApi.reducer,
 }
 
 export const makeStore = () => {
   return configureStore({
     reducer : combinedReducer,
     middleware: (getDefaultMiddleare) => {
-      return getDefaultMiddleare().concat(shipmentApi.middleware)
-    }
+      return getDefaultMiddleare()
+      .concat(shipmentApi.middleware)
+      .concat(authApi.middleware)
+    },
+    
   })
 }
 

@@ -14,7 +14,7 @@ export interface LoginResponseDto {
     id: string;
     username: string;
     email: string;
-    roles: RoleEnum;
+    role: string;
   };
 }
 
@@ -22,20 +22,21 @@ export interface SignupBodyDto {
   username: string;
   password: string;
   email: string;
-  roles: RoleEnum[];
+  role: string;
 }
 
 export interface SignupResponseDto {
   id: string;
   username: string;
   email: string;
-  roles: string;
+  role: string;
 }
-
 
 export enum RoleEnum {
   TALENT = "admin",
   ADMIN = "officer",
+  CLIENT = "client",
+  DRIVER = "driver",
 }
 
 interface AuthState {
@@ -44,47 +45,68 @@ interface AuthState {
     id: string;
     username: string;
     email: string;
-    roles: RoleEnum;
+    role: string;
   } | null;
 }
 
-const loadAuthState = (): AuthState => {
-  return {
-    token:  null,
-    user: null,
-  };
-};
+const loadAuthState = (): AuthState => ({
+  token: null,
+  user: null,
+});
 
 const initialState: AuthState = loadAuthState();
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setCredentials: (state, action: PayloadAction<LoginResponseDto>) => {
+    // : PayloadAction<LoginResponseDto>
+    setCredentials: (state, action) => {
       state.token = action.payload.token;
       state.user = action.payload.user;
+
+      if(typeof window !== "undefined") {
+        localStorage.setItem("token", action.payload.token)
+        localStorage.setItem("user", JSON.stringify(action.payload.user))
+      }
     },
     clearCredentials: (state) => {
       state.token = null;
       state.user = null;
+
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      }
+    },
+    loadUserFromStorage: (state) => {
+      if (typeof window !== "undefined") {
+        const storedToken = localStorage.getItem("token");
+        const storedUser = localStorage.getItem("user");
+
+        if (storedToken && storedUser) {
+          state.token = storedToken;
+          state.user = JSON.parse(storedUser);
+        }
+      }
     },
   },
 });
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/auth" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001" }),
   endpoints: (builder) => ({
     login: builder.mutation<any, LoginBodyDto>({
       query: (credentials) => ({
-        url: "/login",
+        url: "/auth/login",
         method: "POST",
         body: credentials,
       }),
     }),
     signup: builder.mutation<any, SignupBodyDto>({
       query: (userData) => ({
-        url: "/signup",
+        url: "/users",
         method: "POST",
         body: userData,
       }),
@@ -92,6 +114,6 @@ export const authApi = createApi({
   }),
 });
 
-export const { setCredentials, clearCredentials } = authSlice.actions;
+export const { setCredentials, clearCredentials, loadUserFromStorage } = authSlice.actions;
 export default authSlice.reducer;
 export const { useLoginMutation, useSignupMutation } = authApi;

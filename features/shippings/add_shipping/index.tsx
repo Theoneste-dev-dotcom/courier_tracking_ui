@@ -1,3 +1,4 @@
+'use client'
 import InputText from '@/components/Input/InputText';
 import ErrorText from '@/components/Typography/ErrorText';
 import React, { useState } from 'react'

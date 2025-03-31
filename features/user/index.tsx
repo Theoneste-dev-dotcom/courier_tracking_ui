@@ -1,10 +1,12 @@
-'use client'
+
+
+    'use client'
 import moment from "moment"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import TitleCard from "../../components/Cards/TitleCard"
 import { openModal } from "../common/modalSlice"
-import { deleteLead, getLeadsContent } from "./leadSlice"
+// import { deleteLead, getLeadsContent } from "./userSlice"
 import { CONFIRMATION_MODAL_CLOSE_TYPES, MODAL_BODY_TYPES } from '../../utils/globalConstantUtil'
 import TrashIcon from '@heroicons/react/24/outline/TrashIcon'
 import { showNotification } from '../common/headerSlice'
@@ -14,7 +16,7 @@ const TopSideButtons = () => {
     const dispatch = useDispatch()
 
     const openAddNewLeadModal = () => {
-        dispatch(openModal({title : "Add New Branch", bodyType : MODAL_BODY_TYPES.LEAD_ADD_NEW}))
+        dispatch(openModal({title : "Add New Lead", bodyType : MODAL_BODY_TYPES.LEAD_ADD_NEW}))
     }
 
     return(
@@ -24,7 +26,8 @@ const TopSideButtons = () => {
     )
 }
 
-function Leads(){
+const Users = () => {
+
 
     const {leads } = useSelector(state => state.lead)
     const dispatch = useDispatch()
@@ -35,7 +38,7 @@ function Leads(){
 
     
 
-    const getDummyStatus = (index:any) => {
+    const getDummyStatus = (index) => {
         if(index % 5 === 0)return <div className="badge">Not Interested</div>
         else if(index % 5 === 1)return <div className="badge badge-primary">In Progress</div>
         else if(index % 5 === 2)return <div className="badge badge-secondary">Sold</div>
@@ -43,7 +46,7 @@ function Leads(){
         else return <div className="badge badge-ghost">Open</div>
     }
 
-    const deleteCurrentLead = (index:any) => {
+    const deleteCurrentLead = (index) => {
         dispatch(openModal({title : "Confirmation", bodyType : MODAL_BODY_TYPES.CONFIRMATION, 
         extraObject : { message : `Are you sure you want to delete this lead?`, type : CONFIRMATION_MODAL_CLOSE_TYPES.LEAD_DELETE, index}}))
     }
@@ -51,17 +54,18 @@ function Leads(){
     return(
         <>
             
-            <TitleCard title="Current Branch Records" topMargin="mt-2" TopSideButtons={<TopSideButtons />}>
+            <TitleCard title="Current Drivers" topMargin="mt-2" TopSideButtons={<TopSideButtons />}>
 
                 {/* Leads List in table format loaded from slice after api call */}
             <div className="overflow-x-auto w-full">
                 <table className="table w-full">
                     <thead>
                     <tr>
-                        <th>Branch Name</th>
-                        <th>Branch Location</th>
-                        <th>Branch Manager</th>
-                        <th>Branch Email</th>
+                        <th>Driver Name</th>
+                        <th>Driver Email </th>
+                        <th>Created At</th>
+                        <th>Status</th>
+                        <th>Assigned To</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -100,5 +104,4 @@ function Leads(){
     )
 }
 
-
-export default Leads
+export default Users
