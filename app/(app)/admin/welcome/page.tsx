@@ -1,9 +1,9 @@
 import React from 'react'
-import InternalPage from '@/pages/protected/Dashboard'
+import InternalPage from '@/pages/protected/Wecome'
 const page = () => {
   return (
     <div>
-      <InternalPage />
+      <InternalPage/>
     </div>
   )
 }

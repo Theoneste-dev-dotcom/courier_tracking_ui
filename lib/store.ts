@@ -6,6 +6,7 @@ import leadsSlice from '../features/leads/leadSlice'
 import { shipmentApi } from '@/features/shippings/shipments_slice'
 import { authApi } from '@/features/user/authSlice'
 import authReducer from '@/features/user/authSlice'
+import { welcomeApi } from '@/features/welcome/welcomeSlice'
 const combinedReducer = {
   auth: authReducer,
   header : headerSlice,
@@ -14,6 +15,8 @@ const combinedReducer = {
   lead : leadsSlice,
   [shipmentApi.reducerPath]: shipmentApi.reducer,
   [authApi.reducerPath] : authApi.reducer,
+  [welcomeApi.reducerPath]: welcomeApi.reducer
+
 }
 
 export const makeStore = () => {
@@ -23,6 +26,7 @@ export const makeStore = () => {
       return getDefaultMiddleare()
       .concat(shipmentApi.middleware)
       .concat(authApi.middleware)
+      .concat(welcomeApi.middleware)
     },
     
   })
