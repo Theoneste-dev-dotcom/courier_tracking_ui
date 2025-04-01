@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRegisterCompanyMutation } from "../welcomeSlice";
+import { useRouter } from "next/navigation";
+import axios from 'axios'
 
 const subscriptionPlans = [
   {
@@ -47,7 +49,7 @@ const subscriptionPlans = [
 
 
 const RegisterCompany = () => {
-
+  const router = useRouter();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
@@ -57,7 +59,13 @@ const RegisterCompany = () => {
     subscriptionPlan: "",
   });
 
-  const [registerCompany, {isLoading, isError, issuc}]  = useRegisterCompanyMutation();
+  const token = localStorage.getItem('token')
+
+  if(!token) {
+     router.push('/')
+  }
+
+  const [registerCompany, {isLoading, isError, isSuccess}]  = useRegisterCompanyMutation();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -74,18 +82,12 @@ const RegisterCompany = () => {
   const handleSubmit = async () => {
     try {
       console.log(formData)
-      const response = await registerCompany(formData);
-      // const response = await fetch("/api/register-company", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(formData),
-      // });
-
-      if (response.ok) {
-        alert("Company Registered Successfully!");
-      } else {
-        alert("Error in registration");
-      }
+      const response  = await axios.post('http://localhost:3001/companies', formData, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      console.log(response)
     } catch (error) {
       console.error("Error submitting data:", error);
     }
