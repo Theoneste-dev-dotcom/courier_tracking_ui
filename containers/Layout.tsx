@@ -8,11 +8,10 @@ import { useEffect } from "react";
 import { removeNotificationMessage } from "../features/common/headerSlice";
 import { Suspense, lazy } from "react";
 import SuspenseContent from "./SuspenseContent";
-
-import {
-  NotificationContainer,
-  NotificationManager,
-} from "react-notifications";
+// import {
+//   NotificationContainer,
+//   NotificationManager,
+// } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import ModalLayout from "./ModalLayout";
 import Header from "./Header";
@@ -23,15 +22,15 @@ function Layout({ children }: { children: React.ReactNode }) {
     (state) => state.header
   );
 
-  useEffect(() => {
-    if (newNotificationMessage !== "") {
-      if (newNotificationStatus === 1)
-        NotificationManager.success(newNotificationMessage, "Success");
-      if (newNotificationStatus === 0)
-        NotificationManager.error(newNotificationMessage, "Error");
-      dispatch(removeNotificationMessage());
-    }
-  }, [newNotificationMessage]);
+  // useEffect(() => {
+  //   if (newNotificationMessage !== "") {
+  //     if (newNotificationStatus === 1)
+  //       NotificationManager.success(newNotificationMessage, "Success");
+  //     if (newNotificationStatus === 0)
+  //       NotificationManager.error(newNotificationMessage, "Error");
+  //     // dispatch(removeNotificationMessage());
+  //   }
+  // }, [newNotificationMessage]);
 
   return (
     <>
@@ -66,7 +65,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <RightSidebar />
 
       {/** Notification layout container */}
-      <NotificationContainer />
+      {/* <NotificationContainer /> */}
 
       {/* Modal layout container */}
       <ModalLayout />

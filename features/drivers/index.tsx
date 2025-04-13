@@ -94,7 +94,8 @@ const Users = () => {
                 <th>Created At</th>
                 <th>Status</th>
                 <th>Assigned To</th>
-                <th></th>
+                <th>Vehicle ID</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -102,19 +103,7 @@ const Users = () => {
                 return (
                   <tr key={k}>
                     <td>
-                      <div className="flex items-center space-x-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img src={l.avatar} alt="Avatar" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">{l.first_name}</div>
-                          <div className="text-sm opacity-50">
-                            {l.last_name}
-                          </div>
-                        </div>
-                      </div>
+                      {l.name}
                     </td>
                     <td>{l.email}</td>
                     <td>
@@ -123,12 +112,12 @@ const Users = () => {
                         .format("DD MMM YY")}
                     </td>
                     <td>{getDummyStatus(k)}</td>
-                    <td>{l.last_name}</td>
+                    <td>{l.vehicle_id}</td>
                     <td>
                       <button
                         title="click me"
                         className="btn btn-square btn-ghost"
-                        onClick={() => deleteCurrentLead(k)}
+                        onClick={() => deleteCurrentDriver(k)}
                       >
                         <TrashIcon className="w-5" />
                       </button>

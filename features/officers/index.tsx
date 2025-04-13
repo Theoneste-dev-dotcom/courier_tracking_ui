@@ -15,11 +15,11 @@ import { showNotification } from "../common/headerSlice";
 const TopSideButtons = () => {
   const dispatch = useDispatch();
 
-  const openAddNewDriverModal = () => {
+  const openAddNewOfficerModal = () => {
     dispatch(
       openModal({
-        title: "Add New Driver",
-        bodyType: MODAL_BODY_TYPES.DRIVER_ADD_NEW,
+        title: "Add New Officer",
+        bodyType: MODAL_BODY_TYPES.OFFICER_ADD_NEW,
       })
     );
   };
@@ -28,7 +28,7 @@ const TopSideButtons = () => {
     <div className="inline-block float-right">
       <button
         className="btn px-6 btn-sm normal-case btn-primary"
-        onClick={() => openAddNewDriverModal()}
+        onClick={() => openAddNewOfficerModal()}
       >
         Add New
       </button>
@@ -36,18 +36,18 @@ const TopSideButtons = () => {
   );
 };
 
-const Users = () => {
+const Officers = () => {
   const current_companyId = localStorage.getItem('current-company-id')
   const [drivers, setDrivers] = useState([])
   // const { leads } = useSelector((state) => state.lead);
   const dispatch = useDispatch();
 
-  const getDrivers = async () => {
+  const getOfficers = async () => {
 
   }
 
   useEffect(() => {
-    getDrivers()
+    getOfficers()
     // dispatch(getLeadsContent())
   }, []);
 
@@ -63,7 +63,7 @@ const Users = () => {
   };
 
 
-  const deleteCurrentDriver = (index) => {
+  const deleteCurrentOfficer = (index) => {
     dispatch(
       openModal({
         title: "Confirmation",
@@ -80,7 +80,7 @@ const Users = () => {
   return (
     <>
       <TitleCard
-        title="Current Drivers"
+        title="Current Officers"
         topMargin="mt-2"
         TopSideButtons={<TopSideButtons />}
       >
@@ -89,12 +89,12 @@ const Users = () => {
           <table className="table w-full">
             <thead>
               <tr>
-                <th>Driver Name</th>
-                <th>Driver Email </th>
+                <th>Officer Name</th>
+                <th>Officer Email </th>
                 <th>Created At</th>
                 <th>Status</th>
-                <th>Assigned To</th>
-                <th></th>
+                <th>Officer Phone</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -103,17 +103,20 @@ const Users = () => {
                   <tr key={k}>
                     <td>
                       <div className="flex items-center space-x-3">
-                        <div className="avatar">
+                        {/* <div className="avatar">
                           <div className="mask mask-squircle w-12 h-12">
                             <img src={l.avatar} alt="Avatar" />
                           </div>
-                        </div>
-                        <div>
+                        </div> */}
+                        {/* <div>
                           <div className="font-bold">{l.first_name}</div>
                           <div className="text-sm opacity-50">
                             {l.last_name}
                           </div>
-                        </div>
+                        </div> */}
+                      </div>
+                      <div>
+                        {l.name}
                       </div>
                     </td>
                     <td>{l.email}</td>
@@ -123,12 +126,12 @@ const Users = () => {
                         .format("DD MMM YY")}
                     </td>
                     <td>{getDummyStatus(k)}</td>
-                    <td>{l.last_name}</td>
+                    <td>{l.phone}</td>
                     <td>
                       <button
                         title="click me"
                         className="btn btn-square btn-ghost"
-                        onClick={() => deleteCurrentLead(k)}
+                        onClick={() => deleteCurrentOfficer(k)}
                       >
                         <TrashIcon className="w-5" />
                       </button>
@@ -144,4 +147,4 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Officers;

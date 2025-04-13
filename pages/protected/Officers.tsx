@@ -1,21 +1,22 @@
 'use client'
 import { setPageTitle } from '@/features/common/headerSlice'
-import Branches from '@/features/leads'
+import Officers from '@/features/officers'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
+const InternalPage = () => {
 
-function InternalPage(){
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Branches"}))
+        dispatch(setPageTitle({ title : "Officers"}))
       }, [])
 
-
-    return(
-        <Branches />
-    )
+  return (
+    <div>
+      <Officers/>
+    </div>
+  )
 }
 
 export default InternalPage

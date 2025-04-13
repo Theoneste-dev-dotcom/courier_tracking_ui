@@ -2,9 +2,13 @@
 const GlobalConstants = {
     MODAL_BODY_TYPES : {
         USER_DETAIL : "USER_DETAIL",
-        LEAD_ADD_NEW : "LEAD_ADD_NEW",
+        BRANCH_ADD_NEW : "BRANCH_ADD_NEW",
+        DRIVER_ADD_NEW : "DRIVER_ADD_NEW",
+        OFFICER_ADD_NEW : "OFFICER_ADD_NEW",
+        ADMIN_ADD_NEW : "ADMIN_ADD_NEW",
         CONFIRMATION : "CONFIRMATION",
         DEFAULT : "",
+
     },
 
     RIGHT_DRAWER_TYPES : {
@@ -13,7 +17,8 @@ const GlobalConstants = {
     },
 
     CONFIRMATION_MODAL_CLOSE_TYPES : {
-        LEAD_DELETE : "LEAD_DELETE",
+        BRANCH_DELETE : "BRANCH_DELETE",
+        DRIVER_DELETE: "DRIVER_DELETE"
     },
 }
 

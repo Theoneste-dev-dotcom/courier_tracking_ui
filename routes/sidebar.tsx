@@ -30,11 +30,19 @@ const applyIconClass = (IconComponent:React.ComponentType<IconComponentProps>, i
 };
 
 
-const routes = [
+const user_loc = localStorage.getItem('user')
+const {role} = JSON.parse(user_loc ? user_loc : "undefined")
+
+export const company_owner_routes = [
   {
     path: "/admin/dashboard",
     icon: applyIconClass(Squares2X2Icon),
     name: "OverView",
+  },
+  {
+    path: "/admin/welcome",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "WElcome",
   },
 
   {
@@ -80,11 +88,11 @@ const routes = [
           icon: applyIconClass(TableCellsIcon),
           name: "All Branches",
         },
-        {
-          path: "/admin/branches/add_new",
-          icon: applyIconClass(TableCellsIcon),
-          name: "Add New Branches",
-        },
+        // {
+        //   path: "/admin/branches/add_new",
+        //   icon: applyIconClass(TableCellsIcon),
+        //   name: "Add New Branches",
+        // },
 
 
     ],
@@ -95,14 +103,35 @@ const routes = [
     name: "Drivers",
     submenu: [
        {
-        path: "/admin/users",
+        path: "/admin/drivers",
         icon: applyIconClass(TableCellsIcon),
-        name: "All Users",
+        name: "All Users/Drivers",
        },
+
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Officers",
+    submenu: [
        {
-        path: "/admin/users/add_new",
+        path: "/admin/officers",
         icon: applyIconClass(TableCellsIcon),
-        name: "Add New User",
+        name: "All Users/Officers",
+       },
+
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "System Admin",
+    submenu: [
+       {
+        path: "/admin/admins",
+        icon: applyIconClass(TableCellsIcon),
+        name: "All Admin",
        },
 
     ]
@@ -163,4 +192,460 @@ const routes = [
   },
 ];
 
-export default routes;
+export const client_routes =[
+  {
+    path: "/admin/dashboard",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "OverView",
+  },
+
+  {
+    path: "/admin/welcome",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "WElcome",
+  },
+
+  {
+    path: "/admin/transactions",
+    icon: applyIconClass(CurrencyDollarIcon),
+    name: "Transactions",
+  },
+  {
+    path: "/admin/charts",
+    icon: applyIconClass(ChartBarIcon),
+    name: "Analytic",
+  },
+
+  {
+    path: "/admin/calendar",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Calendar",
+  },
+  {
+    path: "/admin/shipments",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Shipments",
+    submenu: [
+      {
+          path: "/admin/shipments",
+          icon: applyIconClass(TableCellsIcon),
+          name: "All Shipments", 
+      },
+      {
+          path: "/admin/shipments/add_new",
+          icon: applyIconClass(TableCellsIcon),
+          name: "Add new  Shipments", 
+      },
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Branches",
+    submenu :[
+        {
+          path: "/admin/branches",
+          icon: applyIconClass(TableCellsIcon),
+          name: "All Branches",
+        },
+        // {
+        //   path: "/admin/branches/add_new",
+        //   icon: applyIconClass(TableCellsIcon),
+        //   name: "Add New Branches",
+        // },
+
+
+    ],
+  },
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Drivers",
+    submenu: [
+       {
+        path: "/admin/users",
+        icon: applyIconClass(TableCellsIcon),
+        name: "All Users/Drivers",
+       },
+
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(DocumentDuplicateIcon),
+    name: "Pages",
+    submenu: [
+      {
+        path: "/login",
+        icon: applyIconClass(HiArrowRightOnRectangle, true),
+        name: "Login",
+      },
+      {
+        path: "/register",
+        icon: applyIconClass(UserIcon, true),
+        name: "Register",
+      },
+      {
+        path: "/forgot-password",
+        icon: applyIconClass(KeyIcon, true),
+        name: "Forgot Password",
+      },
+      {
+        path: "/admin/blank",
+        icon: applyIconClass(DocumentIcon, true),
+        name: "Blank Page",
+      },
+      {
+        path: "/admin/404",
+        icon: applyIconClass(ExclamationTriangleIcon, true),
+        name: "404",
+      },
+    ],
+  },
+  {
+    path: "",
+    icon: applyIconClass(Cog6ToothIcon),
+    name: "Settings",
+    submenu: [
+      {
+        path: "/admin/settings-profile",
+        icon: applyIconClass(UserIcon, true),
+        name: "Profile",
+      },
+      {
+        path: "/admin/settings-billing",
+        icon: applyIconClass(WalletIcon, true),
+        name: "Billing",
+      },
+      {
+        path: "/admin/settings-team",
+        icon: applyIconClass(UsersIcon, true),
+        name: "Team Members",
+      },
+    ],
+  },
+];
+export const officer_routes = [
+  {
+    path: "/admin/dashboard",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "OverView",
+  },  
+
+  {
+    path: "/admin/welcome",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "Welcome",
+  },
+  {
+    path: "/admin/transactions",
+    icon: applyIconClass(CurrencyDollarIcon),
+    name: "Transactions",
+  },
+
+  {
+    path: "/admin/shipments",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Shipments",
+    submenu: [
+      {
+          path: "/admin/shipments",
+          icon: applyIconClass(TableCellsIcon),
+          name: "All Shipments", 
+      },
+      {
+          path: "/admin/shipments/add_new",
+          icon: applyIconClass(TableCellsIcon),
+          name: "Add new  Shipments", 
+      },
+    ]
+  },
+ 
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Drivers",
+    submenu: [
+       {
+        path: "/admin/users",
+        icon: applyIconClass(TableCellsIcon),
+        name: "All Users/Drivers",
+       },
+       {
+        path: "/admin/users/add_new",
+        icon: applyIconClass(TableCellsIcon),
+        name: "Add New Driver",
+       },
+
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(DocumentDuplicateIcon),
+    name: "Pages",
+    submenu: [
+      {
+        path: "/login",
+        icon: applyIconClass(HiArrowRightOnRectangle, true),
+        name: "Login",
+      },
+      {
+        path: "/register",
+        icon: applyIconClass(UserIcon, true),
+        name: "Register",
+      },
+      {
+        path: "/forgot-password",
+        icon: applyIconClass(KeyIcon, true),
+        name: "Forgot Password",
+      },
+      {
+        path: "/admin/blank",
+        icon: applyIconClass(DocumentIcon, true),
+        name: "Blank Page",
+      },
+      {
+        path: "/admin/404",
+        icon: applyIconClass(ExclamationTriangleIcon, true),
+        name: "404",
+      },
+    ],
+  },
+  {
+    path: "",
+    icon: applyIconClass(Cog6ToothIcon),
+    name: "Settings",
+    submenu: [
+      {
+        path: "/admin/settings-profile",
+        icon: applyIconClass(UserIcon, true),
+        name: "Profile",
+      },
+      {
+        path: "/admin/settings-billing",
+        icon: applyIconClass(WalletIcon, true),
+        name: "Billing",
+      },
+      {
+        path: "/admin/settings-team",
+        icon: applyIconClass(UsersIcon, true),
+        name: "Team Members",
+      },
+    ],
+  },
+];
+export const admin_routes = [
+  {
+    path: "/admin/dashboard",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "OverView",
+  },
+
+  {
+    path: "/admin/welcome",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "Welcome",
+  },
+
+  {
+    path: "/admin/transactions",
+    icon: applyIconClass(CurrencyDollarIcon),
+    name: "Transactions",
+  },
+  {
+    path: "/admin/charts",
+    icon: applyIconClass(ChartBarIcon),
+    name: "Analytic",
+  },
+
+  {
+    path: "/admin/calendar",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Calendar",
+  },
+  {
+    path: "/admin/shipments",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Shipments",
+    submenu: [
+      {
+          path: "/admin/shipments",
+          icon: applyIconClass(TableCellsIcon),
+          name: "All Shipments", 
+      },
+      {
+          path: "/admin/shipments/add_new",
+          icon: applyIconClass(TableCellsIcon),
+          name: "Add new  Shipments", 
+      },
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Branches",
+    submenu :[
+        {
+          path: "/admin/branches",
+          icon: applyIconClass(TableCellsIcon),
+          name: "All Branches",
+        },
+        // {
+        //   path: "/admin/branches/add_new",
+        //   icon: applyIconClass(TableCellsIcon),
+        //   name: "Add New Branches",
+        // },
+
+
+    ],
+  },
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Drivers",
+    submenu: [
+       {
+        path: "/admin/users",
+        icon: applyIconClass(TableCellsIcon),
+        name: "All Users/Drivers",
+       },
+       {
+        path: "/admin/users/add_new",
+        icon: applyIconClass(TableCellsIcon),
+        name: "Add New Driver",
+       },
+
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(DocumentDuplicateIcon),
+    name: "Pages",
+    submenu: [
+      {
+        path: "/login",
+        icon: applyIconClass(HiArrowRightOnRectangle, true),
+        name: "Login",
+      },
+      {
+        path: "/register",
+        icon: applyIconClass(UserIcon, true),
+        name: "Register",
+      },
+      {
+        path: "/forgot-password",
+        icon: applyIconClass(KeyIcon, true),
+        name: "Forgot Password",
+      },
+      {
+        path: "/admin/blank",
+        icon: applyIconClass(DocumentIcon, true),
+        name: "Blank Page",
+      },
+      {
+        path: "/admin/404",
+        icon: applyIconClass(ExclamationTriangleIcon, true),
+        name: "404",
+      },
+    ],
+  },
+  {
+    path: "",
+    icon: applyIconClass(Cog6ToothIcon),
+    name: "Settings",
+    submenu: [
+      {
+        path: "/admin/settings-profile",
+        icon: applyIconClass(UserIcon, true),
+        name: "Profile",
+      },
+      {
+        path: "/admin/settings-billing",
+        icon: applyIconClass(WalletIcon, true),
+        name: "Billing",
+      },
+      {
+        path: "/admin/settings-team",
+        icon: applyIconClass(UsersIcon, true),
+        name: "Team Members",
+      },
+    ],
+  },
+];
+export const driver_routes = [
+  {
+    path: "/admin/dashboard",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "OverView",
+  },
+
+  {
+    path: "/admin/welcome",
+    icon: applyIconClass(Squares2X2Icon),
+    name: "Welcome",
+  },
+  
+  {
+    path: "/admin/shipments",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Shipments",
+    submenu: [
+      {
+          path: "/admin/shipments",
+          icon: applyIconClass(TableCellsIcon),
+          name: "All Shipments", 
+      },
+    ]
+  },
+  
+  {
+    path: "",
+    icon: applyIconClass(DocumentDuplicateIcon),
+    name: "Pages",
+    submenu: [
+      {
+        path: "/login",
+        icon: applyIconClass(HiArrowRightOnRectangle, true),
+        name: "Login",
+      },
+      {
+        path: "/forgot-password",
+        icon: applyIconClass(KeyIcon, true),
+        name: "Forgot Password",
+      },
+      {
+        path: "/admin/blank",
+        icon: applyIconClass(DocumentIcon, true),
+        name: "Blank Page",
+      },
+      {
+        path: "/admin/404",
+        icon: applyIconClass(ExclamationTriangleIcon, true),
+        name: "404",
+      },
+    ],
+  },
+  {
+    path: "",
+    icon: applyIconClass(Cog6ToothIcon),
+    name: "Settings",
+    submenu: [
+      {
+        path: "/admin/settings-profile",
+        icon: applyIconClass(UserIcon, true),
+        name: "Profile",
+      },
+      {
+        path: "/admin/settings-billing",
+        icon: applyIconClass(WalletIcon, true),
+        name: "Billing",
+      },
+      {
+        path: "/admin/settings-team",
+        icon: applyIconClass(UsersIcon, true),
+        name: "Team Members",
+      },
+    ],
+  },
+];
+

@@ -96,4 +96,5 @@ export const authApi = createApi({
 
 export const { setCredentials, clearCredentials } = authSlice.actions;
 export default authSlice.reducer;
+export const selectToken = (state)=> state.auth?.token;
 export const { useLoginMutation, useSignupMutation } = authApi;

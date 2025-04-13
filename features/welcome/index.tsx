@@ -21,6 +21,7 @@ import { RootState } from "@/lib/store";
 // import OfficerComp from "./main_components/OfficerComp";
 // import DriverComp from "./main_components/DriverComp";
 import AdminWelcome from "./mainComes/AdminWelcome";
+import CompanyOwnerWelcome from "./mainComes/CompanyOwnerWelcome";
 const statsData = [
   {
     title: "New Users",
@@ -74,8 +75,6 @@ function WelcomePage() {
   const user = JSON.parse(user_local ? user_local : "undefined");
 
   useEffect(() => {
-    console.log(user);
-
     if (!user) {
       router.push("/login");
     }
@@ -90,10 +89,15 @@ function WelcomePage() {
     );
   };
 
+
   return (
     <main>
       {user.role == "admin" && (
         <AdminWelcome/>
+      )}
+
+      {user.role == "company_owner" && (
+        <CompanyOwnerWelcome/>
       )}
       {/* {user.role == "client" && (
         <ClientComp

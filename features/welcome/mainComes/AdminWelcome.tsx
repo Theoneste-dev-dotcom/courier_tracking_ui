@@ -6,8 +6,9 @@ import DriverCard from "../components/cards/DriverCard";
 import CardHeader from "../components/cards/CardHeader";
 import CardTitle from "../components/cards/CardTitle";
 import CardContent from "../components/cards/CardContent";
-import { useGetUserCompanyQuery } from "../welcomeSlice";
+
 import RegisterCompany from "../components/RegisterCompany";
+import { selectCompanyId } from "../welcomeSlice";
 const AdminWelcome = () => {
   const user_local = localStorage.getItem('user')
   const user = JSON.parse(user_local ? user_local :"undefined")
@@ -20,16 +21,12 @@ const AdminWelcome = () => {
   let response;
 
 
-   const {data,isError, error}  =  useGetUserCompanyQuery({ email:user.email });
 
 
-   if(isError) {
-    console.log(error.data)
-
-   }
+ const companyId = useSelector(selectCompanyId)
 
 
-if(!data) { return (<RegisterCompany/>) // render the  the create company page form
+if(!companyId) { return (<RegisterCompany/>) // render the  the create company page form
 }
   return (
     <div className="p-6 space-y-6">

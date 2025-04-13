@@ -7,6 +7,7 @@ import { RECENT_TRANSACTIONS } from "@/utils/dummyData";
 import FunnelIcon from "@heroicons/react/24/outline/FunnelIcon";
 import XMarkIcon from "@heroicons/react/24/outline/XMarkIcon";
 import SearchBar from "../../components/Input/SearchBar";
+import Image from "next/image";
 
 const TopSideButtons = ({ removeFilter, applyFilter, applySearch }) => {
   const [filterParam, setFilterParam] = useState("");
@@ -132,7 +133,7 @@ function Transactions() {
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
                           <div className="mask mask-circle w-12 h-12">
-                            <img src={l.avatar} alt="Avatar" />
+                            <img src={l.avatar} alt="Avatar"  />
                           </div>
                         </div>
                         <div>

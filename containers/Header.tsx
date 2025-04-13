@@ -11,8 +11,10 @@ import SunIcon from '@heroicons/react/24/outline/SunIcon'
 import Image from "next/image";
 import Link from "next/link";
 import profile from "@/public/profile.png";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { noOfNotifications, pageTitle } = useSelector((state) => state.header);
   const [currentTheme, setCurrentTheme] = useState(() => localStorage.getItem("theme") || "light");
@@ -37,11 +39,11 @@ const Header = () => {
 
   const logoutUser = () => {
     localStorage.clear();
-    window.location.href = "/";
+    router.push('/login')
   };
 
   return (
-    <nav className="navbar sticky top-0 bg-base-100 shadow-md z-10 flex-1  justify-start items-start  h-[20%] pt-4">
+    <nav className="navbar sticky bg-base-100 shadow-md z-10 flex-1  justify-start items-start  h-[20%] pt-4">
       {/* Left Section - Sidebar Toggle & Page Title */}
       <div className="flex-1 flex items-center">
         <label htmlFor="left-sidebar-drawer" className="btn btn-primary drawer-button lg:hidden">

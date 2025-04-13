@@ -1,15 +1,41 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import routes from "../routes/sidebar";
 import SidebarSubmenu from "./SidebarSubmenu";
+import { admin_routes, client_routes, officer_routes, company_owner_routes, driver_routes } from "../routes/sidebar";
 import Image from 'next/image'
+import { Role } from "@/utils/roles";
 
 const LeftSidebar = () => {
+  const user_local = localStorage.getItem('user')
+  const {role} = JSON.parse(user_local ? user_local : 'undefined')
+  const [routes, setRoutes] = useState<any[]>([])
   const pathname = usePathname();
   const sidebarRef = useRef(null);
+
+
+ 
+  useEffect(()=> {
+    switch (role) {
+      case 'admin':
+        setRoutes(admin_routes);
+        break;
+      case 'client':
+        setRoutes(client_routes);
+        break;
+      case 'officer':
+        setRoutes(officer_routes);
+        break;
+      case 'company_owner':
+        setRoutes(company_owner_routes);
+        break;
+      case 'driver':
+        setRoutes(driver_routes);
+        break;
+    }
+  }, [])
 
   // Close Sidebar (for mobile screens)
   const closeSidebar = () => {

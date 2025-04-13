@@ -1,21 +1,22 @@
 'use client'
 import { setPageTitle } from '@/features/common/headerSlice'
-import Branches from '@/features/leads'
 import React, { useEffect } from 'react'
+
 import { useDispatch } from 'react-redux'
 
+const InternalPage = () => {
 
-function InternalPage(){
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Branches"}))
+        dispatch(setPageTitle({ title : "Drivers"}))
       }, [])
 
-
-    return(
-        <Branches />
-    )
+  return (
+    <div>
+      <Drivers/>
+    </div>
+  )
 }
 
 export default InternalPage

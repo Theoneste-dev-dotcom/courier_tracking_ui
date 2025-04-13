@@ -1,25 +1,26 @@
 "use client";
 import moment from "moment";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TitleCard from "../../components/Input/Cards/TitleCard";
 import { openModal } from "../common/modalSlice";
-import { deleteLead, getLeadsContent } from "./leadSlice";
 import {
   CONFIRMATION_MODAL_CLOSE_TYPES,
   MODAL_BODY_TYPES,
 } from "../../utils/globalConstantUtil";
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { showNotification } from "../common/headerSlice";
+import axios from "axios";
+import { selectCompanyId } from "../welcome/welcomeSlice";
 
 const TopSideButtons = () => {
   const dispatch = useDispatch();
 
-  const openAddNewLeadModal = () => {
+  const openAddNewBranchModal = () => {
     dispatch(
       openModal({
         title: "Add New Branch",
-        bodyType: MODAL_BODY_TYPES.LEAD_ADD_NEW,
+        bodyType: MODAL_BODY_TYPES.BRANCH_ADD_NEW,
       })
     );
   };
@@ -28,7 +29,7 @@ const TopSideButtons = () => {
     <div className="inline-block float-right">
       <button
         className="btn px-6 btn-sm normal-case btn-primary"
-        onClick={() => openAddNewLeadModal()}
+        onClick={() => openAddNewBranchModal()}
       >
         Add New
       </button>
@@ -36,11 +37,40 @@ const TopSideButtons = () => {
   );
 };
 
-function Leads() {
-  const { leads } = useSelector((state) => state.lead);
+interface BRANCH_OBJ{
+  name : "",
+  location: "",
+  email:"",
+  manager_name:"",
+  phone_number: "",
+  companyId:"",
+}
+function Branches() {
+  // const { leads } = useSelector((state) => state.lead);
+  const [branches, setBranches] = useState<BRANCH_OBJ[]>([])
   const dispatch = useDispatch();
+  
+   const current_companyId = localStorage.getItem('current-company-id')
+   console.log(current_companyId, "where is the company")
+  const getBranches = async ()=> {  
+    const res = await axios.get(`http://localhost:3001/branches/company-branches/${current_companyId}`, {
+      headers: {
+        'Authorization' : `Bearer ${localStorage.getItem('token')}`
+      }
+        
+    })
+
+    if(res) {
+      console.log(res.data)
+      setBranches(res.data)
+    }else {
+      console.log("failed to fetch ")
+    }
+  }
+
 
   useEffect(() => {
+     getBranches()
     // dispatch(getLeadsContent())
   }, []);
 
@@ -61,8 +91,8 @@ function Leads() {
         title: "Confirmation",
         bodyType: MODAL_BODY_TYPES.CONFIRMATION,
         extraObject: {
-          message: `Are you sure you want to delete this lead?`,
-          type: CONFIRMATION_MODAL_CLOSE_TYPES.LEAD_DELETE,
+          message: `Are you sure you want to delete this branch?`,
+          type: CONFIRMATION_MODAL_CLOSE_TYPES.BRANCH_DELETE,
           index,
         },
       })
@@ -82,30 +112,21 @@ function Leads() {
             <thead>
               <tr>
                 <th>Branch Name</th>
-                <th>Branch Location</th>
-                <th>Branch Manager</th>
                 <th>Branch Email</th>
-                <th></th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Branch Location</th>
+                <th>Branch Manager Name</th>
+                <th>Branch Phone Number</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {leads.map((l, k) => {
+              {branches.map((l, k) => {
                 return (
                   <tr key={k}>
                     <td>
-                      <div className="flex items-center space-x-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img src={l.avatar} alt="Avatar" />
-                          </div>
-                        </div>
-                        <div>
-                          <div className="font-bold">{l.first_name}</div>
-                          <div className="text-sm opacity-50">
-                            {l.last_name}
-                          </div>
-                        </div>
-                      </div>
+                      <div className="font-bold">{l.name}</div>
                     </td>
                     <td>{l.email}</td>
                     <td>
@@ -114,7 +135,9 @@ function Leads() {
                         .format("DD MMM YY")}
                     </td>
                     <td>{getDummyStatus(k)}</td>
-                    <td>{l.last_name}</td>
+                    <td>{l.location}</td>
+                    <td>{l.manager_name}</td>
+                    <td>{l.phone_number}</td>
                     <td>
                       <button
                         title="click me"
@@ -135,4 +158,4 @@ function Leads() {
   );
 }
 
-export default Leads;
+export default Branches;

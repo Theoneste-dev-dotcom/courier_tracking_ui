@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { useRegisterCompanyMutation } from "../welcomeSlice";
+
 import { useRouter } from "next/navigation";
 import axios from 'axios'
+import { useSelector } from "react-redux";
+import { selectToken } from "@/features/user/authSlice";
 
 const subscriptionPlans = [
   {
@@ -49,6 +51,7 @@ const subscriptionPlans = [
 
 
 const RegisterCompany = () => {
+ 
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -60,12 +63,12 @@ const RegisterCompany = () => {
   });
 
   const token = localStorage.getItem('token')
-
+  
   if(!token) {
      router.push('/')
   }
-
-  const [registerCompany, {isLoading, isError, isSuccess}]  = useRegisterCompanyMutation();
+  
+  // const [registerCompany, {isLoading, isError, isSuccess}]  = useRegisterCompanyMutation();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -80,14 +83,16 @@ const RegisterCompany = () => {
   };
 
   const handleSubmit = async () => {
+    
     try {
-      console.log(formData)
+      console.log(formData, "token=> ", token)
       const response  = await axios.post('http://localhost:3001/companies', formData, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       });
-      console.log(response)
+      
+      window.location.reload();
     } catch (error) {
       console.error("Error submitting data:", error);
     }
@@ -98,7 +103,7 @@ const RegisterCompany = () => {
       {step === 1 ? (
         // Step 1: Company Details
         <form onSubmit={handleNext} className="space-y-4">
-          <h2 className="text-2xl font-bold text-center mb-4">Register Your Company</h2>
+          <h2 className="text-2xl font-bold text-center mb-4 text-base-content">Register Your Company</h2>
 
           <div>
             <label className="label"><span className="label-text">Company Name</span></label>
@@ -108,7 +113,7 @@ const RegisterCompany = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter company name"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-base-content"
               required
             />
           </div>
@@ -121,7 +126,7 @@ const RegisterCompany = () => {
               value={formData.address}
               onChange={handleChange}
               placeholder="Enter address"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-base-content"
               required
             />
           </div>
@@ -134,7 +139,7 @@ const RegisterCompany = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter email"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-base-content"
               required
             />
           </div>
@@ -147,7 +152,7 @@ const RegisterCompany = () => {
               value={formData.phone}
               onChange={handleChange}
               placeholder="Enter phone number"
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-base-content"
               required
             />
           </div>

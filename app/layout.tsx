@@ -4,6 +4,7 @@ import { AppStore, makeStore } from "@/lib/store";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider } from "react-redux";
+import CheckAuth from "@/utils/CheckAuth";
 
 // Theme Context for global management
 const ThemeContext = createContext({
@@ -41,7 +42,9 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
+      <CheckAuth>
+        {children}
+      </CheckAuth>
     </ThemeContext.Provider>
   );
 };

@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react"; // Import icons
 import { useLoginMutation } from "./authSlice";
-import { setCredentials} from "./authSlice";
+import { setCredentials } from "./authSlice";
 import { useDispatch, UseDispatch } from "react-redux";
 
 function Login() {
@@ -19,7 +19,7 @@ function Login() {
     emailId: "",
   };
   let responseUser = {
-    id:0,
+    id: 0,
     name: "",
     email: "",
     role: "",
@@ -33,8 +33,6 @@ function Login() {
 
   const [login, { data, isError, isSuccess, isLoading }] = useLoginMutation();
 
-
-
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage("");
@@ -44,17 +42,17 @@ function Login() {
     if (loginObj.password.trim() === "")
       return setErrorMessage("Password is required! (use any value)");
     else {
-     
       try {
         const payload = {
           email: loginObj.emailId,
           password: loginObj.password,
         };
 
-        const res = await login(payload).unwrap();
+        await login(payload).unwrap();
 
         if (isSuccess) {
-        //   alert("logged in");
+          localStorage.clear();
+          //   alert("logged in");
           // console.log(data);
 
           responseUser = {
@@ -66,9 +64,10 @@ function Login() {
 
           dispatch(setCredentials({ token: data.token, responseUser }));
 
-          localStorage.setItem('user', JSON.stringify(responseUser))     
-          localStorage.setItem('token', data.token)     
-          router.push("admin/welcome")
+          localStorage.setItem("user", JSON.stringify(responseUser));
+          localStorage.setItem("token", data.token);
+
+          router.push("admin/welcome");
         }
 
         if (isError) {
@@ -76,6 +75,7 @@ function Login() {
         }
       } catch (error) {
         console.log(error);
+      } finally {
       }
     }
   };
