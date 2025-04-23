@@ -22,6 +22,7 @@ import { RootState } from "@/lib/store";
 // import DriverComp from "./main_components/DriverComp";
 import AdminWelcome from "./mainComes/AdminWelcome";
 import CompanyOwnerWelcome from "./mainComes/CompanyOwnerWelcome";
+import ClientWelcome from "./mainComes/ClientWelcome";
 const statsData = [
   {
     title: "New Users",
@@ -99,12 +100,10 @@ function WelcomePage() {
       {user.role == "company_owner" && (
         <CompanyOwnerWelcome/>
       )}
-      {/* {user.role == "client" && (
-        <ClientComp
-          updateDashboardPeriod={updateDashboardPeriod}
-          statsData={statsData}
-        />
+       {user.role == "client" && (
+        <ClientWelcome/>
       )}
+      {/*
       {user.role == "officer" && (
         <OfficerComp
           updateDashboardPeriod={updateDashboardPeriod}

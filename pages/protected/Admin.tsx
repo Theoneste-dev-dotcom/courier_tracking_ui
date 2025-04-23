@@ -1,23 +1,19 @@
-'use client'
 import { setPageTitle } from '@/features/common/headerSlice'
-import Drivers from '@/features/drivers'
 import React, { useEffect } from 'react'
 
+import Admins from '@/features/admins'
 import { useDispatch } from 'react-redux'
 
-const InternalPage = () => {
-
+const Admin = () => {
     const dispatch = useDispatch()
-
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Drivers"}))
+        dispatch(setPageTitle({ title : "Company Admins"}))
       }, [])
-
   return (
     <div>
-      <Drivers/>
+     <Admins/>
     </div>
   )
 }
 
-export default InternalPage
+export default Admin

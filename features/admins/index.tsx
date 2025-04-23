@@ -1,10 +1,10 @@
-"use client";
+'use client'
+import React from 'react'
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TitleCard from "../../components/Input/Cards/TitleCard";
 import { openModal } from "../common/modalSlice";
-import axios from "axios";
 // import { deleteLead, getLeadsContent } from "./userSlice"
 import {
   CONFIRMATION_MODAL_CLOSE_TYPES,
@@ -12,6 +12,7 @@ import {
 } from "../../utils/globalConstantUtil";
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { showNotification } from "../common/headerSlice";
+import axios from 'axios';
 
 const TopSideButtons = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const TopSideButtons = () => {
   const openAddNewDriverModal = () => {
     dispatch(
       openModal({
-        title: "Add New Driver",
+        title: "Add New Admin",
         bodyType: MODAL_BODY_TYPES.DRIVER_ADD_NEW,
       })
     );
@@ -37,24 +38,24 @@ const TopSideButtons = () => {
   );
 };
 
-const Users = () => {
+const Admins = () => {
   const current_companyId = localStorage.getItem('current-company-id')
-  const [drivers, setDrivers] = useState([])
+  const [admins, setAdmins] = useState([])
   // const { leads } = useSelector((state) => state.lead);
   const dispatch = useDispatch();
-  
-  const getDrivers = async () => {
-   const response = await axios.get(`http://localhost:3001/users/all?role=driver&companyId=${current_companyId}`,{
-     headers: {
-      'Authorization' : `Bearer ${localStorage.getItem('token')}`
-     }
-   })
-   console.log(response.data)
-   setDrivers(response.data)
+
+  const getAdmins = async () => {
+    const response = await axios.get(`http://localhost:3001/users/all?role=admin&companyId=${current_companyId}`,{
+      headers: {
+       'Authorization' : `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    console.log(response.data)
+    setAdmins(response.data)
   }
 
   useEffect(() => {
-    getDrivers()
+    getAdmins()
     // dispatch(getLeadsContent())
   }, []);
 
@@ -70,13 +71,13 @@ const Users = () => {
   };
 
 
-  const deleteCurrentDriver = (index) => {
+  const deleteCurrentAdmin = (index) => {
     dispatch(
       openModal({
         title: "Confirmation",
         bodyType: MODAL_BODY_TYPES.CONFIRMATION,
         extraObject: {
-          message: `Are you sure you want to delete this driver?`,
+          message: `Are you sure you want to delete this admin?`,
           type: CONFIRMATION_MODAL_CLOSE_TYPES.DRIVER_DELETE,
           index,
         },
@@ -87,7 +88,7 @@ const Users = () => {
   return (
     <>
       <TitleCard
-        title="Current Drivers"
+        title="Current Admins"
         topMargin="mt-2"
         TopSideButtons={<TopSideButtons />}
       >
@@ -98,27 +99,24 @@ const Users = () => {
               <tr>
                 <th>Driver Name</th>
                 <th>Driver Email </th>
-                <th>Vehicle ID</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {drivers.map((l, k) => {
+              {admins.map((l, k) => {
                 return (
                   <tr key={k}>
-                    <td className="text-base-content">
-                      {l.user.name} 
+                    <td className='text-base-content'>
+                      {l.user.name}
                     </td>
-                    <td className="text-base-content">{l.user.email}</td>
-                   
-                    <td className="text-base-content">{l.vehicleId}</td>
+                    <td className='text-base-content'>{l.user.email}</td>
                     <td>
                       <button
                         title="click me"
-                        className="btn btn-square btn-ghost text-red-500  "
-                        onClick={() => deleteCurrentDriver(k)}
+                        className="btn btn-square btn-ghost"
+                        onClick={() => deleteCurrentAdmin(k)}
                       >
-                        <TrashIcon className="w-5" />
+                        <TrashIcon className="w-5 text-red-500" />
                       </button>
                     </td>
                   </tr>
@@ -132,4 +130,5 @@ const Users = () => {
   );
 };
 
-export default Users;
+export default Admins;
+

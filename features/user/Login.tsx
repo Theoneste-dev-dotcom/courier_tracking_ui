@@ -50,7 +50,7 @@ function Login() {
 
         await login(payload).unwrap();
 
-        if (isSuccess) {
+       
           localStorage.clear();
           //   alert("logged in");
           // console.log(data);
@@ -68,7 +68,7 @@ function Login() {
           localStorage.setItem("token", data.token);
 
           router.push("admin/welcome");
-        }
+        
 
         if (isError) {
           alert("failed to log in");
@@ -78,7 +78,7 @@ function Login() {
       } finally {
       }
     }
-  };
+  }
 
   const updateFormValue = ({ updateType, value }: any) => {
     setErrorMessage("");

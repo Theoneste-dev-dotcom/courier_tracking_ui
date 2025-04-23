@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TitleCard from "../../components/Input/Cards/TitleCard";
 import { openModal } from "../common/modalSlice";
+import axios from "axios";
 // import { deleteLead, getLeadsContent } from "./userSlice"
 import {
   CONFIRMATION_MODAL_CLOSE_TYPES,
@@ -37,17 +38,28 @@ const TopSideButtons = () => {
 };
 
 const Officers = () => {
-  const current_companyId = localStorage.getItem('current-company-id')
-  const [drivers, setDrivers] = useState([])
+  const current_companyId = localStorage.getItem("current-company-id");
+  const [officers, setOfficers] = useState([]);
   // const { leads } = useSelector((state) => state.lead);
   const dispatch = useDispatch();
 
   const getOfficers = async () => {
+    console.log(current_companyId)
+    const response = await axios.get(
+      `http://localhost:3001/users/all?role=officer&companyId=${current_companyId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    console.log(response.data)
 
-  }
+    setOfficers(response.data);
+  };
 
   useEffect(() => {
-    getOfficers()
+    getOfficers();
     // dispatch(getLeadsContent())
   }, []);
 
@@ -62,14 +74,13 @@ const Officers = () => {
     else return <div className="badge badge-ghost">Open</div>;
   };
 
-
   const deleteCurrentOfficer = (index) => {
     dispatch(
       openModal({
         title: "Confirmation",
         bodyType: MODAL_BODY_TYPES.CONFIRMATION,
         extraObject: {
-          message: `Are you sure you want to delete this driver?`,
+          message: `Are you sure you want to delete this officer?`,
           type: CONFIRMATION_MODAL_CLOSE_TYPES.DRIVER_DELETE,
           index,
         },
@@ -91,14 +102,12 @@ const Officers = () => {
               <tr>
                 <th>Officer Name</th>
                 <th>Officer Email </th>
-                <th>Created At</th>
-                <th>Status</th>
                 <th>Officer Phone</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {drivers.map((l, k) => {
+              {officers.map((l, k) => {
                 return (
                   <tr key={k}>
                     <td>
@@ -115,22 +124,14 @@ const Officers = () => {
                           </div>
                         </div> */}
                       </div>
-                      <div>
-                        {l.name}
-                      </div>
+                      <div className="text-base-content text-lg font-semibold">{l.user.name}</div>
                     </td>
-                    <td>{l.email}</td>
-                    <td>
-                      {moment(new Date())
-                        .add(-5 * (k + 2), "days")
-                        .format("DD MMM YY")}
-                    </td>
-                    <td>{getDummyStatus(k)}</td>
-                    <td>{l.phone}</td>
+                    <td className="text-base-content">{l.user.email}</td>
+                    <td className="text-base-content">{l.user.phone}</td>
                     <td>
                       <button
                         title="click me"
-                        className="btn btn-square btn-ghost"
+                        className="btn btn-square btn-ghost text-red-500"
                         onClick={() => deleteCurrentOfficer(k)}
                       >
                         <TrashIcon className="w-5" />

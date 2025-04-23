@@ -42,7 +42,7 @@ export const company_owner_routes = [
   {
     path: "/admin/welcome",
     icon: applyIconClass(Squares2X2Icon),
-    name: "WElcome",
+    name: "Welcome",
   },
 
   {
@@ -60,6 +60,11 @@ export const company_owner_routes = [
     path: "/admin/calendar",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Calendar",
+  },
+  {
+    path: "/admin/clients",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Clients",
   },
   {
     path: "/admin/shipments",
@@ -202,7 +207,7 @@ export const client_routes =[
   {
     path: "/admin/welcome",
     icon: applyIconClass(Squares2X2Icon),
-    name: "WElcome",
+    name: "Welcome",
   },
 
   {
@@ -505,14 +510,35 @@ export const admin_routes = [
     name: "Drivers",
     submenu: [
        {
-        path: "/admin/users",
+        path: "/admin/drivers",
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Drivers",
        },
+
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Officers",
+    submenu: [
        {
-        path: "/admin/users/add_new",
+        path: "/admin/officers",
         icon: applyIconClass(TableCellsIcon),
-        name: "Add New Driver",
+        name: "All Users/Officers",
+       },
+
+    ]
+  },
+  {
+    path: "",
+    icon: applyIconClass(CalendarDaysIcon),
+    name: "Clients",
+    submenu: [
+       {
+        path: "/admin/clients",
+        icon: applyIconClass(TableCellsIcon),
+        name: "All Users/Clients",
        },
 
     ]

@@ -62,9 +62,6 @@ function Register() {
         alert("User registered Successfully");
       }
 
-      if (isError) {
-        alert("failed to register user");
-      }
       // if (response.data.success == false) {
       //   alert(response.data.message);
       // } else {
@@ -76,7 +73,7 @@ function Register() {
     }
   };
 
-  const updateFormValue = ({ updateType, value }) => {
+  const updateFormValue = ({ updateType, value }:{updateType: string, value:string}) => {
     setErrorMessage("");
     setRegisterObj({ ...registerObj, [updateType]: value });
   };

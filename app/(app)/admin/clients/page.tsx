@@ -1,8 +1,5 @@
-'use client'
-
 import React from 'react'
-import InternalPage from '@/pages/protected/Admin'
-
+import InternalPage from '@/pages/protected/Clients'
 const page = () => {
   return (
     <div>

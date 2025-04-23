@@ -164,22 +164,22 @@ const RegisterCompany = () => {
       ) : (
         // Step 2: Subscription Selection
         <div>
-          <h2 className="text-2xl font-bold text-center mb-6">Choose a Subscription Plan</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-base-content ">Choose a Subscription Plan</h2>
 
           <div className="grid md:grid-cols-3 gap-4">
             {subscriptionPlans.map((plan) => (
               <div
                 key={plan.id}
                 onClick={() => handleSelectPlan(plan.id)}
-                className={`p-4 border rounded-lg cursor-pointer transition ${
-                  formData.subscriptionPlan === plan.id ? "border-primary bg-primary text-white" : "border-gray-300"
+                className={`p-4 border rounded-lg cursor-pointer transition  dark:hover:bg-teal-950  ${
+                  formData.subscriptionPlan === plan.id ? "border-primary light:text-white bg-teal-800 dark:hover:bg-teal-900 light:hover:bg-teal-900 text-white" : "border-gray-300 "
                 }`}
               >
-                <h3 className="text-lg font-bold">{plan.title}</h3>
-                <p className="text-sm mb-2">{plan.duration}</p>
+                <h3 className="text-lg font-bold text-base-content">{plan.title}</h3>
+                <p className="text-sm mb-2 text-base-content">{plan.duration}</p>
                 <ul className="text-sm space-y-1">
                   {plan.features.map((feature, idx) => (
-                    <li key={idx}>✅ {feature}</li>
+                    <li className="text-base-content py-2 hover:bg-base-200 px-1 rounded-lg  transition-all"  key={idx}>✅ {feature}</li>
                   ))}
                 </ul>
               </div>

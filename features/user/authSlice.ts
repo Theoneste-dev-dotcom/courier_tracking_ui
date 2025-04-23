@@ -19,7 +19,7 @@ export interface LoginResponseDto {
 }
 
 export interface SignupBodyDto {
-  username: string;
+  name: string;
   password: string;
   email: string;
   role: string;
@@ -27,7 +27,7 @@ export interface SignupBodyDto {
 
 export interface SignupResponseDto {
   id: string;
-  username: string;
+  name: string;
   email: string;
   role: string;
 }

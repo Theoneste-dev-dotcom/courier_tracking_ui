@@ -2,7 +2,24 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import InformationCircleIcon from "@heroicons/react/24/outline/InformationCircleIcon";
 
-function SelectBox(props) {
+interface PropType {
+     
+  labelTitle: string;
+   labelStyle?: string;
+   type?: string;
+   containerStyle?: string;
+   labelDescription?:string
+   defaultValue?: string;
+   placeholder?: string;
+   options?:{
+    name:string,
+    value:string
+   }[],
+   updateFormValue:  (value: any) => void
+   updateType?: string;
+
+}
+function SelectBox(props: PropType) {
   const {
     labelTitle,
     labelDescription,
@@ -37,17 +54,17 @@ function SelectBox(props) {
       </label>
 
       <select
-        className="select select-md  select-bordered w-full "
+        className="select select-md  select-bordered w-full text-base-content"
         title="."
         value={value}
         onChange={(e) => updateValue(e.target.value)}
       >
-        <option disabled value="PLACEHOLDER">
+        <option disabled value="PLACEHOLDER" className="text-base-content">
           {placeholder}
         </option>
-        {options.map((o, k) => {
+        {options?.map((o, k) => {
           return (
-            <option value={o.value} key={k}>
+            <option className="text-base-content" value={o.value} key={k}>
               {o.name}
             </option>
           );

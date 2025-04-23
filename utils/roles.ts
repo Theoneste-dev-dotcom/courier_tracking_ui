@@ -2,7 +2,7 @@ export const roles = [
     {name:'Select Role', value:''},
     // {name:'driver', value:'driver'},
     {name:'company_owner', value:'company_owner'},
-    {name:'admin', value:'admin'},
+    // {name:'admin', value:'admin'},
     {name:'client', value:'client'}
 
    ]

@@ -37,40 +37,41 @@ const TopSideButtons = () => {
   );
 };
 
-interface BRANCH_OBJ{
-  name : "",
-  location: "",
-  email:"",
-  manager_name:"",
-  phone_number: "",
-  companyId:"",
+interface BRANCH_OBJ {
+  name: "";
+  location: "";
+  email: "";
+  manager_name: "";
+  phone_number: "";
+  companyId: "";
 }
 function Branches() {
   // const { leads } = useSelector((state) => state.lead);
-  const [branches, setBranches] = useState<BRANCH_OBJ[]>([])
+  const [branches, setBranches] = useState<BRANCH_OBJ[]>([]);
   const dispatch = useDispatch();
+
+  const current_companyId = localStorage.getItem("current-company-id");
   
-   const current_companyId = localStorage.getItem('current-company-id')
-   console.log(current_companyId, "where is the company")
-  const getBranches = async ()=> {  
-    const res = await axios.get(`http://localhost:3001/branches/company-branches/${current_companyId}`, {
-      headers: {
-        'Authorization' : `Bearer ${localStorage.getItem('token')}`
+  const getBranches = async () => {
+    const res = await axios.get(
+      `http://localhost:3001/branches/company-branches/${current_companyId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       }
-        
-    })
+    );
 
-    if(res) {
-      console.log(res.data)
-      setBranches(res.data)
-    }else {
-      console.log("failed to fetch ")
+    if (res) {
+      // console.log(res.data);
+      setBranches(res.data);
+    } else {
+      console.log("failed to fetch ");
     }
-  }
-
+  };
 
   useEffect(() => {
-     getBranches()
+    getBranches();
     // dispatch(getLeadsContent())
   }, []);
 
@@ -113,8 +114,6 @@ function Branches() {
               <tr>
                 <th>Branch Name</th>
                 <th>Branch Email</th>
-                <th>Time</th>
-                <th>Status</th>
                 <th>Branch Location</th>
                 <th>Branch Manager Name</th>
                 <th>Branch Phone Number</th>
@@ -124,24 +123,19 @@ function Branches() {
             <tbody>
               {branches.map((l, k) => {
                 return (
-                  <tr key={k}>
+                  <tr key={k} className="text-base-content">
                     <td>
-                      <div className="font-bold">{l.name}</div>
+                      <div className="font-bold ">{l.name}</div>
                     </td>
-                    <td>{l.email}</td>
-                    <td>
-                      {moment(new Date())
-                        .add(-5 * (k + 2), "days")
-                        .format("DD MMM YY")}
-                    </td>
-                    <td>{getDummyStatus(k)}</td>
-                    <td>{l.location}</td>
-                    <td>{l.manager_name}</td>
-                    <td>{l.phone_number}</td>
+                    <td className="text-base-content">{l.email}</td>
+
+                    <td className="text-base-content">{l.location}</td>
+                    <td className="text-base-content">{l.manager_name}</td>
+                    <td className="text-base-content">{l.phone_number}</td>
                     <td>
                       <button
                         title="click me"
-                        className="btn btn-square btn-ghost"
+                        className="btn btn-square btn-ghost text-red-500"
                         onClick={() => deleteCurrentLead(k)}
                       >
                         <TrashIcon className="w-5" />

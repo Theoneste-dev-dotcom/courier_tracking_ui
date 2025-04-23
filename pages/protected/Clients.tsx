@@ -1,21 +1,22 @@
 'use client'
 import { setPageTitle } from '@/features/common/headerSlice'
-import Drivers from '@/features/drivers'
+import Clients from '@/features/clients'
 import React, { useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
+
 
 const InternalPage = () => {
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "Drivers"}))
+        dispatch(setPageTitle({ title : "Clients"}))
       }, [])
 
   return (
     <div>
-      <Drivers/>
+      <Clients/>
     </div>
   )
 }
