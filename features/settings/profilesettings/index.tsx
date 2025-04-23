@@ -84,7 +84,7 @@ const ProfileSettings = () => {
         setProfileImage(imageResponse.data.imageUrl);
       }
     } catch (error) {
-      console.error("Failed to fetch user data:", error);
+      // console.error("Failed to fetch user data:", error);
       dispatch(showNotification({ message: "Failed to load profile data", status: 0 }));
     } finally {
       setIsLoading(false);
@@ -136,14 +136,13 @@ const ProfileSettings = () => {
       );
 
       if (response.data) {
-        dispatch(showNotification({ message: "Profile Updated Successfully!", status: 1 }));
+        // dispatch(showNotification({ message: "Profile Updated Successfully!", status: 1 }));
         const updatedUser = { ...JSON.parse(user_local || "{}"), ...response.data };
         localStorage.setItem("user", JSON.stringify(updatedUser));
         fetchUserData();
       }
     } catch (error) {
-      console.error("Error updating profile:", error);
-      dispatch(showNotification({ message: "Failed to update profile", status: 0 }));
+      // dispatch(showNotification({ message: "Failed to update profile", status: 0 }));
     }
   };
 

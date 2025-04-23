@@ -8,6 +8,7 @@ import axios from "axios";
 import { selectCompanyId } from "@/features/welcome/welcomeSlice";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
+import PhoneInputComponent from "@/components/Input/PhoneNumber";
 
 const INITIAL_USER_OBJ = {
   name: "",
@@ -65,7 +66,7 @@ function AddUser({ closeModal }: any) {
           break;
       }
 
-      console.log(companyId, id);
+      console.log(userObj);
       const res = await axios.post(
         `http://localhost:3001/users?companyId=${companyId}&currentId=${id}`,
         userObj,
@@ -75,9 +76,8 @@ function AddUser({ closeModal }: any) {
           },
         }
       );
-      console.log(res.data);
-      // dispatch(addNewLead({driverObj}))
-      // dispatch(showNotification({message : "New Driver Added!", status : 1}))
+      // console.log(res.data);
+      dispatch(showNotification({ message: "New Driver Added!", status: 1 }));
       closeModal();
       location.reload();
     }
@@ -133,14 +133,16 @@ function AddUser({ closeModal }: any) {
         </button>
       </div>
 
-      <InputText
-        type="email"
+      <PhoneInputComponent
+        type="tel"
         defaultValue={userObj.phone}
         updateType="phone"
         containerStyle="mt-4"
         labelTitle="Phone Number"
         updateFormValue={updateFormValue}
       />
+
+
 
       {title == "Add New Driver" && (
         <InputText
@@ -169,4 +171,4 @@ function AddUser({ closeModal }: any) {
   );
 }
 
-export default AddUser
+export default AddUser;

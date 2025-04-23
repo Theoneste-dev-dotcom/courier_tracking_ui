@@ -376,11 +376,6 @@ export const officer_routes = [
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Drivers",
        },
-       {
-        path: "/admin/users/add_new",
-        icon: applyIconClass(TableCellsIcon),
-        name: "Add New Driver",
-       },
 
     ]
   },

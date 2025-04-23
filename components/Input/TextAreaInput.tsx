@@ -1,7 +1,6 @@
 import { useState } from "react"
 
 interface PropType {
-     
        labelTitle: string;
         labelStyle?: string;
         type?: string;

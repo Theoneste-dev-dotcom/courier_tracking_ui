@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-interface InputTextProps{
+export interface InputTextProps{
     labelTitle: string
     labelStyle?: string
     type?: string
