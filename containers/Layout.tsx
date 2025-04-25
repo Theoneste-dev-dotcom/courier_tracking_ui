@@ -8,29 +8,28 @@ import { useEffect } from "react";
 import { removeNotificationMessage } from "../features/common/headerSlice";
 import { Suspense, lazy } from "react";
 import SuspenseContent from "./SuspenseContent";
-// import {
-//   NotificationContainer,
-//   NotificationManager,
-// } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import ModalLayout from "./ModalLayout";
 import Header from "./Header";
+import { RootState } from "@/lib/store";
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+
 
 function Layout({ children }: { children: React.ReactNode }) {
   const dispatch = useDispatch();
   const { newNotificationMessage, newNotificationStatus } = useSelector(
-    (state) => state.header
+    (state: RootState) => state.header
   );
 
-  // useEffect(() => {
-  //   if (newNotificationMessage !== "") {
-  //     if (newNotificationStatus === 1)
-  //       NotificationManager.success(newNotificationMessage, "Success");
-  //     if (newNotificationStatus === 0)
-  //       NotificationManager.error(newNotificationMessage, "Error");
-  //     // dispatch(removeNotificationMessage());
-  //   }
-  // }, [newNotificationMessage]);
+  useEffect(() => {
+    if (newNotificationMessage !== "") {
+      if (newNotificationStatus === 1)
+       toast.success(newNotificationMessage);
+      if (newNotificationStatus === 0)
+        toast.error(newNotificationMessage);
+      dispatch(removeNotificationMessage());
+    }
+  }, [newNotificationMessage]);
 
   return (
     <>
@@ -48,12 +47,8 @@ function Layout({ children }: { children: React.ReactNode }) {
           <main className="flex-1 overflow-y-auto bg-base-200 ">
             <div className="drawer-content flex flex-col">
               <Header />
-              <main
-                className="flex-1 overflow-y-auto md:pt-4 pt-4 px-6 bg-basse-200"
-              >
-                <Suspense fallback={<SuspenseContent />}>
-                  {children}
-                </Suspense>
+              <main className="flex-1 overflow-y-auto md:pt-4 pt-4 px-6 bg-basse-200">
+                <Suspense fallback={<SuspenseContent />}>{children}</Suspense>
                 <div className="h-16"></div>
               </main>
             </div>
@@ -65,7 +60,19 @@ function Layout({ children }: { children: React.ReactNode }) {
       <RightSidebar />
 
       {/** Notification layout container */}
-      {/* <NotificationContainer /> */}
+      <ToastContainer
+      position="top-right"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+      transition={Bounce}
+       />
 
       {/* Modal layout container */}
       <ModalLayout />

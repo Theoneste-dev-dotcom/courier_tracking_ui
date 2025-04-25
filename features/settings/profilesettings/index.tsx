@@ -113,7 +113,6 @@ const ProfileSettings = () => {
   ];
 
   // Data Fetching
-  
 
   const fetchImageData = async () => {
     const imageResponse = await axios.get(
@@ -179,7 +178,6 @@ const ProfileSettings = () => {
   };
 
   const handleSubmit = async () => {
-   
     try {
       // console.log("Submitting user data:", userData);
       const formData = new FormData();
@@ -188,18 +186,15 @@ const ProfileSettings = () => {
         if (value !== undefined && key !== "profilePic") {
           formData.append(key, value.toString());
         }
-      });     
-
-   
+      });
 
       // Append image file if exists
       if (userData.profilePic) {
         formData.append("profilePic", userData.profilePic);
       }
 
-
       console.log(formData.get("name"));
-     
+
       const response = await axios.put(
         `http://localhost:3001/users/${id}`,
         formData,
@@ -211,9 +206,13 @@ const ProfileSettings = () => {
         }
       );
 
-
       if (response.data) {
-        dispatch(showNotification({ message: "Profile Updated Successfully!", status: 1 }));
+        dispatch(
+          showNotification({
+            message: "Profile Updated Successfully!",
+            status: 1,
+          })
+        );
         const updatedUser = {
           ...JSON.parse(user_local || "{}"),
           ...response.data,
@@ -222,7 +221,9 @@ const ProfileSettings = () => {
         fetchUserData();
       }
     } catch (error) {
-      dispatch(showNotification({ message: "Failed to update profile", status: 0 }));
+      dispatch(
+        showNotification({ message: "Failed to update profile", status: 0 })
+      );
     }
   };
 
@@ -239,7 +240,7 @@ const ProfileSettings = () => {
     const commonProps = {
       updateType: field.updateType,
       labelTitle: field.labelTitle,
-      defaultValue: currentUser?.[field.updateType] || field.defaultValue,
+      defaultValue: currentUser?.[field.updateType as keyof UserProfile] || field.defaultValue,
       updateFormValue,
       ...field.options,
     };
@@ -284,6 +285,7 @@ const ProfileSettings = () => {
             <label className="cursor-pointer p-3 bg-teal-700 rounded-full hover:bg-teal-600 transition-colors">
               <ImageIcon className="text-white" />
               <input
+                title="..."
                 type="file"
                 accept="image/*"
                 className="hidden"
@@ -299,7 +301,9 @@ const ProfileSettings = () => {
 
       {/* Personal Information Section */}
       <section className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-base-content">Personal Information</h3>
+        <h3 className="text-lg font-semibold mb-4 text-base-content">
+          Personal Information
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {personalInfoFields.map(renderFormField)}
         </div>
@@ -309,7 +313,9 @@ const ProfileSettings = () => {
 
       {/* Preferences Section */}
       <section className="mb-8">
-        <h3 className="text-lg font-semibold mb-4 text-base-content">Preferences</h3>
+        <h3 className="text-lg font-semibold mb-4 text-base-content">
+          Preferences
+        </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {preferenceFields.map(renderFormField)}
         </div>

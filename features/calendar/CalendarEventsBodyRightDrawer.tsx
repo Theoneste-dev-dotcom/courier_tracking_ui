@@ -2,7 +2,11 @@ import { CALENDAR_EVENT_STYLE } from "../../components/CalendarView/util"
 
 const THEME_BG = CALENDAR_EVENT_STYLE
 
-function CalendarEventsBodyRightDrawer({filteredEvents}){
+interface CalendarEventsBodyRightDrawerPropTypes {
+ filteredEvents: any[]
+}
+
+const CalendarEventsBodyRightDrawer:React.FC<CalendarEventsBodyRightDrawerPropTypes> = ({filteredEvents})=>{
     return(
         <>
              {

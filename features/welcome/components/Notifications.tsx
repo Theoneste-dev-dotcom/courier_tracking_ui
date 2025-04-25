@@ -4,9 +4,6 @@ import { useEffect } from "react";
 export default function NotificationsComponent() {
   const { socket, isConnected } = useSocket();
 
-  if(isConnected) {
-    console.log("why no notf")
-  }
   useEffect(() => {
     if (!socket) return;
     socket.on("new-notification", (data) => {

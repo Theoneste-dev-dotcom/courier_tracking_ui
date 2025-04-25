@@ -3,14 +3,14 @@ import { MODAL_BODY_TYPES } from '../utils/globalConstantUtil'
 import { useSelector, useDispatch } from 'react-redux'
 import { closeModal } from '../features/common/modalSlice'
 import AddLeadModalBody from '../features/leads/components/AddBranchModalBody'
-import ConfirmationModalBody from '../features/common/components/ConfirmationModalBody'
 import AddDriverModalBody from '@/features/user/components/AddUser'
 import AddBranchModalBody from '../features/leads/components/AddBranchModalBody'
 import AddUser from '@/features/user/components/AddUser'
+import ConfirmationModalBody from '@/features/common/components/ConfirmationModalBody'
+import { RootState } from "@/lib/store";
 function ModalLayout(){
 
-
-    const {isOpen, bodyType, size, extraObject, title} = useSelector(state => state.modal)
+    const {isOpen, bodyType, size, extraObject, title} = useSelector((state:RootState) => state.modal)
     const dispatch = useDispatch()
 
     const close = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

@@ -12,6 +12,7 @@ import {
 } from "../../utils/globalConstantUtil";
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { showNotification } from "../common/headerSlice";
+import { OfficerType } from "@/types/System";
 
 const TopSideButtons = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const TopSideButtons = () => {
 
 const Officers = () => {
   const current_companyId = localStorage.getItem("current-company-id");
-  const [officers, setOfficers] = useState([]);
+  const [officers, setOfficers] = useState<OfficerType[]>([]);
   // const { leads } = useSelector((state) => state.lead);
   const dispatch = useDispatch();
 
@@ -61,7 +62,7 @@ const Officers = () => {
     // dispatch(getLeadsContent())
   }, []);
 
-  const getDummyStatus = (index) => {
+  const getDummyStatus = (index:number) => {
     if (index % 5 === 0) return <div className="badge">Not Interested</div>;
     else if (index % 5 === 1)
       return <div className="badge badge-primary">In Progress</div>;
@@ -72,7 +73,7 @@ const Officers = () => {
     else return <div className="badge badge-ghost">Open</div>;
   };
 
-  const deleteCurrentOfficer = (index) => {
+  const deleteCurrentOfficer = (index:number) => {
     dispatch(
       openModal({
         title: "Confirmation",
@@ -130,7 +131,7 @@ const Officers = () => {
                       <button
                         title="click me"
                         className="btn btn-square btn-ghost text-red-500"
-                        onClick={() => deleteCurrentOfficer(k)}
+                        onClick={() => deleteCurrentOfficer(l.user.id)}
                       >
                         <TrashIcon className="w-5" />
                       </button>

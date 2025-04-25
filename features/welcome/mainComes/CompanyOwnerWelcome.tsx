@@ -28,7 +28,7 @@ const CompanyOwnerWelcome = () => {
 
   const getCurrentCompany = async () => {
     const respo = await axios.get(
-      "http://localhost:3001/users/user-company/company",
+      "http://localhost:3001/users/user-company",
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

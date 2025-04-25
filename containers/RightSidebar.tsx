@@ -1,6 +1,7 @@
 import React from 'react'
 import XMarkIcon  from '@heroicons/react/24/solid/XMarkIcon'
 import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@/lib/store'
 import NotificationBodyRightDrawer from '../features/common/components/NotificationBodyRightDrawer'
 import { closeRightDrawer } from '../features/common/rightDrawerSlice'
 import { RIGHT_DRAWER_TYPES } from '../utils/globalConstantUtil'
@@ -8,14 +9,14 @@ import CalendarEventsBodyRightDrawer from '@/features/calendar/CalendarEventsBod
 
 
 function RightSidebar(){
-
-    const {isOpen, bodyType, extraObject, header} = useSelector(state => state.rightDrawer)
+    const {isOpen, bodyType, extraObject, header} = useSelector((state: RootState) => state.rightDrawer)
     const dispatch = useDispatch()
 
     const close = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       dispatch(closeRightDrawer(e))
     }
 
+    const events = [{}]
       
 
     return(
@@ -30,7 +31,7 @@ function RightSidebar(){
                             <button type='button' title='close sidebar' className="float-left btn btn-circle btn-outline btn-sm" onClick={e => close(e)}>
                             <XMarkIcon className="h-5 w-5"/>
                             </button>
-                            <span className="ml-2 font-bold text-xl">{header}</span>
+                            <span className="ml-2 font-bold text-xl text-base-content">{header}</span>
                         </div>
 
 
@@ -41,7 +42,7 @@ function RightSidebar(){
                             {
                                 {
                                         [RIGHT_DRAWER_TYPES.NOTIFICATION] : <NotificationBodyRightDrawer {...extraObject} closeRightDrawer={close}/>,
-                                        [RIGHT_DRAWER_TYPES.CALENDAR_EVENTS] : <CalendarEventsBodyRightDrawer {...extraObject} closeRightDrawer={close}/>,
+                                        [RIGHT_DRAWER_TYPES.CALENDAR_EVENTS] : <CalendarEventsBodyRightDrawer {...extraObject} filteredEvents={events}/>,
                                         [RIGHT_DRAWER_TYPES.DEFAULT] : <div></div>
                                 }[bodyType]
                             }
@@ -53,7 +54,7 @@ function RightSidebar(){
 
             </section>
 
-            <section className=" w-screen h-full cursor-pointer " onClick={(e) => close(e)} ></section>
+            <section className=" w-screen h-full cursor-pointer " onClick={close} ></section>
         </div>
     )
 }

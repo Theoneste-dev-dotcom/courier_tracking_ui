@@ -9,6 +9,7 @@ import { selectCompanyId } from "@/features/welcome/welcomeSlice";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import PhoneInputComponent from "@/components/Input/PhoneNumber";
+import { RootState } from "@/lib/store";
 
 const INITIAL_USER_OBJ = {
   name: "",
@@ -32,7 +33,7 @@ function AddUser({ closeModal }: any) {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  const { title } = useSelector((state) => state.modal);
+  const { title } = useSelector((state: RootState) => state.modal);
 
   const saveNewUser = async () => {
     if (title == "Add New Driver") {
@@ -79,7 +80,7 @@ function AddUser({ closeModal }: any) {
       // console.log(res.data);
       dispatch(showNotification({ message: "New Driver Added!", status: 1 }));
       closeModal();
-      location.reload();
+      // location.reload();
     }
   };
 

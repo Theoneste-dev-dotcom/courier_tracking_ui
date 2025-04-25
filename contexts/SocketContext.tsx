@@ -29,9 +29,6 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
       console.log("Socket already connected");
       return;
     }
-  
-    console.log("Initializing socket connection with token...");
-  
     const socket = io("http://localhost:3001", {
       auth: { token },
       transports: ['websocket', 'polling'],
@@ -47,12 +44,12 @@ export const SocketProvider = ({ children }: { children: React.ReactNode }) => {
     // Connection events
     const onConnect = () => {
       setIsConnected(true);
-      console.log("✅ Socket connected. ID:", socket.id, "Token:", token);
+      console.log("✅ Socket connected. ID:", socket.id);
     };
   
     const onDisconnect = (reason: Socket.DisconnectReason) => {
       setIsConnected(false);
-      console.log("❌ Socket disconnected. Reason:", reason, "Token:", token);
+      console.log("❌ Socket disconnected. Reason:", reason);
       
       // Specific handling for unauthorized disconnect
       if (reason === "io server disconnect") {

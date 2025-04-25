@@ -50,7 +50,6 @@ const Admins = () => {
        'Authorization' : `Bearer ${localStorage.getItem('token')}`
       }
     })
-    console.log(response.data)
     setAdmins(response.data)
   }
 

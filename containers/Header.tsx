@@ -12,11 +12,12 @@ import Image from "next/image";
 import Link from "next/link";
 import profile from "@/public/profile.png";
 import { useRouter } from "next/navigation";
+import { RootState } from "@/lib/store";
 
 const Header = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { noOfNotifications, pageTitle } = useSelector((state) => state.header);
+  const { noOfNotifications, pageTitle } = useSelector((state:RootState) => state.header);
   const [currentTheme, setCurrentTheme] = useState(() => localStorage.getItem("theme") || "light");
 
   useEffect(() => {
@@ -56,8 +57,8 @@ const Header = () => {
       <div className="flex items-center gap-x-4">
         {/* swap theme */}
       <label className="swap ">
-        
-                <input type="checkbox"/>
+                <label className="hidden" htmlFor="label">d</label>
+                <input id='label' type="checkbox"/>
                 <SunIcon  data-set-theme="light" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 text-base-content "+(currentTheme === "dark" ? "swap-on" : "swap-off")}/>
                 <MoonIcon data-set-theme="dark" data-act-class="ACTIVECLASS" className={"fill-current w-6 h-6 text-base-content "+(currentTheme === "light" ? "swap-on" : "swap-off")} />
             </label>

@@ -12,6 +12,7 @@ import {
 } from "../../utils/globalConstantUtil";
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { showNotification } from "../common/headerSlice";
+import { DriverType } from "@/types/System";
 
 const TopSideButtons = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const TopSideButtons = () => {
 
 const Users = () => {
   const current_companyId = localStorage.getItem('current-company-id')
-  const [drivers, setDrivers] = useState([])
+  const [drivers, setDrivers] = useState<DriverType[]>([])
   // const { leads } = useSelector((state) => state.lead);
   const dispatch = useDispatch();
   
@@ -59,7 +60,7 @@ const Users = () => {
     // dispatch(getLeadsContent())
   }, []);
 
-  const getDummyStatus = (index) => {
+  const getDummyStatus = (index:number) => {
     if (index % 5 === 0) return <div className="badge">Not Interested</div>;
     else if (index % 5 === 1)
       return <div className="badge badge-primary">In Progress</div>;
@@ -71,7 +72,7 @@ const Users = () => {
   };
 
 
-  const deleteCurrentDriver = (index) => {
+  const deleteCurrentDriver = (index:number) => {
     dispatch(
       openModal({
         title: "Confirmation",
@@ -121,7 +122,7 @@ const Users = () => {
                        <button
                          title="click me"
                          className="btn btn-square btn-ghost text-red-500  "
-                         onClick={() => deleteCurrentDriver(k)}
+                         onClick={() => deleteCurrentDriver(l.user.id)}
                        >
                          <TrashIcon className="w-5" />
                        </button>
