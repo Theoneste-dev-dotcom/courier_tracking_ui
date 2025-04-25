@@ -10,7 +10,7 @@ const InternalPage = () => {
     const user = JSON.parse(user_local ? user_local : "undefined")
 
     useEffect(() => {
-        console.log(user);
+       
         let the_name = user.name.split(' ')[0]
        
         dispatch(setPageTitle({ title : ` Hey ${(the_name).charAt(0).toUpperCase()+(the_name).slice(1).toLowerCase()},`}))

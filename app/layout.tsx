@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Provider } from "react-redux";
 import CheckAuth from "@/utils/CheckAuth";
+import { SocketProvider } from "@/contexts/SocketContext";
 
 // Theme Context for global management
 const ThemeContext = createContext({
@@ -43,7 +44,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <CheckAuth>
-        {children}
+        <SocketProvider>{children}</SocketProvider>
       </CheckAuth>
     </ThemeContext.Provider>
   );

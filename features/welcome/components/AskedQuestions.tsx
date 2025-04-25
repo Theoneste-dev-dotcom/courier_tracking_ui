@@ -29,7 +29,7 @@ const AskedQuestions = () => {
   return (
     <div className="relative">
       {data.map((driver, key) => (
-        <div className="flex  gap-4 items-center justify-start    mb-6">
+        <div key={driver.name} className="flex  gap-4 items-center justify-start    mb-6">
           <div>
             <Image
               className="default w-12 h-12 object-fit-cover rounded-full"

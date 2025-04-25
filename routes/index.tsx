@@ -10,7 +10,7 @@ const Charts = lazy(() => import('../pages/protected/Charts'))
 const Leads = lazy(() => import('../pages/protected/Leads'))
 const Calendar = lazy(() => import('../pages/protected/Calendar'))
 const Team = lazy(() => import('../pages/protected/Team'))
-const Transactions = lazy(() => import('../pages/protected/Transactions'))
+const Transactions = lazy(() => import('../pages/protected/Logs'))
 const Bills = lazy(() => import('../pages/protected/Bills'))
 const ProfileSettings = lazy(() => import('../pages/protected/ProfileSettings'))
 

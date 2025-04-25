@@ -12,6 +12,7 @@ import AdminsStatus from "../components/AdminsStatus";
 import AskedQuestions from "../components/AskedQuestions";
 import OfficersStatus from "../components/OfficersStatus";
 import ClientsStatus from "../components/ClientssStatus";
+import NotificationsComponent from "../components/Notifications";
 const CompanyOwnerWelcome = () => {
   const dispatch = useDispatch();
   const user_local = localStorage.getItem("user");
@@ -35,7 +36,7 @@ const CompanyOwnerWelcome = () => {
       }
     );
 
-    console.log("current company response => ", respo.data);
+
     localStorage.setItem('current-company-id', respo.data.id)
     dispatch(
       setCompanyId({ companyId: respo.data.id, companyName: respo.data.name })
@@ -52,7 +53,7 @@ const CompanyOwnerWelcome = () => {
             },
           }
         );
-        console.log("compay owner response => ", response.data);
+    
       }
     } catch (error) {
       console.log(error);
@@ -73,6 +74,11 @@ const CompanyOwnerWelcome = () => {
       <p className="dark:text-gray-500 text-black">
         Here's an overview of your company's status:
       </p>
+
+      {/* Notifcatiion status */}
+      <div>
+        <NotificationsComponent/>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2  items-center justify-center gap-6">
         <div className="">

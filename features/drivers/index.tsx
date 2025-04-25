@@ -44,12 +44,13 @@ const Users = () => {
   const dispatch = useDispatch();
   
   const getDrivers = async () => {
+    
    const response = await axios.get(`http://localhost:3001/users/all?role=driver&companyId=${current_companyId}`,{
      headers: {
       'Authorization' : `Bearer ${localStorage.getItem('token')}`
      }
    })
-   console.log(response.data)
+
    setDrivers(response.data)
   }
 
@@ -92,41 +93,50 @@ const Users = () => {
         TopSideButtons={<TopSideButtons />}
       >
         {/* Leads List in table format loaded from slice after api call */}
-        <div className="overflow-x-auto w-full">
-          <table className="table w-full">
-            <thead>
-              <tr>
-                <th>Driver Name</th>
-                <th>Driver Email </th>
-                <th>Vehicle ID</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {drivers.map((l, k) => {
-                return (
-                  <tr key={k}>
-                    <td className="text-base-content">
-                      {l.user.name} 
-                    </td>
-                    <td className="text-base-content">{l.user.email}</td>
-                   
-                    <td className="text-base-content">{l.vehicleId}</td>
-                    <td>
-                      <button
-                        title="click me"
-                        className="btn btn-square btn-ghost text-red-500  "
-                        onClick={() => deleteCurrentDriver(k)}
-                      >
-                        <TrashIcon className="w-5" />
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+      {drivers.length > 0 ? (
+         <div className="overflow-x-auto w-full">
+         <table className="table w-full">
+           <thead>
+             <tr>
+               <th>Driver Name</th>
+               <th>Driver Email </th>
+               <th>Vehicle ID</th>
+               <th>Actions</th>
+             </tr>
+           </thead>
+          
+           {
+             drivers && (
+               <tbody>
+               {drivers.map((l, k) => {
+                 return (
+                   <tr key={k}>
+                     <td className="text-base-content">
+                       {l.user.name} 
+                     </td>
+                     <td className="text-base-content">{l.user.email}</td>
+                    
+                     <td className="text-base-content">{l.vehicleId}</td>
+                     <td>
+                       <button
+                         title="click me"
+                         className="btn btn-square btn-ghost text-red-500  "
+                         onClick={() => deleteCurrentDriver(k)}
+                       >
+                         <TrashIcon className="w-5" />
+                       </button>
+                     </td>
+                   </tr>
+                 );
+               })}
+                </tbody>
+             )}
+          
+         </table>
+       </div>
+      ) : (
+        <p className="text-base-content text-lg font-semibold" >No drivers available.</p>
+      )} 
       </TitleCard>
     </>
   );

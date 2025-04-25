@@ -46,9 +46,9 @@ export const company_owner_routes = [
   },
 
   {
-    path: "/admin/transactions",
+    path: "/admin/logs",
     icon: applyIconClass(CurrencyDollarIcon),
-    name: "Transactions",
+    name: "System Logs",
   },
   {
     path: "/admin/charts",
@@ -372,7 +372,7 @@ export const officer_routes = [
     name: "Drivers",
     submenu: [
        {
-        path: "/admin/users",
+        path: "/admin/drivers",
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Drivers",
        },

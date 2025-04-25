@@ -75,7 +75,7 @@ const TopSideButtons = ({ removeFilter, applyFilter, applySearch }) => {
   );
 };
 
-function Transactions() {
+function SystemLogs() {
   const [trans, setTrans] = useState(RECENT_TRANSACTIONS);
 
   const removeFilter = () => {
@@ -158,4 +158,4 @@ function Transactions() {
   );
 }
 
-export default Transactions;
+export default SystemLogs;

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { AnyActionArg, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import Image from "next/image";
@@ -13,6 +13,7 @@ import { showNotification } from "../../common/headerSlice";
 
 // Assets
 import profile from "@/public/profile.png";
+import PhoneInputComponent from "@/components/Input/PhoneNumber";
 
 // Types
 interface UserProfile {
@@ -23,14 +24,18 @@ interface UserProfile {
   role?: string;
   about?: string;
   address?: string;
-  imagePath?: string;
+  profilePic?: any;
 }
 
 interface FormField {
-  updateType: keyof UserProfile;
+  updateType: any;
   labelTitle: string;
   defaultValue: string;
-  component: 'InputText' | 'TextAreaInput' | 'ToogleInput';
+  component:
+    | "InputText"
+    | "TextAreaInput"
+    | "ToogleInput"
+    | "PhoneInputComponent";
   options?: any;
 }
 
@@ -48,52 +53,91 @@ const ProfileSettings = () => {
 
   // Form Configuration
   const personalInfoFields: FormField[] = [
-    { updateType: 'name', labelTitle: 'Name', defaultValue: '', component: 'InputText' },
-    { updateType: 'email', labelTitle: 'Email Id', defaultValue: '', component: 'InputText' },
-    { updateType: 'role', labelTitle: 'Title', defaultValue: '', component: 'InputText' },
-    { updateType: 'address', labelTitle: 'Place', defaultValue: '', component: 'InputText' },
-    { updateType: 'about', labelTitle: 'About', defaultValue: '', component: 'TextAreaInput' },
-    { updateType: 'phone', labelTitle: 'Telephone Number', defaultValue: '', component: 'InputText' },
+    {
+      updateType: "name",
+      labelTitle: "Name",
+      defaultValue: "",
+      component: "InputText",
+    },
+    {
+      updateType: "email",
+      labelTitle: "Email Id",
+      defaultValue: "",
+      component: "InputText",
+    },
+    {
+      updateType: "role",
+      labelTitle: "Title",
+      defaultValue: "",
+      component: "InputText",
+    },
+    {
+      updateType: "address",
+      labelTitle: "Place",
+      defaultValue: "",
+      component: "InputText",
+    },
+    {
+      updateType: "about",
+      labelTitle: "About",
+      defaultValue: "",
+      component: "TextAreaInput",
+    },
+    {
+      updateType: "phone",
+      labelTitle: "Telephone Number",
+      defaultValue: "",
+      component: "PhoneInputComponent",
+    },
   ];
 
   const preferenceFields: FormField[] = [
-    { updateType: 'langauage', labelTitle: 'Language', defaultValue: 'English', component: 'InputText' },
-    { updateType: 'timezone', labelTitle: 'Timezone', defaultValue: 'IST', component: 'InputText' },
-    { updateType: 'syncData', labelTitle: 'Sync Data', defaultValue: 'true', component: 'ToogleInput' },
+    {
+      updateType: "langauage",
+      labelTitle: "Language",
+      defaultValue: "English",
+      component: "InputText",
+    },
+    {
+      updateType: "timezone",
+      labelTitle: "Timezone",
+      defaultValue: "IST",
+      component: "InputText",
+    },
+    {
+      updateType: "syncData",
+      labelTitle: "Sync Data",
+      defaultValue: "true",
+      component: "ToogleInput",
+    },
   ];
 
   // Data Fetching
-  const fetchUserData = async () => {
-    try {
-      setIsLoading(true);
-      const [userResponse, imageResponse] = await Promise.all([
-        axios.get(`http://localhost:3001/users/specific/${id}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }),
-        axios.get(`http://localhost:3001/users/profile/image`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        })
-      ]);
+  
 
-      if (userResponse.data) {
-        setCurrentUser(userResponse.data);
-        setUserData(userResponse.data);
+  const fetchImageData = async () => {
+    const imageResponse = await axios.get(
+      `http://localhost:3001/users/profile/image`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }
+    );
+    console.log("Image Data:", imageResponse.data);
 
-      if (imageResponse.data?.imageUrl) {
-        setProfileImage(imageResponse.data.imageUrl);
-      }
-    } catch (error) {
-      // console.error("Failed to fetch user data:", error);
-      dispatch(showNotification({ message: "Failed to load profile data", status: 0 }));
-    } finally {
-      setIsLoading(false);
+    if (imageResponse.data) {
+      setProfileImage(imageResponse.data.imageUrl);
     }
   };
 
   // Form Handling
-  const updateFormValue = ({ updateType, value }: { updateType: keyof UserProfile; value: string }) => {
-    setUserData(prev => ({ ...prev, [updateType]: value }));
+  const updateFormValue = ({
+    updateType,
+    value,
+  }: {
+    updateType: keyof UserProfile;
+    value: string;
+  }) => {
+    setUserData((prev) => ({ ...prev, [updateType]: value }));
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,47 +146,83 @@ const ProfileSettings = () => {
       const reader = new FileReader();
       reader.onload = (event) => {
         setProfileImage(event.target?.result as string);
-        setUserData(prev => ({ ...prev, imageFile: file }));
+        setUserData((prev) => ({ ...prev, profilePic: file }));
       };
       reader.readAsDataURL(file);
     }
   };
 
-  const handleSubmit = async () => {
+  const fetchUserData = async () => {
     try {
+      setIsLoading(true);
+      const userResponse = await axios.get(
+        `http://localhost:3001/users/specific/${id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
+
+      console.log("User Data:", userResponse.data);
+
+      if (userResponse.data) {
+        setCurrentUser(userResponse.data);
+        setUserData(userResponse.data);
+      }
+    } catch (error) {
+      // console.error("Failed to fetch user data:", error);
+      dispatch(
+        showNotification({ message: "Failed to load profile data", status: 0 })
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+   
+    try {
+      // console.log("Submitting user data:", userData);
       const formData = new FormData();
-      
       // Append all user data fields
       Object.entries(userData).forEach(([key, value]) => {
-        if (value !== undefined && key !== 'imageFile') {
+        if (value !== undefined && key !== "profilePic") {
           formData.append(key, value.toString());
         }
-      });
+      });     
+
+   
 
       // Append image file if exists
-      if (userData.imageFile) {
-        formData.append('profilePic', userData.imageFile);
+      if (userData.profilePic) {
+        formData.append("profilePic", userData.profilePic);
       }
 
+
+      console.log(formData.get("name"));
+     
       const response = await axios.put(
         `http://localhost:3001/users/${id}`,
         formData,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
 
+
       if (response.data) {
-        // dispatch(showNotification({ message: "Profile Updated Successfully!", status: 1 }));
-        const updatedUser = { ...JSON.parse(user_local || "{}"), ...response.data };
+        dispatch(showNotification({ message: "Profile Updated Successfully!", status: 1 }));
+        const updatedUser = {
+          ...JSON.parse(user_local || "{}"),
+          ...response.data,
+        };
         localStorage.setItem("user", JSON.stringify(updatedUser));
         fetchUserData();
       }
     } catch (error) {
-      // dispatch(showNotification({ message: "Failed to update profile", status: 0 }));
+      dispatch(showNotification({ message: "Failed to update profile", status: 0 }));
     }
   };
 
@@ -150,6 +230,7 @@ const ProfileSettings = () => {
   useEffect(() => {
     if (id) {
       fetchUserData();
+      fetchImageData();
     }
   }, [id]);
 
@@ -164,12 +245,14 @@ const ProfileSettings = () => {
     };
 
     switch (field.component) {
-      case 'InputText':
+      case "InputText":
         return <InputText key={field.updateType} {...commonProps} />;
-      case 'TextAreaInput':
+      case "TextAreaInput":
         return <TextAreaInput key={field.updateType} {...commonProps} />;
-      case 'ToogleInput':
+      case "ToogleInput":
         return <ToogleInput key={field.updateType} {...commonProps} />;
+      case "PhoneInputComponent":
+        return <PhoneInputComponent key={field.updateType} {...commonProps} />;
       default:
         return null;
     }
@@ -195,7 +278,7 @@ const ProfileSettings = () => {
             width={160}
             height={160}
           />
-          
+
           {/* Image Upload Button */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black bg-opacity-30 rounded-full">
             <label className="cursor-pointer p-3 bg-teal-700 rounded-full hover:bg-teal-600 transition-colors">
@@ -209,14 +292,14 @@ const ProfileSettings = () => {
             </label>
           </div>
         </div>
-        <p className="mt-2 text-sm text-gray-500">
+        {/* <p className="mt-2 text-sm text-gray-500">
           {currentUser.imagePath || "profile.png"}
-        </p>
+        </p> */}
       </div>
 
       {/* Personal Information Section */}
       <section className="mb-8">
-        <h3 className="text-lg font-semibold mb-4">Personal Information</h3>
+        <h3 className="text-lg font-semibold mb-4 text-base-content">Personal Information</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {personalInfoFields.map(renderFormField)}
         </div>
@@ -226,7 +309,7 @@ const ProfileSettings = () => {
 
       {/* Preferences Section */}
       <section className="mb-8">
-        <h3 className="text-lg font-semibold mb-4">Preferences</h3>
+        <h3 className="text-lg font-semibold mb-4 text-base-content">Preferences</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {preferenceFields.map(renderFormField)}
         </div>
@@ -239,7 +322,7 @@ const ProfileSettings = () => {
           onClick={handleSubmit}
           disabled={isLoading}
         >
-          {isLoading ? 'Updating...' : 'Update Profile'}
+          {isLoading ? "Updating..." : "Update Profile"}
         </button>
       </div>
     </TitleCard>

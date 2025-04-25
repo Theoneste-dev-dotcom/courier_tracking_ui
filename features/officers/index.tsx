@@ -44,7 +44,6 @@ const Officers = () => {
   const dispatch = useDispatch();
 
   const getOfficers = async () => {
-    console.log(current_companyId)
     const response = await axios.get(
       `http://localhost:3001/users/all?role=officer&companyId=${current_companyId}`,
       {
@@ -53,8 +52,7 @@ const Officers = () => {
         },
       }
     );
-    console.log(response.data)
-
+  
     setOfficers(response.data);
   };
 

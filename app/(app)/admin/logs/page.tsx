@@ -1,5 +1,6 @@
+import InternalPage from '@/pages/protected/Logs'
 import React from 'react'
-import InternalPage from '@/pages/protected/Transactions'
+
 
 const page = () => {
   return (

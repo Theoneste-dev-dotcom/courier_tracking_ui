@@ -23,6 +23,7 @@ import { RootState } from "@/lib/store";
 import AdminWelcome from "./mainComes/AdminWelcome";
 import CompanyOwnerWelcome from "./mainComes/CompanyOwnerWelcome";
 import ClientWelcome from "./mainComes/ClientWelcome";
+import OfficerWelcome from "./mainComes/OfficerWelcome";
 const statsData = [
   {
     title: "New Users",
@@ -90,7 +91,7 @@ function WelcomePage() {
     );
   };
 
-
+ 
   return (
     <main>
       {user.role == "admin" && (
@@ -103,6 +104,10 @@ function WelcomePage() {
        {user.role == "client" && (
         <ClientWelcome/>
       )}
+       {user.role == "officer" && (
+        <OfficerWelcome/>
+      )}
+
       {/*
       {user.role == "officer" && (
         <OfficerComp
