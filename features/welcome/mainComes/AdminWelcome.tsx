@@ -14,41 +14,14 @@ import OfficersStatus from "../components/OfficersStatus";
 import AskedQuestions from "../components/AskedQuestions";
 import DriversStatus from "../components/DriversStatus";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+import {toast} from 'react-toastify'
 const AdminWelcome = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const user_local = localStorage.getItem('user')
   const user = JSON.parse(user_local ? user_local :"undefined")
 
-  // Example data (Replace with real API data)
- const companyId = useSelector(selectCompanyId)
- 
- const getCurrentCompany = async () => {
-
-  const respo = await axios.get(
-    "http://localhost:3001/users/user-company/company",
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    }
-  );
-
-  localStorage.setItem('current-company-id', respo.data.id)
-  dispatch(
-    setCompanyId({ companyId: respo.data.id, companyName: respo.data.name })
-  );
-  
-};
-
-useEffect(()=> {
-  getCurrentCompany()
-}, [])
-
-if(!companyId) {
-  return (
-    <div className="text-base-content text-xl font-semibold">You are not a member of any company</div>
-  )
-}
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-3xl font-bold text-primary">Welcome,</h1>

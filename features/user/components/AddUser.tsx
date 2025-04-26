@@ -81,7 +81,7 @@ function AddUser({ closeModal }: any) {
       // console.log(res.data);
       dispatch(showNotification({ message: "New Driver Added!", status: 1 }));
       closeModal();
-      // location.reload();
+      location.reload();
     }
   };
 

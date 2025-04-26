@@ -14,48 +14,61 @@ import OfficersStatus from "../components/OfficersStatus";
 import AskedQuestions from "../components/AskedQuestions";
 import DriversStatus from "../components/DriversStatus";
 import axios from "axios";
+import { Router } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 const OfficerWelcome = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
-  const user_local = localStorage.getItem('user')
-  const user = JSON.parse(user_local ? user_local :"undefined")
+  const user_local = localStorage.getItem("user");
+  const user = JSON.parse(user_local ? user_local : "undefined");
 
   // Example data (Replace with real API data)
- const companyId = useSelector(selectCompanyId)
- 
- const getCurrentCompany = async () => {
+  const companyId = useSelector(selectCompanyId);
 
-  const respo = await axios.get(
-    "http://localhost:3001/users/user-company/company",
-    {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
+  const getCurrentCompany = async () => {
+    try {
+      const respo = await axios.get(
+        "http://localhost:3001/users/user-company/company",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+
+      if (respo.data.id) {
+        localStorage.setItem("current-company-id", respo.data.id);
+        dispatch(
+          setCompanyId({
+            companyId: respo.data.id,
+            companyName: respo.data.name,
+          })
+        );
+      } else {
+        toast.warning('You are registered in any company', { autoClose: 3000 });
+        localStorage.clear();
+        router.push("/");
+      }
+    } catch (error) {
+      toast.warning('You are registered in any company', { autoClose: 3000 });
+      localStorage.clear();
+      router.push("/");
     }
-  );
+  };
 
-  localStorage.setItem('current-company-id', respo.data.id)
-  dispatch(
-    setCompanyId({ companyId: respo.data.id, companyName: respo.data.name })
-  );
-  
-};
-
-useEffect(()=> {
-  getCurrentCompany()
-}, [])
-
-if(!companyId) {
-  return (
-    <div className="text-base-content text-xl font-semibold">You are not a member of any company</div>
-  )
-}
+  useEffect(() => {
+    getCurrentCompany();
+  }, []);
   return (
     <div className="p-6 space-y-6">
       <h1 className="text-3xl font-bold text-primary">Welcome,</h1>
-      <p className="text-gray-500">Here's an overview of company's status in ur company:</p>
-      
-        {/* <DriverCard title="Drivers Status" content="alerts of your current status to day" actions={['View All']}/> */}
-        <div className="grid grid-cols-1 md:grid-cols-2  items-center justify-center gap-6">
+      <p className="text-gray-500">
+        Here's an overview of company's status in ur company:
+      </p>
+
+      {/* <DriverCard title="Drivers Status" content="alerts of your current status to day" actions={['View All']}/> */}
+      <div className="grid grid-cols-1 md:grid-cols-2  items-center justify-center gap-6">
         <div className="">
           <h3 className="text-info text-xl font-light">
             Notifications About the recent drivers.
@@ -96,7 +109,6 @@ if(!companyId) {
           </div>
         </div>
       </div>
-
     </div>
   );
 };

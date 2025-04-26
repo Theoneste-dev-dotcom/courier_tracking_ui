@@ -24,6 +24,8 @@ import AdminWelcome from "./mainComes/AdminWelcome";
 import CompanyOwnerWelcome from "./mainComes/CompanyOwnerWelcome";
 import ClientWelcome from "./mainComes/ClientWelcome";
 import OfficerWelcome from "./mainComes/OfficerWelcome";
+import CheckCompany from "./mainComes/CheckCompany";
+import DriverWelcome from "./mainComes/DriverWelcome";
 const statsData = [
   {
     title: "New Users",
@@ -81,7 +83,7 @@ function WelcomePage() {
       router.push("/login");
     }
   }, []);
-  const updateDashboardPeriod = (newRange) => {
+  const updateDashboardPeriod = (newRange: any) => {
     // Dashboard range changed, write code to refresh your values
     dispatch(
       showNotification({
@@ -91,22 +93,15 @@ function WelcomePage() {
     );
   };
 
- 
   return (
     <main>
-      {user.role == "admin" && (
-        <AdminWelcome/>
-      )}
+      {user.role == "admin" && <AdminWelcome />}
 
-      {user.role == "company_owner" && (
-        <CompanyOwnerWelcome/>
-      )}
-       {user.role == "client" && (
-        <ClientWelcome/>
-      )}
-       {user.role == "officer" && (
-        <OfficerWelcome/>
-      )}
+      {user.role == "company_owner" && <CompanyOwnerWelcome />}
+      {user.role == "client" && <ClientWelcome />}
+      {user.role == "officer" && <OfficerWelcome />}
+
+      {user.role == "driver" && <DriverWelcome />}
 
       {/*
       {user.role == "officer" && (
