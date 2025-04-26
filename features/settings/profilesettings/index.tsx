@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
+import { baseUrl } from "@/utils/app_data";
 
 // Components
 import TitleCard from "../../../components/Input/Cards/TitleCard";
@@ -116,7 +117,7 @@ const ProfileSettings = () => {
 
   const fetchImageData = async () => {
     const imageResponse = await axios.get(
-      `http://localhost:3001/users/profile/image`,
+      `${baseUrl}users/profile/image`,
       {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       }
@@ -155,7 +156,7 @@ const ProfileSettings = () => {
     try {
       setIsLoading(true);
       const userResponse = await axios.get(
-        `http://localhost:3001/users/specific/${id}`,
+        `${baseUrl}users/specific/${id}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
@@ -196,7 +197,7 @@ const ProfileSettings = () => {
       console.log(formData.get("name"));
 
       const response = await axios.put(
-        `http://localhost:3001/users/${id}`,
+        `${baseUrl}users/${id}`,
         formData,
         {
           headers: {

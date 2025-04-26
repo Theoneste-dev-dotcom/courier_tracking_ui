@@ -23,6 +23,10 @@ export interface OfficerType{
     id:number;
     user:UserType
 }
+export interface AdminType {
+    id:number;
+    user:UserType
+}
 // "id": 4,
 // "vehicleId": "BCG4567",
 // "user": {

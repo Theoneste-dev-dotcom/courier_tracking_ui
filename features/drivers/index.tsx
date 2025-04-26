@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TitleCard from "../../components/Input/Cards/TitleCard";
 import { openModal } from "../common/modalSlice";
 import axios from "axios";
+import { baseUrl } from "@/utils/app_data";
 // import { deleteLead, getLeadsContent } from "./userSlice"
 import {
   CONFIRMATION_MODAL_CLOSE_TYPES,
@@ -29,7 +30,7 @@ const TopSideButtons = () => {
   return (
     <div className="inline-block float-right">
       <button
-        className="btn px-6 btn-sm normal-case btn-primary"
+        className="btn px-6 py-2 btn-sm normal-case bg-teal-500 text-white  "
         onClick={() => openAddNewDriverModal()}
       >
         Add New
@@ -46,7 +47,7 @@ const Users = () => {
   
   const getDrivers = async () => {
     
-   const response = await axios.get(`http://localhost:3001/users/all?role=driver&companyId=${current_companyId}`,{
+   const response = await axios.get(`${baseUrl}users/all?role=driver&companyId=${current_companyId}`,{
      headers: {
       'Authorization' : `Bearer ${localStorage.getItem('token')}`
      }

@@ -6,6 +6,7 @@ import "./globals.css";
 import { Provider } from "react-redux";
 import CheckAuth from "@/utils/CheckAuth";
 import { SocketProvider } from "@/contexts/SocketContext";
+import { Bounce, ToastContainer } from "react-toastify";
 
 // Theme Context for global management
 const ThemeContext = createContext({
@@ -43,9 +44,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <CheckAuth>
-        <SocketProvider>{children}</SocketProvider>
-      </CheckAuth>
+      {children}
     </ThemeContext.Provider>
   );
 };
@@ -71,6 +70,22 @@ export default function RootLayout({
         <Provider store={storeRef.current}>
           <ThemeProvider>{children}</ThemeProvider>
         </Provider>
+        
+
+      <ToastContainer
+      position="top-right"
+      autoClose={4000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      transition={Bounce}
+       />
+
       </body>
     </html>
   );

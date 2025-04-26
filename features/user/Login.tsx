@@ -7,9 +7,10 @@ import InputText from "@/components/Input/InputText";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react"; // Import icons
-import { useLoginMutation } from "./authSlice";
 import { setCredentials } from "./authSlice";
+import { toast } from "react-toastify";
 import { useDispatch, UseDispatch } from "react-redux";
+import { baseUrl } from "@/utils/app_data";
 
 function Login() {
   const dispatch = useDispatch();
@@ -31,8 +32,6 @@ function Login() {
   const [errorMessage, setErrorMessage] = useState("");
   const [loginObj, setLoginObj] = useState(INITIAL_LOGIN_OBJ);
 
-  const [login, { data, isError, isSuccess, isLoading }] = useLoginMutation();
-
   const submitForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setErrorMessage("");
@@ -48,32 +47,28 @@ function Login() {
           password: loginObj.password,
         };
 
-        await login(payload).unwrap();
-
-       
+       const reponse = await axios.post(`${baseUrl}auth/login`, payload)
           localStorage.clear();
-          //   alert("logged in");
-          // console.log(data);
-
+         if(reponse.data.code==200) {
           responseUser = {
-            id: data.id,
-            name: data.name,
-            email: data.email,
-            role: data.role,
+            id: reponse.data.id,
+            name: reponse.data.name,
+            email: reponse.data.email,
+            role: reponse.data.role,
           };
 
-          dispatch(setCredentials({ token: data.token, responseUser }));
+          dispatch(setCredentials({ token: reponse.data.token, responseUser }));
 
           localStorage.setItem("user", JSON.stringify(responseUser));
-          localStorage.setItem("token", data.token);
+          localStorage.setItem("token", reponse.data.token);
 
-          router.push("admin/welcome");
-        
-
-        if (isError) {
-          alert("failed to log in");
-        }
+          router.push("/admin/welcome");
+         }
+             
       } catch (error) {
+           if (axios.isAxiosError(error) && error.response?.status === 401) {
+             toast.error(error.response.data.message.message);
+           }
         console.log(error);
       } finally {
       }

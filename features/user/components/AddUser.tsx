@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import PhoneInputComponent from "@/components/Input/PhoneNumber";
 import { RootState } from "@/lib/store";
+import { baseUrl } from "@/utils/app_data";
 
 const INITIAL_USER_OBJ = {
   name: "",
@@ -69,7 +70,7 @@ function AddUser({ closeModal }: any) {
 
       console.log(userObj);
       const res = await axios.post(
-        `http://localhost:3001/users?companyId=${companyId}&currentId=${id}`,
+        `${baseUrl}users?companyId=${companyId}&currentId=${id}`,
         userObj,
         {
           headers: {

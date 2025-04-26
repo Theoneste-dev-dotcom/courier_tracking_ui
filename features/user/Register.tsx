@@ -11,6 +11,7 @@ import { useSignupMutation } from "./authSlice";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
+import { toast } from "react-toastify";
 
 function Register() {
   const router = useRouter();
@@ -53,23 +54,16 @@ function Register() {
         role: registerObj.role,
       };
 
-      // const response = await axios.post("http://localhost:3001/users", payload);
-
+ 
       const respo = await register(payload).unwrap();
+      toast.success("Thank you for registering,\n Now Login to your Account", {
+        position: "top-right",
+        autoClose: 3000,
+        closeOnClick: true,
+        theme:'colored'
+      })
       router.push("/login");
 
-      if (isSuccess) {
-        alert("User registered Successfully");
-      }
-
-      // if (response.data.success == false) {
-      //   alert(response.data.message);
-      // } else {
-      //   router.push("login");
-      // }
-      // console.log("User registration response", response);
-
-      //   router.push("admin/welcome");
     }
   };
 

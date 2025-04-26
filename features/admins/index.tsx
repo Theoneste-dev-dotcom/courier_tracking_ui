@@ -13,6 +13,8 @@ import {
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
 import { showNotification } from "../common/headerSlice";
 import axios from 'axios';
+import {baseUrl} from '../../utils/app_data'
+import { AdminType } from '@/types/System';
 
 const TopSideButtons = () => {
   const dispatch = useDispatch();
@@ -40,12 +42,12 @@ const TopSideButtons = () => {
 
 const Admins = () => {
   const current_companyId = localStorage.getItem('current-company-id')
-  const [admins, setAdmins] = useState([])
+  const [admins, setAdmins] = useState<AdminType[]>([])
   // const { leads } = useSelector((state) => state.lead);
   const dispatch = useDispatch();
 
   const getAdmins = async () => {
-    const response = await axios.get(`http://localhost:3001/users/all?role=admin&companyId=${current_companyId}`,{
+    const response = await axios.get(`${baseUrl}users/all?role=admin&companyId=${current_companyId}`,{
       headers: {
        'Authorization' : `Bearer ${localStorage.getItem('token')}`
       }
@@ -58,7 +60,7 @@ const Admins = () => {
     // dispatch(getLeadsContent())
   }, []);
 
-  const getDummyStatus = (index) => {
+  const getDummyStatus = (index:number) => {
     if (index % 5 === 0) return <div className="badge">Not Interested</div>;
     else if (index % 5 === 1)
       return <div className="badge badge-primary">In Progress</div>;
@@ -70,7 +72,7 @@ const Admins = () => {
   };
 
 
-  const deleteCurrentAdmin = (index) => {
+  const deleteCurrentAdmin = (index:number) => {
     dispatch(
       openModal({
         title: "Confirmation",

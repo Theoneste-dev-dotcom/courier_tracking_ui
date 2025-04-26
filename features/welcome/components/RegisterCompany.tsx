@@ -3,9 +3,10 @@
 import { useState } from "react";
 
 import { useRouter } from "next/navigation";
-import axios from 'axios'
+import axios from "axios";
 import { useSelector } from "react-redux";
 import { selectToken } from "@/features/user/authSlice";
+import PhoneInputComponent from "@/components/Input/PhoneNumber";
 
 const subscriptionPlans = [
   {
@@ -49,9 +50,7 @@ const subscriptionPlans = [
   },
 ];
 
-
 const RegisterCompany = () => {
- 
   const router = useRouter();
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -62,12 +61,12 @@ const RegisterCompany = () => {
     subscriptionPlan: "",
   });
 
-  const token = localStorage.getItem('token')
-  
-  if(!token) {
-     router.push('/')
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    router.push("/login");
   }
-  
+
   // const [registerCompany, {isLoading, isError, isSuccess}]  = useRegisterCompanyMutation();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -83,19 +82,33 @@ const RegisterCompany = () => {
   };
 
   const handleSubmit = async () => {
-    
     try {
-      console.log(formData, "token=> ", token)
-      const response  = await axios.post('http://localhost:3001/companies', formData, {
-        headers: {
-          'Authorization': `Bearer ${token}`
+      console.log(formData, "token=> ", token);
+      const response = await axios.post(
+        "http://localhost:3001/companies",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      });
-      
+      );
+
       window.location.reload();
     } catch (error) {
       console.error("Error submitting data:", error);
     }
+  };
+
+  const updateFormValue = ({
+    updateType,
+    value,
+  }: {
+    updateType: string;
+    value: string;
+  }) => {
+   
+    setFormData({ ...formData, [updateType]: value });
   };
 
   return (
@@ -103,10 +116,14 @@ const RegisterCompany = () => {
       {step === 1 ? (
         // Step 1: Company Details
         <form onSubmit={handleNext} className="space-y-4">
-          <h2 className="text-2xl font-bold text-center mb-4 text-base-content">Register Your Company</h2>
+          <h2 className="text-2xl font-bold text-center mb-4 text-base-content">
+            Register Your Company
+          </h2>
 
           <div>
-            <label className="label"><span className="label-text">Company Name</span></label>
+            <label className="label">
+              <span className="label-text">Company Name</span>
+            </label>
             <input
               type="text"
               name="name"
@@ -119,7 +136,9 @@ const RegisterCompany = () => {
           </div>
 
           <div>
-            <label className="label"><span className="label-text">Address</span></label>
+            <label className="label">
+              <span className="label-text">Address</span>
+            </label>
             <input
               type="text"
               name="address"
@@ -132,7 +151,9 @@ const RegisterCompany = () => {
           </div>
 
           <div>
-            <label className="label"><span className="label-text">Email</span></label>
+            <label className="label">
+              <span className="label-text">Email</span>
+            </label>
             <input
               type="email"
               name="email"
@@ -145,26 +166,28 @@ const RegisterCompany = () => {
           </div>
 
           <div>
-            <label className="label"><span className="label-text">Phone</span></label>
-            <input
-              type="text"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="Enter phone number"
-              className="input input-bordered w-full text-base-content"
-              required
+            <PhoneInputComponent
+              type="tel"
+              defaultValue={formData.phone}
+              updateType="phone"
+              containerStyle="mt-4"
+              labelTitle="Phone Number"
+              updateFormValue={updateFormValue}
             />
           </div>
 
           <div className="flex justify-end">
-            <button type="submit" className="btn btn-primary">Next</button>
+            <button type="submit" className="btn btn-primary">
+              Next
+            </button>
           </div>
         </form>
       ) : (
         // Step 2: Subscription Selection
         <div>
-          <h2 className="text-2xl font-bold text-center mb-6 text-base-content ">Choose a Subscription Plan</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-base-content ">
+            Choose a Subscription Plan
+          </h2>
 
           <div className="grid md:grid-cols-3 gap-4">
             {subscriptionPlans.map((plan) => (
@@ -172,14 +195,25 @@ const RegisterCompany = () => {
                 key={plan.id}
                 onClick={() => handleSelectPlan(plan.id)}
                 className={`p-4 border rounded-lg cursor-pointer transition  dark:hover:bg-teal-950  ${
-                  formData.subscriptionPlan === plan.id ? "border-primary light:text-white bg-teal-800 dark:hover:bg-teal-900 light:hover:bg-teal-900 text-white" : "border-gray-300 "
+                  formData.subscriptionPlan === plan.id
+                    ? "border-primary light:text-white bg-teal-800 dark:hover:bg-teal-900 light:hover:bg-teal-900 text-white"
+                    : "border-gray-300 "
                 }`}
               >
-                <h3 className="text-lg font-bold text-base-content">{plan.title}</h3>
-                <p className="text-sm mb-2 text-base-content">{plan.duration}</p>
+                <h3 className="text-lg font-bold text-base-content">
+                  {plan.title}
+                </h3>
+                <p className="text-sm mb-2 text-base-content">
+                  {plan.duration}
+                </p>
                 <ul className="text-sm space-y-1">
                   {plan.features.map((feature, idx) => (
-                    <li className="text-base-content py-2 hover:bg-base-200 px-1 rounded-lg  transition-all"  key={idx}>✅ {feature}</li>
+                    <li
+                      className="text-base-content py-2 hover:bg-base-200 px-1 rounded-lg  transition-all"
+                      key={idx}
+                    >
+                      ✅ {feature}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -187,8 +221,14 @@ const RegisterCompany = () => {
           </div>
 
           <div className="flex justify-between mt-6">
-            <button onClick={() => setStep(1)} className="btn btn-outline">Back</button>
-            <button onClick={handleSubmit} className="btn btn-primary" disabled={!formData.subscriptionPlan}>
+            <button onClick={() => setStep(1)} className="btn btn-outline">
+              Back
+            </button>
+            <button
+              onClick={handleSubmit}
+              className="btn btn-primary"
+              disabled={!formData.subscriptionPlan}
+            >
               Submit
             </button>
           </div>

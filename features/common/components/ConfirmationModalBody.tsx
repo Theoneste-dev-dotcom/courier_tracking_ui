@@ -2,6 +2,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import axios from 'axios'
 import { CONFIRMATION_MODAL_CLOSE_TYPES} from '../../../utils/globalConstantUtil'
 import { deleteLead } from '../../leads/leadSlice'
+import { baseUrl } from '@/utils/app_data'
 import { showNotification } from '../headerSlice'
 
 interface ConfirmationPropsTypes {
@@ -24,7 +25,8 @@ function ConfirmationModalBody({ extraObject, closeModal}:ConfirmationPropsTypes
 
     const deleteUser = async({id}:any) => {
       console.log("the user to be deleted id is => ", id)
-      const response = await axios.delete('http://localhost:3001/users/2', {
+      console.log(baseUrl+'users/2')
+      const response = await axios.delete(`${baseUrl}users/2`, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
@@ -61,9 +63,9 @@ function ConfirmationModalBody({ extraObject, closeModal}:ConfirmationPropsTypes
 
         <div className="modal-action mt-12">
                 
-                <button className="btn btn-outline   " onClick={() => closeModal()}>Cancel</button>
+                <button className="btn btn-outline btn-danger  text-red " onClick={() => closeModal()}>Cancel</button>
 
-                <button className="btn btn-primary w-36" onClick={() => proceedWithYes()}>Yes</button> 
+                <button className="btn bg-teal-500 text-white w-36" onClick={() => proceedWithYes()}>Yes</button> 
 
         </div>
         </>

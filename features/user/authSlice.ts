@@ -2,6 +2,8 @@
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { baseUrl } from "@/utils/app_data";
+import { RootState } from "@/lib/store";
 
 export interface LoginBodyDto {
   email: string;
@@ -75,18 +77,18 @@ const authSlice = createSlice({
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001" }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${baseUrl}` }),
   endpoints: (builder) => ({
     login: builder.mutation<any, LoginBodyDto>({
       query: (credentials) => ({
-        url: "/auth/login",
+        url: "auth/login",
         method: "POST",
         body: credentials,
       }),
     }),
     signup: builder.mutation<any, SignupBodyDto>({
       query: (userData) => ({
-        url: "/users",
+        url: "users",
         method: "POST",
         body: userData,
       }),
@@ -96,5 +98,5 @@ export const authApi = createApi({
 
 export const { setCredentials, clearCredentials } = authSlice.actions;
 export default authSlice.reducer;
-export const selectToken = (state)=> state.auth?.token;
+export const selectToken = (state: RootState)=> state.auth?.token;
 export const { useLoginMutation, useSignupMutation } = authApi;

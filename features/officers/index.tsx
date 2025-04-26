@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import TitleCard from "../../components/Input/Cards/TitleCard";
 import { openModal } from "../common/modalSlice";
 import axios from "axios";
+import { baseUrl } from "@/utils/app_data";
 // import { deleteLead, getLeadsContent } from "./userSlice"
 import {
   CONFIRMATION_MODAL_CLOSE_TYPES,
@@ -46,7 +47,7 @@ const Officers = () => {
 
   const getOfficers = async () => {
     const response = await axios.get(
-      `http://localhost:3001/users/all?role=officer&companyId=${current_companyId}`,
+      `${baseUrl}users/all?role=officer&companyId=${current_companyId}`,
       {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

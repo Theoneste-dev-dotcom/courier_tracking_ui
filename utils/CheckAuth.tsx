@@ -9,7 +9,7 @@ const CheckAuth = ({ children }: { children: React.ReactNode }) => {
       setIsAuth(true);
     }else {
         setIsAuth(false);
-        router.push('/')
+        router.push('/login')
     }
     
   }, [router]);
