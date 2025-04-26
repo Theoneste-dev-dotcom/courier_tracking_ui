@@ -13,7 +13,7 @@ const LeftSidebar = () => {
   const {role} = JSON.parse(user_local ? user_local : 'undefined')
   const [routes, setRoutes] = useState<any[]>([])
   const pathname = usePathname();
-  const sidebarRef = useRef(null);
+  const sidebarRef = useRef<HTMLInputElement>(null);
 
 
  

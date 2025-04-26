@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import TitleCard from "../../components/Input/Cards/TitleCard";
-import { showNotification } from "../common/headerSlice";
+import { useNotification } from "@/contexts/NotificationContext";
 
 const INITIAL_INTEGRATION_LIST = [
   {
@@ -56,13 +56,14 @@ const INITIAL_INTEGRATION_LIST = [
 ];
 
 function Integration() {
+  const {showNotification}  = useNotification();
   const dispatch = useDispatch();
 
   const [integrationList, setIntegrationList] = useState(
     INITIAL_INTEGRATION_LIST
   );
 
-  const updateIntegrationStatus = (index) => {
+  const updateIntegrationStatus = (index:number) => {
     let integration = integrationList[index];
     setIntegrationList(
       integrationList.map((i, k) => {
@@ -70,14 +71,13 @@ function Integration() {
         return i;
       })
     );
-    dispatch(
       showNotification({
         message: `${integration.name} ${
           integration.isActive ? "disabled" : "enabled"
         }`,
         status: 1,
       })
-    );
+    
   };
 
   return (
@@ -95,7 +95,9 @@ function Integration() {
                 {i.description}
               </p>
               <div className="mt-6 text-right">
+                
                 <input
+                title=".."
                   type="checkbox"
                   className="toggle toggle-success toggle-lg"
                   checked={i.isActive}

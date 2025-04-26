@@ -13,12 +13,22 @@ import Link from "next/link";
 import profile from "@/public/profile.png";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/lib/store";
+import axios from "axios";
+import { useNotification } from "@/contexts/NotificationContext";
+
 
 const Header = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { noOfNotifications, pageTitle } = useSelector((state:RootState) => state.header);
   const [currentTheme, setCurrentTheme] = useState(() => localStorage.getItem("theme") || "light");
+  const {pageTitle} = useSelector((state: RootState) => state.header);
+  const {
+    noOfNotifications,
+    showNotification,
+    markAllNotificationsAsRead,
+  } = useNotification();
+
+  
 
   useEffect(() => {
     themeChange(false); // Required for theme switching
@@ -28,6 +38,7 @@ const Header = () => {
   }, []);
 
   const toggleTheme = () => {
+    
     const newTheme = currentTheme === "dark" ? "light" : "dark";
     setCurrentTheme(newTheme);
     localStorage.setItem("theme", newTheme);
@@ -35,6 +46,7 @@ const Header = () => {
   };
 
   const openNotification = () => {
+    markAllNotificationsAsRead()
     dispatch(openRightDrawer({ header: "Notifications", bodyType: RIGHT_DRAWER_TYPES.NOTIFICATION }));
   };
 

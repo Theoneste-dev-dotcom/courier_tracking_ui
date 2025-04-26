@@ -6,12 +6,18 @@ import NotificationBodyRightDrawer from '../features/common/components/Notificat
 import { closeRightDrawer } from '../features/common/rightDrawerSlice'
 import { RIGHT_DRAWER_TYPES } from '../utils/globalConstantUtil'
 import CalendarEventsBodyRightDrawer from '@/features/calendar/CalendarEventsBodyRightDrawer'
-
+import axios from 'axios'
+import { useNotification } from '@/contexts/NotificationContext'
 
 function RightSidebar(){
+    const companyId = localStorage.getItem('current-company-id')
+    const {allNotifications} = useNotification()
     const {isOpen, bodyType, extraObject, header} = useSelector((state: RootState) => state.rightDrawer)
+    const [loading, setLoading] = React.useState(false);
     const dispatch = useDispatch()
 
+
+    
     const close = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       dispatch(closeRightDrawer(e))
     }
@@ -41,7 +47,7 @@ function RightSidebar(){
                             {/* Loading drawer body according to different drawer type */}
                             {
                                 {
-                                        [RIGHT_DRAWER_TYPES.NOTIFICATION] : <NotificationBodyRightDrawer {...extraObject} closeRightDrawer={close}/>,
+                                        [RIGHT_DRAWER_TYPES.NOTIFICATION] : <NotificationBodyRightDrawer notifications={allNotifications} {...extraObject} closeRightDrawer={close}/>,
                                         [RIGHT_DRAWER_TYPES.CALENDAR_EVENTS] : <CalendarEventsBodyRightDrawer {...extraObject} filteredEvents={events}/>,
                                         [RIGHT_DRAWER_TYPES.DEFAULT] : <div></div>
                                 }[bodyType]

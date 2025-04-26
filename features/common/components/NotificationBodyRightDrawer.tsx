@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 type Notification = {
   id: number;
@@ -13,38 +14,24 @@ type NotificationBodyRightDrawerProps = {
   closeRightDrawer: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
+  notifications:Notification[];
 };
 
 const NotificationBodyRightDrawer: React.FC<
   NotificationBodyRightDrawerProps
-> = ({ closeRightDrawer }) => {
+> = ({ closeRightDrawer, notifications }) => {
+ 
+  const dispatch = useDispatch();
   const companyId = localStorage.getItem("current-company-id");
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  const fetchCompanyNotifications = async () => {
-    try {
-      setLoading(true);
-      const notifResponse = await axios.get(
-        `http://localhost:3001/notifications/company/${companyId}`,
-        {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        }
-      );
-      
-      if (notifResponse.data) {
-        setNotifications(notifResponse.data);
-      }
-    } catch (error) {
-      console.error('Error fetching notifications:', error);
-    } finally {
-      setLoading(false);
+  useEffect(()=> {
+    if(notifications){
+      console.log(notifications)
+    }else {
+      console.log("why no notifs")
     }
-  };
-
-  useEffect(() => {
-    fetchCompanyNotifications();
-  }, []);
+  }, [])
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
