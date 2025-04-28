@@ -30,7 +30,7 @@ const NotificationContext = createContext<NotificationContextType>({
   newNotificationStatus: 0,
   allNotifications: [],
   loading: false,
-  showNotification: () => {},
+  showNotification: ({message, status}:{message:string, status:number}) => {},
   setNoOfNotifications: () => {},
   setAllNotifications: () => {},
   markAllNotificationsAsRead: async () => {},
@@ -126,8 +126,8 @@ export const NotificationProvider = ({ children }: {
     if (!companyId || !token) return;
 
     try {
-      await axios.patch(
-        `http://localhost:3001/notifications/company/${companyId}/mark-all-read`,
+      await axios.put(
+        `http://localhost:3001/notifications/company/${companyId}/mark-as-read`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },
