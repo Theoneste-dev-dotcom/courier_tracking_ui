@@ -46,8 +46,8 @@ const Header = () => {
   };
 
   const openNotification = () => {
-    dispatch(openRightDrawer({ header: "Notifications", bodyType: RIGHT_DRAWER_TYPES.NOTIFICATION }));
     markAllNotificationsAsRead()
+    dispatch(openRightDrawer({ header: "Notifications", bodyType: RIGHT_DRAWER_TYPES.NOTIFICATION }));
   };
 
   const logoutUser = () => {

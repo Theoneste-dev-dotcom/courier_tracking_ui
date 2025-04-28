@@ -11,7 +11,7 @@ import CreditCardIcon from "@heroicons/react/24/outline/CreditCardIcon";
 // import BarChart from "./components/BarChart";
 // import DashboardTopBar from "./components/DashboardTopBar";
 import { useDispatch, useSelector } from "react-redux";
-import { showNotification } from "../common/headerSlice";
+
 // import DoughnutChart from "./components/DoughnutChart";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -26,6 +26,7 @@ import ClientWelcome from "./mainComes/ClientWelcome";
 import OfficerWelcome from "./mainComes/OfficerWelcome";
 import CheckCompany from "./mainComes/CheckCompany";
 import DriverWelcome from "./mainComes/DriverWelcome";
+import { useNotification } from "@/contexts/NotificationContext";
 const statsData = [
   {
     title: "New Users",
@@ -78,6 +79,7 @@ function WelcomePage() {
   const token = localStorage.getItem("token");
   const user = JSON.parse(user_local ? user_local : "undefined");
 
+  const {showNotification} = useNotification()
   useEffect(() => {
     if (!user) {
       router.push("/login");
@@ -85,12 +87,12 @@ function WelcomePage() {
   }, []);
   const updateDashboardPeriod = (newRange: any) => {
     // Dashboard range changed, write code to refresh your values
-    dispatch(
+ 
       showNotification({
         message: `Period updated to ${newRange.startDate} to ${newRange.endDate}`,
         status: 1,
       })
-    );
+    
   };
 
   return (

@@ -6,15 +6,21 @@ type Notification = {
   id: number;
   type: string;
   message: string;
-  seen: boolean;
   createdAt: string;
 };
+
+type NotificationBody  = {
+id:number;
+isRead:boolean;
+createdAt:string;
+notification: Notification
+}
 
 type NotificationBodyRightDrawerProps = {
   closeRightDrawer: (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => void;
-  notifications:Notification[];
+  notifications:NotificationBody[];
 };
 
 const NotificationBodyRightDrawer: React.FC<
@@ -26,11 +32,7 @@ const NotificationBodyRightDrawer: React.FC<
   const [loading, setLoading] = useState(false);
 
   useEffect(()=> {
-    if(notifications){
-      console.log(notifications)
-    }else {
-      console.log("why no notifs")
-    }
+
   }, [])
 
   const formatDate = (dateString: string) => {
@@ -58,7 +60,7 @@ const NotificationBodyRightDrawer: React.FC<
             <div
               key={notification.id}
               className={`mb-4 p-4 rounded-lg shadow-md transition-all duration-200 ${
-                notification.seen
+                notification.isRead
                   ? 'bg-gray-100'
                   : 'bg-teal-100 border-l-4 border-teal-500'
               }`}
@@ -66,7 +68,7 @@ const NotificationBodyRightDrawer: React.FC<
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-sm font-medium text-gray-800">
-                    {notification.message}
+                    {notification.notification.message}
                   </p>
                   <div className="mt-2 text-xs text-gray-500">
                     <span>{day}, </span>
@@ -74,7 +76,7 @@ const NotificationBodyRightDrawer: React.FC<
                     <span>at {time}</span>
                   </div>
                 </div>
-                {!notification.seen && (
+                {!notification.isRead && (
                   <span className="h-2 w-2 bg-teal-500 rounded-full"></span>
                 )}
               </div>

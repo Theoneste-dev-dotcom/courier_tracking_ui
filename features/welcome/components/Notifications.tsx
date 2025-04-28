@@ -6,7 +6,7 @@ import {toast} from 'react-toastify';
 export default function NotificationsComponent() {
   const {showNotification} = useNotification();
   const { socket, isConnected } = useSocket();
-  const {newNotificationMessage, newNotificationStatus} = useNotification();
+  const {newNotificationMessage, newNotificationStatus, setNoOfNotifications, noOfNotifications} = useNotification();
 
   
 
@@ -19,8 +19,11 @@ export default function NotificationsComponent() {
 
     if (!socket) return;
     socket.on("new-notification", (data) => {
-      toast.info(`New Notification \n  ${data.message }`, { autoClose: 3000 });
-      showNotification({message:data.message, status:1});
+      // console.log(noOfNotifications + 1, "that is the current notifications")
+      alert(noOfNotifications + 1);
+      // toast.info(`New Notification \n  ${data.message }`, { autoClose: 7000 });
+      setNoOfNotifications(noOfNotifications + 1);
+      // showNotification({message:data.message, status:1});
     });
     return () => {
       socket.off("new-notification");

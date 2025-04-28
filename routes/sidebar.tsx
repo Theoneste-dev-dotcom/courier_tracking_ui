@@ -30,8 +30,6 @@ const applyIconClass = (IconComponent:React.ComponentType<IconComponentProps>, i
 };
 
 
-const user_loc = localStorage.getItem('user')
-const {role} = JSON.parse(user_loc ? user_loc : "undefined")
 
 export const company_owner_routes = [
   {

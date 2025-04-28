@@ -74,19 +74,23 @@ export const NotificationProvider = ({ children }: {
       try {
         setLoading(true);
         const notifResponse = await axios.get(
-          `http://localhost:3001/notifications/company/${companyId}`,
+          `http://localhost:3001/notifications/user`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
 
+       
+
         if (notifResponse.data) {
           setState((prev) => ({
             ...prev,
             allNotifications: notifResponse.data,
-            noOfNotifications: notifResponse.data.filter((n:any) => !n.seen).length,
+            noOfNotifications: notifResponse.data.filter((n:any) => !n.isRead).length,
           }));
+          console.log("notification data are ",notifResponse.data)
         }
+        console.log("no notf data")
       } catch (error) {
         console.error('Error fetching notifications:', error);
       } finally {
@@ -126,8 +130,9 @@ export const NotificationProvider = ({ children }: {
     if (!companyId || !token) return;
 
     try {
+      console.log("why not updating ")
       await axios.put(
-        `http://localhost:3001/notifications/company/${companyId}/mark-as-read`,
+        `http://localhost:3001/notifications/mark-all-read`,
         {},
         {
           headers: { Authorization: `Bearer ${token}` },

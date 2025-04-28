@@ -5,7 +5,6 @@ import LeftSidebar from "./LeftSidebar";
 import { useSelector, useDispatch } from "react-redux";
 import RightSidebar from "./RightSidebar";
 import { useEffect } from "react";
-import { removeNotificationMessage } from "../features/common/headerSlice";
 import { Suspense, lazy } from "react";
 import SuspenseContent from "./SuspenseContent";
 import "react-notifications/lib/notifications.css";
@@ -21,13 +20,14 @@ function Layout({ children }: { children: React.ReactNode }) {
     (state: RootState) => state.header
   );
 
+  
   useEffect(() => {
     if (newNotificationMessage !== "") {
       if (newNotificationStatus === 1)
        toast.success(newNotificationMessage);
       if (newNotificationStatus === 0)
         toast.error(newNotificationMessage);
-      dispatch(removeNotificationMessage());
+     
     }
   }, [newNotificationMessage]);
 

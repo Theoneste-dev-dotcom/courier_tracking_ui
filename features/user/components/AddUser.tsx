@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorText from "../../../components/Typography/ErrorText";
-import { showNotification } from "../../common/headerSlice";
 // import { addNewLead } from "../leadSlice";
 import InputText from "@/components/Input/InputText";
 import axios from "axios";
@@ -11,6 +10,7 @@ import { Eye, EyeOff } from "lucide-react";
 import PhoneInputComponent from "@/components/Input/PhoneNumber";
 import { RootState } from "@/lib/store";
 import { baseUrl } from "@/utils/app_data";
+import { useNotification } from "@/contexts/NotificationContext";
 
 const INITIAL_USER_OBJ = {
   name: "",
@@ -36,6 +36,8 @@ function AddUser({ closeModal }: any) {
 
   const { title } = useSelector((state: RootState) => state.modal);
 
+  const {showNotification} = useNotification();
+  
   const saveNewUser = async () => {
     if (title == "Add New Driver") {
       userObj.role = "driver";
@@ -79,7 +81,7 @@ function AddUser({ closeModal }: any) {
         }
       );
       // console.log(res.data);
-      dispatch(showNotification({ message: "New Driver Added!", status: 1 }));
+     showNotification({ message: "New Driver Added!", status: 1 });
       closeModal();
       location.reload();
     }

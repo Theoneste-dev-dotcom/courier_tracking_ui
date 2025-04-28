@@ -60,7 +60,12 @@ function Register() {
         position: "top-right",
         autoClose: 3000,
         closeOnClick: true,
-        theme:'colored'
+        theme:'colored', 
+        style: {
+          backgroundColor: '#14b8a6', // teal-500 hex from Tailwind (#14b8a6)
+          color: 'white',
+          fontWeight: 'bold'
+        }
       })
       router.push("/login");
 
