@@ -62,7 +62,7 @@ function Login() {
           localStorage.setItem("user", JSON.stringify(responseUser));
           localStorage.setItem("token", reponse.data.token);
 
-          router.push("/admin/welcome");
+          router.push("/welcome");
          }
              
       } catch (error) {

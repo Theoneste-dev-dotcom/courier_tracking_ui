@@ -33,49 +33,49 @@ const applyIconClass = (IconComponent:React.ComponentType<IconComponentProps>, i
 
 export const company_owner_routes = [
   {
-    path: "/admin/dashboard",
+    path: "/dashboard",
     icon: applyIconClass(Squares2X2Icon),
     name: "OverView",
   },
   {
-    path: "/admin/welcome",
+    path: "/welcome",
     icon: applyIconClass(Squares2X2Icon),
     name: "Welcome",
   },
 
   {
-    path: "/admin/logs",
+    path: "/logs",
     icon: applyIconClass(CurrencyDollarIcon),
     name: "System Logs",
   },
   {
-    path: "/admin/charts",
+    path: "/charts",
     icon: applyIconClass(ChartBarIcon),
     name: "Analytic",
   },
 
   {
-    path: "/admin/calendar",
+    path: "/calendar",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Calendar",
   },
   {
-    path: "/admin/clients",
+    path: "/clients",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Clients",
   },
   {
-    path: "/admin/shipments",
+    path: "/shipments",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Shipments",
     submenu: [
       {
-          path: "/admin/shipments",
+          path: "/shipments",
           icon: applyIconClass(TableCellsIcon),
           name: "All Shipments", 
       },
       {
-          path: "/admin/shipments/add_new",
+          path: "/shipments/add_new",
           icon: applyIconClass(TableCellsIcon),
           name: "Add new  Shipments", 
       },
@@ -87,17 +87,10 @@ export const company_owner_routes = [
     name: "Branches",
     submenu :[
         {
-          path: "/admin/branches",
+          path: "/branches",
           icon: applyIconClass(TableCellsIcon),
           name: "All Branches",
         },
-        // {
-        //   path: "/admin/branches/add_new",
-        //   icon: applyIconClass(TableCellsIcon),
-        //   name: "Add New Branches",
-        // },
-
-
     ],
   },
   {
@@ -106,7 +99,7 @@ export const company_owner_routes = [
     name: "Drivers",
     submenu: [
        {
-        path: "/admin/drivers",
+        path: "/drivers",
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Drivers",
        },
@@ -119,7 +112,7 @@ export const company_owner_routes = [
     name: "Officers",
     submenu: [
        {
-        path: "/admin/officers",
+        path: "/officers",
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Officers",
        },
@@ -132,7 +125,7 @@ export const company_owner_routes = [
     name: "System Admin",
     submenu: [
        {
-        path: "/admin/admins",
+        path: "s",
         icon: applyIconClass(TableCellsIcon),
         name: "All Admin",
        },
@@ -160,12 +153,12 @@ export const company_owner_routes = [
         name: "Forgot Password",
       },
       {
-        path: "/admin/blank",
+        path: "/blank",
         icon: applyIconClass(DocumentIcon, true),
         name: "Blank Page",
       },
       {
-        path: "/admin/404",
+        path: "/404",
         icon: applyIconClass(ExclamationTriangleIcon, true),
         name: "404",
       },
@@ -177,17 +170,17 @@ export const company_owner_routes = [
     name: "Settings",
     submenu: [
       {
-        path: "/admin/settings-profile",
+        path: "/settings-profile",
         icon: applyIconClass(UserIcon, true),
         name: "Profile",
       },
       {
-        path: "/admin/settings-billing",
+        path: "/settings-billing",
         icon: applyIconClass(WalletIcon, true),
         name: "Billing",
       },
       {
-        path: "/admin/settings-team",
+        path: "/settings-team",
         icon: applyIconClass(UsersIcon, true),
         name: "Team Members",
       },
@@ -197,82 +190,36 @@ export const company_owner_routes = [
 
 export const client_routes =[
   {
-    path: "/admin/dashboard",
+    path: "/dashboard",
     icon: applyIconClass(Squares2X2Icon),
     name: "OverView",
   },
 
   {
-    path: "/admin/welcome",
+    path: "/welcome",
     icon: applyIconClass(Squares2X2Icon),
     name: "Welcome",
   },
 
   {
-    path: "/admin/transactions",
+    path: "/logs",
     icon: applyIconClass(CurrencyDollarIcon),
-    name: "Transactions",
-  },
-  {
-    path: "/admin/charts",
-    icon: applyIconClass(ChartBarIcon),
-    name: "Analytic",
+    name: "System Logs",
   },
 
   {
-    path: "/admin/calendar",
-    icon: applyIconClass(CalendarDaysIcon),
-    name: "Calendar",
-  },
-  {
-    path: "/admin/shipments",
+    path: "shipments",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Shipments",
     submenu: [
       {
-          path: "/admin/shipments",
+          path: "shipments",
           icon: applyIconClass(TableCellsIcon),
           name: "All Shipments", 
       },
-      {
-          path: "/admin/shipments/add_new",
-          icon: applyIconClass(TableCellsIcon),
-          name: "Add new  Shipments", 
-      },
     ]
   },
-  {
-    path: "",
-    icon: applyIconClass(CalendarDaysIcon),
-    name: "Branches",
-    submenu :[
-        {
-          path: "/admin/branches",
-          icon: applyIconClass(TableCellsIcon),
-          name: "All Branches",
-        },
-        // {
-        //   path: "/admin/branches/add_new",
-        //   icon: applyIconClass(TableCellsIcon),
-        //   name: "Add New Branches",
-        // },
-
-
-    ],
-  },
-  {
-    path: "",
-    icon: applyIconClass(CalendarDaysIcon),
-    name: "Drivers",
-    submenu: [
-       {
-        path: "/admin/users",
-        icon: applyIconClass(TableCellsIcon),
-        name: "All Users/Drivers",
-       },
-
-    ]
-  },
+  
   {
     path: "",
     icon: applyIconClass(DocumentDuplicateIcon),
@@ -294,12 +241,12 @@ export const client_routes =[
         name: "Forgot Password",
       },
       {
-        path: "/admin/blank",
+        path: "/blank",
         icon: applyIconClass(DocumentIcon, true),
         name: "Blank Page",
       },
       {
-        path: "/admin/404",
+        path: "/404",
         icon: applyIconClass(ExclamationTriangleIcon, true),
         name: "404",
       },
@@ -311,17 +258,17 @@ export const client_routes =[
     name: "Settings",
     submenu: [
       {
-        path: "/admin/settings-profile",
+        path: "/settings-profile",
         icon: applyIconClass(UserIcon, true),
         name: "Profile",
       },
       {
-        path: "/admin/settings-billing",
+        path: "/settings-billing",
         icon: applyIconClass(WalletIcon, true),
         name: "Billing",
       },
       {
-        path: "/admin/settings-team",
+        path: "/settings-team",
         icon: applyIconClass(UsersIcon, true),
         name: "Team Members",
       },
@@ -330,34 +277,34 @@ export const client_routes =[
 ];
 export const officer_routes = [
   {
-    path: "/admin/dashboard",
+    path: "/dashboard",
     icon: applyIconClass(Squares2X2Icon),
     name: "OverView",
   },  
 
   {
-    path: "/admin/welcome",
+    path: "/welcome",
     icon: applyIconClass(Squares2X2Icon),
     name: "Welcome",
   },
   {
-    path: "/admin/transactions",
+    path: "/transactions",
     icon: applyIconClass(CurrencyDollarIcon),
     name: "Transactions",
   },
 
   {
-    path: "/admin/shipments",
+    path: "/shipments",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Shipments",
     submenu: [
       {
-          path: "/admin/shipments",
+          path: "/shipments",
           icon: applyIconClass(TableCellsIcon),
           name: "All Shipments", 
       },
       {
-          path: "/admin/shipments/add_new",
+          path: "/shipments/add_new",
           icon: applyIconClass(TableCellsIcon),
           name: "Add new  Shipments", 
       },
@@ -370,7 +317,7 @@ export const officer_routes = [
     name: "Drivers",
     submenu: [
        {
-        path: "/admin/drivers",
+        path: "/drivers",
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Drivers",
        },
@@ -398,12 +345,12 @@ export const officer_routes = [
         name: "Forgot Password",
       },
       {
-        path: "/admin/blank",
+        path: "/blank",
         icon: applyIconClass(DocumentIcon, true),
         name: "Blank Page",
       },
       {
-        path: "/admin/404",
+        path: "/404",
         icon: applyIconClass(ExclamationTriangleIcon, true),
         name: "404",
       },
@@ -415,17 +362,17 @@ export const officer_routes = [
     name: "Settings",
     submenu: [
       {
-        path: "/admin/settings-profile",
+        path: "/settings-profile",
         icon: applyIconClass(UserIcon, true),
         name: "Profile",
       },
       {
-        path: "/admin/settings-billing",
+        path: "/settings-billing",
         icon: applyIconClass(WalletIcon, true),
         name: "Billing",
       },
       {
-        path: "/admin/settings-team",
+        path: "/settings-team",
         icon: applyIconClass(UsersIcon, true),
         name: "Team Members",
       },
@@ -434,45 +381,45 @@ export const officer_routes = [
 ];
 export const admin_routes = [
   {
-    path: "/admin/dashboard",
+    path: "/dashboard",
     icon: applyIconClass(Squares2X2Icon),
     name: "OverView",
   },
 
   {
-    path: "/admin/welcome",
+    path: "/welcome",
     icon: applyIconClass(Squares2X2Icon),
     name: "Welcome",
   },
 
   {
-    path: "/admin/transactions",
+    path: "/transactions",
     icon: applyIconClass(CurrencyDollarIcon),
     name: "Transactions",
   },
   {
-    path: "/admin/charts",
+    path: "/charts",
     icon: applyIconClass(ChartBarIcon),
     name: "Analytic",
   },
 
   {
-    path: "/admin/calendar",
+    path: "/calendar",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Calendar",
   },
   {
-    path: "/admin/shipments",
+    path: "/shipments",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Shipments",
     submenu: [
       {
-          path: "/admin/shipments",
+          path: "/shipments",
           icon: applyIconClass(TableCellsIcon),
           name: "All Shipments", 
       },
       {
-          path: "/admin/shipments/add_new",
+          path: "/shipments/add_new",
           icon: applyIconClass(TableCellsIcon),
           name: "Add new  Shipments", 
       },
@@ -484,12 +431,12 @@ export const admin_routes = [
     name: "Branches",
     submenu :[
         {
-          path: "/admin/branches",
+          path: "/branches",
           icon: applyIconClass(TableCellsIcon),
           name: "All Branches",
         },
         // {
-        //   path: "/admin/branches/add_new",
+        //   path: "/branches/add_new",
         //   icon: applyIconClass(TableCellsIcon),
         //   name: "Add New Branches",
         // },
@@ -503,7 +450,7 @@ export const admin_routes = [
     name: "Drivers",
     submenu: [
        {
-        path: "/admin/drivers",
+        path: "/drivers",
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Drivers",
        },
@@ -516,7 +463,7 @@ export const admin_routes = [
     name: "Officers",
     submenu: [
        {
-        path: "/admin/officers",
+        path: "/officers",
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Officers",
        },
@@ -529,7 +476,7 @@ export const admin_routes = [
     name: "Clients",
     submenu: [
        {
-        path: "/admin/clients",
+        path: "/clients",
         icon: applyIconClass(TableCellsIcon),
         name: "All Users/Clients",
        },
@@ -557,12 +504,12 @@ export const admin_routes = [
         name: "Forgot Password",
       },
       {
-        path: "/admin/blank",
+        path: "/blank",
         icon: applyIconClass(DocumentIcon, true),
         name: "Blank Page",
       },
       {
-        path: "/admin/404",
+        path: "/404",
         icon: applyIconClass(ExclamationTriangleIcon, true),
         name: "404",
       },
@@ -574,17 +521,17 @@ export const admin_routes = [
     name: "Settings",
     submenu: [
       {
-        path: "/admin/settings-profile",
+        path: "/settings-profile",
         icon: applyIconClass(UserIcon, true),
         name: "Profile",
       },
       {
-        path: "/admin/settings-billing",
+        path: "/settings-billing",
         icon: applyIconClass(WalletIcon, true),
         name: "Billing",
       },
       {
-        path: "/admin/settings-team",
+        path: "/settings-team",
         icon: applyIconClass(UsersIcon, true),
         name: "Team Members",
       },
@@ -593,24 +540,24 @@ export const admin_routes = [
 ];
 export const driver_routes = [
   {
-    path: "/admin/dashboard",
+    path: "/dashboard",
     icon: applyIconClass(Squares2X2Icon),
     name: "OverView",
   },
 
   {
-    path: "/admin/welcome",
+    path: "/welcome",
     icon: applyIconClass(Squares2X2Icon),
     name: "Welcome",
   },
   
   {
-    path: "/admin/shipments",
+    path: "/shipments",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Shipments",
     submenu: [
       {
-          path: "/admin/shipments",
+          path: "/shipments",
           icon: applyIconClass(TableCellsIcon),
           name: "All Shipments", 
       },
@@ -633,12 +580,12 @@ export const driver_routes = [
         name: "Forgot Password",
       },
       {
-        path: "/admin/blank",
+        path: "/blank",
         icon: applyIconClass(DocumentIcon, true),
         name: "Blank Page",
       },
       {
-        path: "/admin/404",
+        path: "/404",
         icon: applyIconClass(ExclamationTriangleIcon, true),
         name: "404",
       },
@@ -650,17 +597,17 @@ export const driver_routes = [
     name: "Settings",
     submenu: [
       {
-        path: "/admin/settings-profile",
+        path: "/settings-profile",
         icon: applyIconClass(UserIcon, true),
         name: "Profile",
       },
       {
-        path: "/admin/settings-billing",
+        path: "/settings-billing",
         icon: applyIconClass(WalletIcon, true),
         name: "Billing",
       },
       {
-        path: "/admin/settings-team",
+        path: "/settings-team",
         icon: applyIconClass(UsersIcon, true),
         name: "Team Members",
       },

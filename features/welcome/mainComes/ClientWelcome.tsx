@@ -2,8 +2,8 @@ import React from 'react'
 
 const ClientWelcome = () => {
   return (
-    <div>
-      
+    <div className='text-base-content'>
+      Client Welcome
     </div>
   )
 }

@@ -63,7 +63,7 @@ const LeftSidebar = () => {
 
         {/* Logo Section */}
         <li className="mb-2 text-lg font-semibold">
-          <Link href="/app/welcome" className="flex items-center ">
+          <Link href="welcome" className="flex items-center ">
             <Image className="mask mask-squircle w-10" src="/logo192.png" width={20} height={20} alt="DashWind Logo" />
             <span className="lg:block">DashWind</span>
           </Link>

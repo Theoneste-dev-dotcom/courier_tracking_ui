@@ -11,7 +11,6 @@ import {
   MODAL_BODY_TYPES,
 } from "../../utils/globalConstantUtil";
 import TrashIcon from "@heroicons/react/24/outline/TrashIcon";
-import { showNotification } from "../common/headerSlice";
 import axios from 'axios';
 
 const TopSideButtons = () => {
