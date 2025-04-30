@@ -4,6 +4,8 @@ const ClientWelcome = () => {
   return (
     <div className='text-base-content'>
       Client Welcome
+
+        
     </div>
   )
 }
