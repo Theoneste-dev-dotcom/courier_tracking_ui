@@ -202,9 +202,9 @@ export const client_routes =[
   },
 
   {
-    path: "/logs",
+    path: "/activities",
     icon: applyIconClass(CurrencyDollarIcon),
-    name: "System Logs",
+    name: "System Activities",
   },
 
   {

@@ -7,9 +7,13 @@ import { LogTabs } from '@/features/transactions/LogTabs'
 
 function InternalPage(){
     const dispatch = useDispatch()
+    const user_local = localStorage.getItem('user')
+    const user = JSON.parse(user_local ? user_local : "undefined")
+
+
 
     useEffect(() => {
-        dispatch(setPageTitle({ title : "System Logs"}))
+        dispatch(setPageTitle({ title : user.role == 'client' ? "My Activity" : "System Logs"}))
       }, [])
 
 

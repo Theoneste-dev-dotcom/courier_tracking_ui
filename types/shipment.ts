@@ -6,6 +6,7 @@ export interface LocationType {
   }
   
   export interface UserDetails {
+    id:number;
     name: string;
     email: string;
     phone: number;
@@ -13,6 +14,7 @@ export interface LocationType {
   }
   
   export interface CompanyDetails {
+    id?: number;
     name: string;
     email?: string;
     phone?: number;

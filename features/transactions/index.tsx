@@ -1,7 +1,6 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { showNotification } from "../common/headerSlice";
 import TitleCard from "../../components/Input/Cards/TitleCard";
 import { RECENT_TRANSACTIONS } from "@/utils/dummyData";
 import FunnelIcon from "@heroicons/react/24/outline/FunnelIcon";
@@ -133,7 +132,7 @@ function SystemLogs() {
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
                           <div className="mask mask-circle w-12 h-12">
-                            <img src={l.avatar} alt="Avatar"  />
+                            <img src={l.avatar} alt="Avatar" />
                           </div>
                         </div>
                         <div>
