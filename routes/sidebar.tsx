@@ -75,7 +75,7 @@ export const company_owner_routes = [
           name: "All Shipments", 
       },
       {
-          path: "/shipments/add_new",
+          path: "/shipments/add",
           icon: applyIconClass(TableCellsIcon),
           name: "Add new  Shipments", 
       },
