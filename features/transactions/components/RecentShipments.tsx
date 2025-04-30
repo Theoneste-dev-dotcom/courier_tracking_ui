@@ -80,10 +80,10 @@ import {
       <Card className="col-span-4 animate-fade-in">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <CardTitle>Recent Shipments</CardTitle>
-            <CardDescription>The latest shipment activity across the company</CardDescription>
+            <CardTitle className="text-base-content">Recent Shipments</CardTitle>
+            <CardDescription className="text-base-content">The latest shipment activity across the company</CardDescription>
           </div>
-          <Button size="sm" variant="outline" className="flex items-center">
+          <Button size="sm" variant="outline" className="flex items-center text-base-content">
             View All
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
@@ -92,29 +92,29 @@ import {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>Client</TableHead>
-                <TableHead>Tracking #</TableHead>
-                <TableHead>Origin</TableHead>
-                <TableHead>Destination</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Expected Delivery</TableHead>
+                <TableHead className="text-base-content">ID</TableHead>
+                <TableHead className="text-base-content">Client</TableHead>
+                <TableHead className="text-base-content">Tracking #</TableHead>
+                <TableHead className="text-base-content">Origin</TableHead>
+                <TableHead className="text-base-content">Destination</TableHead>
+                <TableHead className="text-base-content">Status</TableHead>
+                <TableHead className="text-base-content">Expected Delivery</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {shipments.map((shipment) => (
                 <TableRow key={shipment.id} className="hover:bg-muted/50 cursor-pointer">
-                  <TableCell className="font-medium">{shipment.id}</TableCell>
-                  <TableCell>{shipment.client}</TableCell>
-                  <TableCell>{shipment.trackingNumber}</TableCell>
-                  <TableCell>{shipment.origin}</TableCell>
-                  <TableCell>{shipment.destination}</TableCell>
-                  <TableCell>
-                    <Badge className={getStatusColor(shipment.status)} variant="outline">
+                  <TableCell className="font-medium text-base-content">{shipment.id}</TableCell>
+                  <TableCell className="text-base-content">{shipment.client}</TableCell>
+                  <TableCell className="text-base-content">{shipment.trackingNumber}</TableCell>
+                  <TableCell className="text-base-content">{shipment.origin}</TableCell>
+                  <TableCell className="text-base-content">{shipment.destination}</TableCell>
+                  <TableCell className="text-base-content">
+                    <Badge className={`${getStatusColor(shipment.status)} text-base-content`} variant="outline">
                       {shipment.status}
                     </Badge>
                   </TableCell>
-                  <TableCell>{shipment.expectedDelivery}</TableCell>
+                  <TableCell className="text-base-content">{shipment.expectedDelivery}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

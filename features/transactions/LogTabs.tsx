@@ -103,11 +103,11 @@ export function LogTabs() {
     <Tabs defaultValue="overview" className="w-full">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
         <TabsList>
-          <TabsTrigger value="overview " className="text-base-content">Overview</TabsTrigger>
-          <TabsTrigger value="shipments " className="text-base-content">Shipments</TabsTrigger>
-          <TabsTrigger value="clients " className="text-base-content">Clients</TabsTrigger>
-          <TabsTrigger value="drivers " className="text-base-content">Drivers</TabsTrigger>
-          <TabsTrigger value="officers " className="text-base-content">Officers</TabsTrigger>
+          <TabsTrigger value="overview" className="text-base-content">Overview</TabsTrigger>
+          <TabsTrigger value="shipments" className="text-base-content">Shipments</TabsTrigger>
+          <TabsTrigger value="clients" className="text-base-content">Clients</TabsTrigger>
+          <TabsTrigger value="drivers" className="text-base-content">Drivers</TabsTrigger>
+          <TabsTrigger value="officers" className="text-base-content">Officers</TabsTrigger>
         </TabsList>
         
         <div className="flex w-full sm:w-auto">

@@ -59,8 +59,8 @@ export function ActiveDrivers() {
   return (
     <Card className="col-span-4 md:col-span-2 animate-fade-in">
       <CardHeader>
-        <CardTitle>Active Drivers</CardTitle>
-        <CardDescription>Current status of company drivers</CardDescription>
+        <CardTitle className="text-base-content">Active Drivers</CardTitle>
+        <CardDescription className="text-base-content">Current status of company drivers</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
@@ -77,16 +77,16 @@ export function ActiveDrivers() {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="text-sm font-medium">{driver.name}</p>
-                  <p className="text-xs text-muted-foreground">{driver.location}</p>
+                  <p className="text-sm font-medium text-base-content">{driver.name}</p>
+                  <p className="text-xs text-muted-foreground text-base-content">{driver.location}</p>
                 </div>
               </div>
               <div className="flex flex-col items-end">
-                <Badge className={getStatusColor(driver.status)} variant="outline">
+                <Badge className={`${getStatusColor(driver.status)} text-base-content`}>
                   {driver.status}
                 </Badge>
                 {driver.currentShipment && (
-                  <span className="text-xs text-muted-foreground mt-1">
+                  <span className="text-xs text-muted-foreground mt-1 text-base-content">
                     Shipment: {driver.currentShipment}
                   </span>
                 )}

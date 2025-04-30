@@ -56,8 +56,8 @@ export function RecentActivity() {
   return (
     <Card className="col-span-4 md:col-span-2 animate-fade-in">
       <CardHeader>
-        <CardTitle>Recent Activity</CardTitle>
-        <CardDescription>Latest company activity logs</CardDescription>
+        <CardTitle className="text-base-content">Recent Activity</CardTitle>
+        <CardDescription className="text-base-content">Latest company activity logs</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-5">
@@ -72,9 +72,9 @@ export function RecentActivity() {
                 )}
               </div>
               <div>
-                <p className="font-medium text-sm">{activity.action}</p>
-                <p className="text-xs text-muted-foreground">{activity.description}</p>
-                <p className="text-xs text-muted-foreground mt-1">{activity.time}</p>
+                <p className="font-medium text-sm text-base-content">{activity.action}</p>
+                <p className="text-xs text-muted-foreground text-base-content">{activity.description}</p>
+                <p className="text-xs text-muted-foreground mt-1 text-gray-400 dark:text-teal-900">{activity.time}</p>
               </div>
             </div>
           ))}
