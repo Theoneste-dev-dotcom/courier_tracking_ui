@@ -9,7 +9,7 @@ import {
   import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
   import { Badge } from "@/components/ui/badge";
   import { ArrowRight } from "lucide-react";
-  import { Button } from "@/components/ui/button";
+  import { Button } from "@/components/ui/Button";
   
   // Sample shipment data - in a real app, this would come from an API
   const shipments = [
