@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Search, Plus, Check, User } from 'lucide-react';
 import { Label } from '@/components/ui/label';
