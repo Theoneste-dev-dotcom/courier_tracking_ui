@@ -31,8 +31,8 @@ const DeliveryProgress = ({ shipment, updates }: DeliveryProgressProps) => {
   return (
     <div className="mb-8">
       <div className="flex justify-between mb-2 text-sm">
-        <span className="font-semibold">Origin</span>
-        <span className="font-semibold">Destination</span>
+        <span className="font-semibold text-base-content">Origin</span>
+        <span className="font-semibold text-base-content">Destination</span>
       </div>
       
       <div className="relative mb-2">

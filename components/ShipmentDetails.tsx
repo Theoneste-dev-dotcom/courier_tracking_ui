@@ -8,17 +8,32 @@ interface ShipmentDetailsProps {
   shipment: Shipment;
 }
 
-const ContactCard = ({ title, details }: { title: string; details?: UserDetails }) => {
+const ContactCard = ({
+  title,
+  details,
+}: {
+  title: string;
+  details?: UserDetails;
+}) => {
   if (!details) return null;
-  
+
   return (
-    <div className="space-y-2">
-      <h4 className="font-medium text-sm">{title}</h4>
-      <div className="text-sm space-y-1">
-        <p className="font-medium">{details.name}</p>
-        <p className="text-muted-foreground">{details.location_name}</p>
-        <p className="text-muted-foreground">{details.email}</p>
-        <p className="text-muted-foreground">{details.phone}</p>
+    <div className="space-y-1">
+      <h4 className="text-base-content font-medium text-lg">{title}</h4>
+      <div className="text-base-content text-sm space-y-1">
+        <p className="text-base-content font-medium">{details.name}</p>
+        <p className="text-base-content text-muted-foreground">
+          {details.location_name}
+        </p>
+        <p
+          className="text-base-content text-muted-foreground w-20 truncate inline-block"
+          title={details.email}
+        >
+          {details.email}
+        </p>
+        <p className="text-base-content text-muted-foreground">
+          {details.phone}
+        </p>
       </div>
     </div>
   );
@@ -26,67 +41,83 @@ const ContactCard = ({ title, details }: { title: string; details?: UserDetails 
 
 const ShipmentDetails = ({ shipment }: ShipmentDetailsProps) => {
   return (
-    <Card className="border border-border">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-lg flex items-center gap-2">
+    <Card className="text-base-content border border-border">
+      <CardHeader className="text-base-content pb-2">
+        <CardTitle className="text-base-content text-lg flex items-center gap-2">
           <Package className="h-5 w-5 text-teal-600" />
-          Shipment Details
+          <span className=" text-base-content"> Shipment Details</span>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="text-base-content grid grid-cols-2 gap-6">
           {/* Left column with shipment details */}
-          <div className="space-y-4">
+          <div className="text-base-content space-y-4">
             <div>
-              <p className="text-sm text-muted-foreground">Tracking Number</p>
-              <p className="font-medium">{shipment.trackingNumber}</p>
+              <p className=" text-sm text-muted-foreground text-base-content">
+                Tracking Number
+              </p>
+              <p className=" font-medium text-base-content">
+                {shipment.trackingNumber}
+              </p>
             </div>
-            
+
             <div>
-              <p className="text-sm text-muted-foreground">Estimated Delivery</p>
-              <p className="font-medium">
-                {shipment.expectedDeliveryDate 
+              <p className=" text-sm text-muted-foreground text-base-content">
+                Estimated Delivery
+              </p>
+              <p className="font-medium text-base-content">
+                {shipment.expectedDeliveryDate
                   ? format(shipment.expectedDeliveryDate, "MMMM d, yyyy")
                   : "Not available"}
               </p>
             </div>
-            
+
             <div>
-              <p className="text-sm text-muted-foreground">Weight</p>
-              <p className="font-medium">{shipment.weight} lbs</p>
+              <p className=" text-sm text-muted-foreground text-base-content">
+                Weight
+              </p>
+              <p className=" font-medium text-base-content">
+                {shipment.weight} lbs
+              </p>
             </div>
-            
+
             <div>
-              <p className="text-sm text-muted-foreground">Date Created</p>
-              <p className="font-medium">
+              <p className=" text-sm text-muted-foreground text-base-content">
+                Date Created
+              </p>
+              <p className=" font-medium text-base-content">
                 {format(shipment.createdAt, "MMMM d, yyyy")}
               </p>
             </div>
           </div>
-          
+
           {/* Right column with locations */}
-          <div className="space-y-4">
+          <div className="text-base-content space-y-4">
             <div>
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
-                <MapPin className="h-4 w-4" /> Origin
+              <p className="text-base-content text-sm text-muted-foreground flex items-center gap-1">
+                <MapPin className="h-4 w-4 text-base-content" /> Origin
               </p>
-              <p className="font-medium">{shipment.origin.placeName}</p>
+              <p className="font-medium text-base-content">
+                {shipment.origin.placeName}
+              </p>
             </div>
-            
+
             <div>
-              <p className="text-sm text-muted-foreground flex items-center gap-1">
-                <MapPin className="h-4 w-4" /> Destination
+              <p className="text-base-content text-sm text-muted-foreground flex items-center gap-1">
+                <MapPin className=" h-4 w-4 text-base-content" /> Destination
               </p>
-              <p className="font-medium">{shipment.destination.placeName}</p>
+              <p className=" font-medium text-base-content">
+                {shipment.destination.placeName}
+              </p>
             </div>
           </div>
         </div>
-        
-        <Separator className="my-6" />
-        
+
+        <Separator className="text-base-content my-6" />
+
         <div className="grid grid-cols-2 gap-6">
-          <ContactCard title="Sender" details={shipment.senderDetails} />
-          <ContactCard title="Recipient" details={shipment.receiverDetails} />
+          <ContactCard title=" Sender" details={shipment.senderDetails} />
+          <ContactCard title=" Recipient" details={shipment.receiverDetails} />
         </div>
       </CardContent>
     </Card>

@@ -13,8 +13,8 @@ const ShipmentLogs = ({ logs }: ShipmentLogsProps) => {
   if (!logs.length) {
     return (
       <div className="py-4">
-        <h3 className="text-lg font-semibold mb-4 text-foreground">Shipment Logs</h3>
-        <p className="text-muted-foreground text-center py-6">No logs available for this shipment</p>
+        <h3 className="text-lg font-semibold mb-4 text-foreground text-base-content">Shipment Logs</h3>
+        <p className="text-muted-foreground text-center py-6  text-base-content">No logs available for this shipment</p>
       </div>
     );
   }
@@ -39,14 +39,14 @@ const ShipmentLogs = ({ logs }: ShipmentLogsProps) => {
 
   return (
     <div className="py-4">
-      <h3 className="text-lg font-semibold mb-4 text-foreground">Shipment Logs</h3>
+      <h3 className="text-lg font-semibold mb-4 text-foreground  text-base-content">Shipment Logs</h3>
       <div className="overflow-x-auto">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Type</TableHead>
-              <TableHead>Message</TableHead>
-              <TableHead className="text-right">Timestamp</TableHead>
+              <TableHead className="w-[100px]  text-base-content">Type</TableHead>
+              <TableHead className="text-base-content">Message</TableHead>
+              <TableHead className="text-right  text-base-content">Timestamp</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -55,11 +55,11 @@ const ShipmentLogs = ({ logs }: ShipmentLogsProps) => {
                 <TableCell className="font-medium">
                   <div className="flex items-center gap-2">
                     {getLogIcon(log.type)}
-                    <span className="capitalize">{log.type}</span>
+                    <span className="capitalize  text-base-content">{log.type}</span>
                   </div>
                 </TableCell>
-                <TableCell>{log.message}</TableCell>
-                <TableCell className="text-right">
+                <TableCell className=" text-base-content">{log.message}</TableCell>
+                <TableCell className="text-right  text-base-content">
                   {format(log.timestamp, "MMM d, yyyy • h:mm a")}
                 </TableCell>
               </TableRow>

@@ -16,8 +16,8 @@ const ShipmentTimeline = ({ updates, currentStatus }: ShipmentTimelineProps) => 
   );
 
   return (
-    <div className="py-4">
-      <h3 className="text-lg font-semibold mb-4 text-foreground">Shipment Progress</h3>
+    <div className="py-4 ">
+      <h3 className="text-lg  font-semibold mb-4 text-foreground text-base-content">Shipment Progress</h3>
       <div className="relative">
         {sortedUpdates.map((update, index) => {
           const isActive = update.status === currentStatus;
@@ -38,12 +38,12 @@ const ShipmentTimeline = ({ updates, currentStatus }: ShipmentTimelineProps) => 
                 )}
               </div>
               <div className={`pt-0.5 ${isActive ? "text-teal-600 dark:text-teal-600" : "text-foreground"}`}>
-                <p className="font-medium">{update.status}</p>
-                <p className="text-sm text-muted-foreground">{update.description}</p>
-                <p className="text-xs text-muted-foreground mt-1">
+                <p className="font-medium  text-base-content">{update.status}</p>
+                <p className="text-sm text-muted-foreground text-base-content">{update.description}</p>
+                <p className="text-xs text-muted-foreground mt-1 dark:text-gray-200 text-gray-500">
                   {format(update.timestamp, "MMM d, yyyy • h:mm a")}
                 </p>
-                <p className="text-xs text-muted-foreground">{update.location.placeName}</p>
+                <p className="text-xs text-muted-foreground  text-base-content">{update.location.placeName}</p>
               </div>
             </div>
           );
@@ -55,8 +55,8 @@ const ShipmentTimeline = ({ updates, currentStatus }: ShipmentTimelineProps) => 
             <Circle className="h-6 w-6 text-gray-300 dark:text-gray-600" />
           </div>
           <div className="pt-0.5">
-            <p className="font-medium">Delivered</p>
-            <p className="text-sm text-muted-foreground">Package will be delivered to recipient</p>
+            <p className="font-medium  text-base-content">Delivered</p>
+            <p className="text-sm text-muted-foreground  text-base-content" >Package will be delivered to recipient</p>
           </div>
         </div>
       </div>

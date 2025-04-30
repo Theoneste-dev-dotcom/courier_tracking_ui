@@ -1,11 +1,13 @@
 'use client'
-import ShipmentStatus from '@/features/welcome/components/ShipmentsStatus'
+import SpecificShipment from '@/pages/protected/SpecificShipment'
+import { useParams } from 'next/navigation'
 import React from 'react'
 
 const page = () => {
+    const shipmentId = 0;
   return (
     <div>
-        <ShipmentStatus/>
+       <SpecificShipment shipmentId={shipmentId}/>
     </div>
   )
 }

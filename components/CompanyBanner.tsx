@@ -24,17 +24,17 @@ const CompanyBanner = ({ companyDetails }: CompanyBannerProps) => {
             </div>
           )}
           <div>
-            <h3 className="font-medium text-foreground">{companyDetails.name}</h3>
-            <p className="text-sm text-muted-foreground">Transport Provider</p>
+            <h3 className="font-medium text-foreground text-base-content">{companyDetails.name}</h3>
+            <p className="text-sm text-muted-foreground text-base-content">Transport Provider</p>
           </div>
         </div>
         
         <div className="text-right">
           {companyDetails.phone && (
-            <p className="text-sm text-muted-foreground">{companyDetails.phone}</p>
+            <p className="text-sm text-muted-foreground text-base-content">{companyDetails.phone}</p>
           )}
           {companyDetails.email && (
-            <p className="text-sm text-muted-foreground">{companyDetails.email}</p>
+            <p className="text-sm text-muted-foreground text-base-content">{companyDetails.email}</p>
           )}
         </div>
       </div>

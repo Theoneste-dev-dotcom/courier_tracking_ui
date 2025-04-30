@@ -13,7 +13,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Package } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
-const ShipmentStatus = () => {
+interface StatusProps {
+  shipmentId: number
+}
+const ShipmentStatus:React.FC<StatusProps> = ({shipmentId}) => {
   const [shipment, setShipment] = useState<Shipment | null>(null);
   const [shipmentUpdates, setShipmentUpdates] = useState<ShipmentUpdate[]>([]);
   const [shipmentLogs, setShipmentLogs] = useState<ShipmentLog[]>([]);
@@ -111,7 +114,7 @@ const ShipmentStatus = () => {
                   <div className="bg-teal-600 dark:bg-teal-800 text-white p-4">
                     <div className="flex items-center gap-2">
                       <Package className="h-5 w-5" />
-                      <h2 className="text-xl font-semibold">{shipment.name}</h2>
+                      <h2 className="text-xl font-semibold ">{shipment.name}</h2>
                     </div>
                   </div>
                   <CardContent className="pt-4">
@@ -120,7 +123,7 @@ const ShipmentStatus = () => {
                     <div className="mt-6">
                       <Button 
                         onClick={handleRefresh} 
-                        className="w-full bg-teal-600 hover:bg-teal-700 text-white"
+                        className="w-full bg-teal-600 hover:bg-teal-700 "
                         disabled={loading}
                       >
                         Refresh Tracking Info
