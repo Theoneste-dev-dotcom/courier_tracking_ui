@@ -202,18 +202,18 @@ export const client_routes =[
   },
 
   {
-    path: "/activities",
+    path: "/logs",
     icon: applyIconClass(CurrencyDollarIcon),
     name: "System Activities",
   },
 
   {
-    path: "shipments",
+    path: "/shipments",
     icon: applyIconClass(CalendarDaysIcon),
     name: "Shipments",
     submenu: [
       {
-          path: "shipments",
+          path: "/shipments",
           icon: applyIconClass(TableCellsIcon),
           name: "All Shipments", 
       },

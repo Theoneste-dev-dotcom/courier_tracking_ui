@@ -11,21 +11,21 @@ import { ClientRequests } from "@/features/dashboard/client-dashboard/ClientRequ
 
 const ClientDashboard = () => {
   const [searchQuery, setSearchQuery] = useState("");
-
+// 
   return (
     <div className="min-h-screen p-6">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">Client Dashboard</h1>
-        <p className="text-muted-foreground">Monitor your shipments and manage your requests</p>
+        <h1 className="text-2xl font-bold mb-2 text-base-content">Client Dashboard</h1>
+        <p className="text-muted-foreground text-base-content">Monitor your shipments and manage your requests</p>
       </div>
       
       <Tabs defaultValue="overview" className="w-full">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-4">
           <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="shipments">Shipments</TabsTrigger>
-            <TabsTrigger value="companies">Companies</TabsTrigger>
-            <TabsTrigger value="requests">Requests</TabsTrigger>
+            <TabsTrigger value="overview" className="text-base-content">Overview</TabsTrigger>
+            <TabsTrigger value="shipments" className="text-base-content">Shipments</TabsTrigger>
+            <TabsTrigger value="companies" className="text-base-content">Companies</TabsTrigger>
+            <TabsTrigger value="requests" className="text-base-content">Requests</TabsTrigger>
           </TabsList>
           
           <div className="flex w-full sm:w-auto">
@@ -53,24 +53,24 @@ const ClientDashboard = () => {
 
         <TabsContent value="shipments" className="space-y-4">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">My Shipments</h2>
-            <Button variant="outline">Export Data</Button>
+            <h2 className="text-xl font-semibold text-base-content">My Shipments</h2>
+            <Button variant="outline" className="text-base-content">Export Data</Button>
           </div>
           <ClientShipmentHistory />
         </TabsContent>
 
         <TabsContent value="companies" className="space-y-4">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">My Companies</h2>
-            <Button variant="outline">Export Data</Button>
+            <h2 className="text-xl font-semibold  text-base-content">My Companies</h2>
+            <Button variant="outline" className=" text-base-content">Export Data</Button>
           </div>
           <ClientCompanies />
         </TabsContent>
 
         <TabsContent value="requests" className="space-y-4">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-semibold">My Requests</h2>
-            <Button variant="outline">Export Data</Button>
+            <h2 className="text-xl font-semibold text-base-content">My Requests</h2>
+            <Button variant="outline" className="text-base-content">Export Data</Button>
           </div>
           <ClientRequests showSummary={false} />
         </TabsContent>

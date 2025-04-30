@@ -118,10 +118,10 @@ import {
       <Card className="animate-fade-in">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <CardTitle>Shipment History</CardTitle>
-            <CardDescription>Track all your shipments across different companies</CardDescription>
+            <CardTitle className="text-base-content">Shipment History</CardTitle>
+            <CardDescription className="text-base-content">Track all your shipments across different companies</CardDescription>
           </div>
-          <Button size="sm" variant="outline" className="flex items-center">
+          <Button size="sm" variant="outline" className="flex items-center text-base-content">
             View All
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
@@ -130,29 +130,29 @@ import {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>ID</TableHead>
-                <TableHead>Company</TableHead>
-                <TableHead>Tracking #</TableHead>
-                <TableHead>Origin</TableHead>
-                <TableHead>Destination</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Expected Delivery</TableHead>
+                <TableHead className="text-base-content">ID</TableHead>
+                <TableHead className="text-base-content">Company</TableHead>
+                <TableHead className="text-base-content">Tracking #</TableHead>
+                <TableHead className="text-base-content">Origin</TableHead>
+                <TableHead className="text-base-content">Destination</TableHead>
+                <TableHead className="text-base-content">Status</TableHead>
+                <TableHead className="text-base-content">Expected Delivery</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentShipments.map((shipment) => (
                 <TableRow key={shipment.id} className="hover:bg-muted/50 cursor-pointer">
-                  <TableCell className="font-medium">{shipment.id}</TableCell>
-                  <TableCell>{shipment.company}</TableCell>
-                  <TableCell>{shipment.trackingNumber}</TableCell>
-                  <TableCell>{shipment.origin}</TableCell>
-                  <TableCell>{shipment.destination}</TableCell>
-                  <TableCell>
+                  <TableCell className="font-medium  text-base-content">{shipment.id}</TableCell>
+                  <TableCell className="text-base-content">{shipment.company}</TableCell>
+                  <TableCell className="text-base-content">{shipment.trackingNumber}</TableCell>
+                  <TableCell className="text-base-content">{shipment.origin}</TableCell>
+                  <TableCell className="text-base-content">{shipment.destination}</TableCell>
+                  <TableCell className="text-base-content">
                     <Badge className={getStatusColor(shipment.status)} variant="outline">
                       {shipment.status}
                     </Badge>
                   </TableCell>
-                  <TableCell>{shipment.expectedDelivery}</TableCell>
+                  <TableCell className="text-base-content">{shipment.expectedDelivery}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -164,13 +164,14 @@ import {
                 <PaginationItem>
                   <PaginationPrevious 
                     onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
-                    className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                    className={currentPage === 1 ? "pointer-events-none opacity-50 text-base-content" : "cursor-pointer text-base-content"}
                   />
                 </PaginationItem>
                 
                 {Array.from({ length: totalPages }).map((_, index) => (
                   <PaginationItem key={index}>
                     <PaginationLink
+                    className="text-base-content"
                       onClick={() => setCurrentPage(index + 1)}
                       isActive={currentPage === index + 1}
                     >
@@ -181,8 +182,9 @@ import {
                 
                 <PaginationItem>
                   <PaginationNext
+
                     onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
-                    className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+                    className={currentPage === totalPages ? "pointer-events-none opacity-50 text-base-content" : "cursor-pointer text-base-content"}
                   />
                 </PaginationItem>
               </PaginationContent>

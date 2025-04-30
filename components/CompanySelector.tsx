@@ -19,7 +19,7 @@ const CompanySelector: React.FC<CompanySelectorProps> = ({
 }) => {
   if (isLoading) {
     return (
-      <div className="p-8 text-center text-muted-foreground">
+      <div className="p-8 text-center text-muted-foreground  text-base-content">
         Loading available companies...
       </div>
     );
@@ -28,7 +28,7 @@ const CompanySelector: React.FC<CompanySelectorProps> = ({
   if (companies.length === 0) {
     return (
       <div className="p-8 text-center border border-dashed rounded-md">
-        <p className="text-muted-foreground">No transport companies available at the moment.</p>
+        <p className="text-muted-foreground  text-base-content">No transport companies available at the moment.</p>
       </div>
     );
   }
@@ -57,8 +57,8 @@ const CompanySelector: React.FC<CompanySelectorProps> = ({
                 </div>
               )}
               <div>
-                <p className="font-medium">{company.name}</p>
-                {company.email && <p className="text-xs text-muted-foreground">{company.email}</p>}
+                <p className="font-medium  text-base-content">{company.name}</p>
+                {company.email && <p className="text-xs text-muted-foreground  text-base-content">{company.email}</p>}
               </div>
             </div>
             {selectedCompanyId === company.id && (

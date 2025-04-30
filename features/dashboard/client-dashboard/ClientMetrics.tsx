@@ -41,18 +41,18 @@ export function ClientMetrics() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between space-x-4">
               <div className="flex flex-col">
-                <span className="text-sm font-medium text-muted-foreground">
+                <span className="text-sm font-medium text-muted-foreground text-base-content">
                   {metric.title}
                 </span>
                 <div className="flex items-center">
-                  <span className="text-2xl font-bold">{metric.value}</span>
-                  <span className={`text-xs ml-2 ${metric.changeType === 'positive' ? 'text-teal-600' : 'text-red-600'}`}>
+                  <span className="text-2xl font-bold text-base-content">{metric.value}</span>
+                  <span className={`text-base-content text-xs ml-2 ${metric.changeType === 'positive' ? 'text-teal-600' : 'text-red-600'}`}>
                     {metric.change}
                   </span>
                 </div>
               </div>
               <div className="p-2 bg-teal-600/10 rounded-full text-teal-700">
-                <metric.icon className="h-5 w-5" />
+                <metric.icon className="h-5 w-5 text-base-content" />
               </div>
             </div>
           </CardContent>

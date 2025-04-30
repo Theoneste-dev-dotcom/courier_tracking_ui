@@ -107,8 +107,8 @@ import {
     return (
       <Card className={`animate-fade-in ${showSummary ? "col-span-4 lg:col-span-2" : ""}`}>
         <CardHeader>
-          <CardTitle>Client Requests</CardTitle>
-          <CardDescription>Track the status of your shipment requests</CardDescription>
+          <CardTitle className="text-base-content">Client Requests</CardTitle>
+          <CardDescription className="text-base-content">Track the status of your shipment requests</CardDescription>
         </CardHeader>
         <CardContent>
           {showSummary && (
@@ -139,31 +139,31 @@ import {
           <Table>
             <TableHeader>
               <TableRow className="bg-muted/50">
-                <TableHead className="font-medium">Request ID</TableHead>
-                <TableHead className="font-medium">Company</TableHead>
-                <TableHead className="font-medium">Type</TableHead>
-                <TableHead className="font-medium">Status</TableHead>
-                <TableHead className="font-medium">Date</TableHead>
+                <TableHead className="font-medium text-base-content" >Request ID</TableHead>
+                <TableHead className="font-medium text-base-content" >Company</TableHead>
+                <TableHead className="font-medium text-base-content" >Type</TableHead>
+                <TableHead className="font-medium text-base-content" >Status</TableHead>
+                <TableHead className="font-medium text-base-content" >Date</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {currentRequests.length > 0 ? (
                 currentRequests.map((request) => (
                   <TableRow key={request.id} className="hover:bg-muted/50 cursor-pointer">
-                    <TableCell className="font-medium">{request.id}</TableCell>
-                    <TableCell>{request.company}</TableCell>
-                    <TableCell>{request.type}</TableCell>
-                    <TableCell>
-                      <Badge className={getStatusColor(request.status)} variant="outline">
+                    <TableCell className="font-medium text-base-content">{request.id}</TableCell>
+                    <TableCell className="text-base-content">{request.company}</TableCell>
+                    <TableCell className="text-base-content">{request.type}</TableCell>
+                    <TableCell className="text-base-content">
+                      <Badge className={`${getStatusColor(request.status)} text-base-content`} variant="outline">
                         {request.status}
                       </Badge>
                     </TableCell>
-                    <TableCell>{request.requestDate}</TableCell>
+                    <TableCell className="text-base-content">{request.requestDate}</TableCell>
                   </TableRow>
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={5} className="text-center py-6 text-muted-foreground">
+                  <TableCell colSpan={5} className="text-center py-6 text-muted-foreground text-base-content">
                     No requests found
                   </TableCell>
                 </TableRow>

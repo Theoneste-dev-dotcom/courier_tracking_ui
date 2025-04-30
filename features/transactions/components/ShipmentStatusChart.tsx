@@ -13,8 +13,8 @@ export function ShipmentStatusChart() {
   return (
     <Card className="col-span-4 lg:col-span-2 animate-fade-in">
       <CardHeader>
-        <CardTitle>Shipment Status Overview</CardTitle>
-        <CardDescription>Distribution of current shipments by status</CardDescription>
+        <CardTitle className="text-base-content">Shipment Status Overview</CardTitle>
+        <CardDescription className="text-base-content">Distribution of current shipments by status</CardDescription>
       </CardHeader>
       <CardContent className="pl-2">
         <ResponsiveContainer width="100%" height={300}>

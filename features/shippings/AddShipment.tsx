@@ -72,7 +72,7 @@ const AddShipment: React.FC = () => {
     try {
       // In a real app, this would send data to your API
       console.log("Shipment data to submit:", data);
-      
+    //   text-base-content
       // Mock successful submission
       setTimeout(() => {
         toast.success("Shipment request created successfully!");
@@ -117,22 +117,22 @@ const AddShipment: React.FC = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-foreground">Create New Shipment</h1>
+        <h1 className="text-3xl font-bold mb-6 text-foreground  text-base-content">Create New Shipment</h1>
         
         <div className="mb-8">
           <div className="flex items-center justify-between">
             {[1, 2, 3].map((stepNumber) => (
               <div 
                 key={stepNumber} 
-                className={`flex items-center ${stepNumber < step ? 'text-teal-600' : stepNumber === step ? 'text-foreground' : 'text-muted-foreground'}`}
+                className={` text-base-content flex items-center ${stepNumber < step ? 'text-teal-600' : stepNumber === step ? 'text-foreground' : 'text-muted-foreground'}`}
               >
                 <div 
-                  className={`w-10 h-10 rounded-full flex items-center justify-center mr-2 
+                  className={` text-base-content w-10 h-10 rounded-full flex items-center justify-center mr-2 
                   ${stepNumber < step ? 'bg-teal-600 text-white' : stepNumber === step ? 'border-2 border-teal-600' : 'border-2 border-muted'}`}
                 >
-                  {stepNumber < step ? <Check className="h-5 w-5" /> : stepNumber}
+                  {stepNumber < step ? <Check className="h-5 w-5  text-base-content" /> : stepNumber}
                 </div>
-                <span className={`hidden md:inline ${stepNumber <= step ? 'font-medium' : 'font-normal'}`}>
+                <span className={`hidden md:inline  text-base-content ${stepNumber <= step ? 'font-medium' : 'font-normal'}`}>
                   {stepNumber === 1 ? 'Shipment Details' : stepNumber === 2 ? 'Locations' : 'Review & Submit'}
                 </span>
               </div>
@@ -140,7 +140,7 @@ const AddShipment: React.FC = () => {
           </div>
           <div className="mt-2 h-1 w-full bg-muted">
             <div 
-              className="h-full bg-teal-600 transition-all duration-300" 
+              className=" text-base-content h-full bg-teal-600 transition-all duration-300" 
               style={{ width: `${((step - 1) / 2) * 100}%` }}
             ></div>
           </div>
@@ -151,10 +151,10 @@ const AddShipment: React.FC = () => {
             {step === 1 && (
               <Card className="mb-8">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Package className="h-5 w-5" /> Shipment Details
+                  <CardTitle className="flex items-center gap-2 text-base-content">
+                    <Package className="h-5 w-5 " /> Shipment Details
                   </CardTitle>
-                  <CardDescription>Enter basic information about your shipment</CardDescription>
+                  <CardDescription className=" text-base-content">Enter basic information about your shipment</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <FormField
@@ -162,9 +162,9 @@ const AddShipment: React.FC = () => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Shipment Name</FormLabel>
+                        <FormLabel className=" text-base-content">Shipment Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="e.g., Home Furniture" {...field} />
+                          <Input className=" text-base-content" placeholder="e.g., Home Furniture" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -176,9 +176,9 @@ const AddShipment: React.FC = () => {
                     name="weight"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Weight (kg)</FormLabel>
+                        <FormLabel className="text-base-content">Weight (kg)</FormLabel>
                         <FormControl>
-                          <Input type="number" min="0" step="0.1" {...field} />
+                          <Input type="number" min="0" step="0.1" {...field}  className="text-base-content"/>
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -186,8 +186,8 @@ const AddShipment: React.FC = () => {
                   />
                   
                   <div className="pt-4">
-                    <h3 className="text-lg font-medium mb-3 flex items-center gap-2">
-                      <Truck className="h-5 w-5" /> Select Transport Company
+                    <h3 className="text-lg font-medium mb-3 flex items-center gap-2 text-base-content ">
+                      <Truck className="h-5 w-5  text-base-content" /> Select Transport Company
                     </h3>
                     <CompanySelector 
                       companies={availableCompanies}
@@ -197,8 +197,8 @@ const AddShipment: React.FC = () => {
                   </div>
                   
                   <div className="pt-4">
-                    <h3 className="text-lg font-medium mb-3 flex items-center gap-2">
-                      <User className="h-5 w-5" /> Receiver Information
+                    <h3 className="text-lg font-medium mb-3 flex items-center gap-2  text-base-content">
+                      <User className="h-5 w-5  text-base-content" /> Receiver Information
                     </h3>
                     <ReceiverSelector onSelect={handleReceiverSelect} />
                   </div>
@@ -220,14 +220,14 @@ const AddShipment: React.FC = () => {
               <Card className="mb-8">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Map className="h-5 w-5" /> Origin & Destination
+                    <Map className="h-5 w-5  text-base-content" /> Origin & Destination
                   </CardTitle>
-                  <CardDescription>Select the pickup and delivery locations</CardDescription>
+                  <CardDescription className="  text-base-content">Select the pickup and delivery locations</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <div>
                     <h3 className="text-lg font-medium mb-3 flex items-center gap-2">
-                      <MapPin className="h-5 w-5" /> Origin Location
+                      <MapPin className="h-5 w-5  text-base-content" /> Origin Location
                     </h3>
                     <LocationSelector 
                       type="origin" 
@@ -237,7 +237,7 @@ const AddShipment: React.FC = () => {
                   
                   <div>
                     <h3 className="text-lg font-medium mb-3 flex items-center gap-2">
-                      <MapPin className="h-5 w-5" /> Destination Location
+                      <MapPin className="h-5 w-5  text-base-content" /> Destination Location
                     </h3>
                     <LocationSelector 
                       type="destination" 
@@ -250,7 +250,7 @@ const AddShipment: React.FC = () => {
                     name="notes"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Additional Notes</FormLabel>
+                        <FormLabel className=" text-base-content">Additional Notes</FormLabel>
                         <FormControl>
                           <Textarea 
                             placeholder="Add any special instructions or notes for the shipment..."
@@ -258,7 +258,7 @@ const AddShipment: React.FC = () => {
                             {...field}
                           />
                         </FormControl>
-                        <FormDescription>Optional: Include any specific details about handling, access requirements, etc.</FormDescription>
+                        <FormDescription className=" text-base-content">Optional: Include any specific details about handling, access requirements, etc.</FormDescription>
                         <FormMessage />
                       </FormItem>
                     )}
@@ -291,16 +291,16 @@ const AddShipment: React.FC = () => {
                 <CardContent className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-3">
-                      <h3 className="font-medium text-muted-foreground">Shipment Details</h3>
-                      <p><span className="font-medium">Name:</span> {form.watch("name")}</p>
-                      <p><span className="font-medium">Weight:</span> {form.watch("weight")} kg</p>
-                      <p><span className="font-medium">Company:</span> {selectedCompany?.name}</p>
+                      <h3 className="font-medium text-muted-foreground text-base-content">Shipment Details</h3>
+                      <p><span className="font-medium text-base-content">Name:</span> {form.watch("name")}</p>
+                      <p><span className="font-medium text-base-content">Weight:</span> {form.watch("weight")} kg</p>
+                      <p><span className="font-medium text-base-content">Company:</span> {selectedCompany?.name}</p>
                     </div>
                     
                     <div className="space-y-3">
-                      <h3 className="font-medium text-muted-foreground">Locations</h3>
-                      <p><span className="font-medium">Origin:</span> {form.watch("origin").placeName}</p>
-                      <p><span className="font-medium">Destination:</span> {form.watch("destination").placeName}</p>
+                      <h3 className="font-medium text-muted-foreground text-base-content">Locations</h3>
+                      <p><span className="font-medium text-base-content">Origin:</span> {form.watch("origin").placeName}</p>
+                      <p><span className="font-medium text-base-content">Destination:</span> {form.watch("destination").placeName}</p>
                     </div>
                   </div>
                   

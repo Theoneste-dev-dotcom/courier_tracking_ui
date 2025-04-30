@@ -16,8 +16,8 @@ export function ShipmentActivityChart() {
   return (
     <Card className="col-span-4 lg:col-span-2 animate-fade-in">
       <CardHeader>
-        <CardTitle>Weekly Shipment Activity</CardTitle>
-        <CardDescription>New shipments vs deliveries over the past week</CardDescription>
+        <CardTitle className="text-base-content">Weekly Shipment Activity</CardTitle>
+        <CardDescription className="text-base-content">New shipments vs deliveries over the past week</CardDescription>
       </CardHeader>
       <CardContent className="pl-2">
         <ResponsiveContainer width="100%" height={300}>
