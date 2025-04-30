@@ -3,7 +3,7 @@ import { setPageTitle } from '@/features/common/headerSlice'
 import Leads from '@/features/leads'
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-
+import Shipments from '@/features/shippings'
 const InternalPage = () => {
     const dispatch = useDispatch()
 
@@ -14,7 +14,8 @@ const InternalPage = () => {
 
   return (
     <div>
-      <Leads/>
+      {/* <Leads/> */}
+      <Shipments/>
     </div>
   )
 }

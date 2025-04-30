@@ -136,6 +136,124 @@ export const mockShipment: Shipment = {
   companyDetails: mockCompanyDetails
 };
 
+
+// Mock multiple shipments for a client
+const mockClientShipments: Shipment[] = [
+  mockShipment,
+  {
+    id: 123457,
+    name: "Office Supplies",
+    status: "Delivered",
+    trackingNumber: "PV-78945613",
+    weight: 3.2,
+    expectedDeliveryDate: new Date("2025-04-20T14:00:00"),
+    createdAt: new Date("2025-04-15T09:30:00"),
+    origin: {
+      longitude: -122.4194,
+      latitude: 37.7749,
+      placeName: "San Francisco, CA"
+    },
+    destination: {
+      longitude: -122.2727,
+      latitude: 37.8716,
+      placeName: "Berkeley, CA"
+    },
+    senderDetails: {
+      name: "John Smith",
+      email: "john.smith@example.com",
+      phone: 4155551234,
+      location_name: "Tech Innovations Inc."
+    },
+    receiverDetails: {
+      name: "David Wong",
+      email: "david.wong@example.com",
+      phone: 5105559876,
+      location_name: "Berkeley University"
+    },
+    companyDetails: {
+      id: 2,
+      name: "FastTrack Shipping",
+      email: "info@fasttrackshipping.com",
+      phone: 8775559876
+    }
+  },
+  {
+    id: 123458,
+    name: "Marketing Materials",
+    status: "Pending",
+    trackingNumber: "PV-78945614",
+    weight: 5.7,
+    expectedDeliveryDate: new Date("2025-05-05T11:00:00"),
+    createdAt: new Date("2025-04-28T13:45:00"),
+    origin: {
+      longitude: -122.4194,
+      latitude: 37.7749,
+      placeName: "San Francisco, CA"
+    },
+    destination: {
+      longitude: -121.8853,
+      latitude: 37.3387,
+      placeName: "San Jose, CA"
+    },
+    senderDetails: {
+      name: "John Smith",
+      email: "john.smith@example.com",
+      phone: 4155551234,
+      location_name: "Tech Innovations Inc."
+    },
+    receiverDetails: {
+      name: "Sarah Johnson",
+      email: "sarah.johnson@example.com",
+      phone: 4085553456,
+      location_name: "Silicon Valley Marketing"
+    },
+    companyDetails: {
+      id: 3,
+      name: "Global Express",
+      email: "service@globalexpress.com",
+      phone: 8885552345
+    }
+  },
+  {
+    id: 123459,
+    name: "Computer Hardware",
+    status: "In Transit",
+    trackingNumber: "PV-78945615",
+    weight: 12.3,
+    expectedDeliveryDate: new Date("2025-05-03T16:30:00"),
+    createdAt: new Date("2025-04-27T10:15:00"),
+    origin: {
+      longitude: -122.4194,
+      latitude: 37.7749,
+      placeName: "San Francisco, CA"
+    },
+    destination: {
+      longitude: -117.1611,
+      latitude: 32.7157,
+      placeName: "San Diego, CA"
+    },
+    senderDetails: {
+      name: "John Smith",
+      email: "john.smith@example.com",
+      phone: 4155551234,
+      location_name: "Tech Innovations Inc."
+    },
+    receiverDetails: {
+      name: "Michael Chen",
+      email: "michael.chen@example.com",
+      phone: 6195557890,
+      location_name: "SD Tech Solutions"
+    },
+    companyDetails: {
+      id: 1,
+      name: "Swift Logistics",
+      email: "support@swiftlogistics.com",
+      phone: 8005551234
+    }
+  }
+];
+
+
 // Service function to get shipment data
 export const getShipment = async (id: number): Promise<Shipment> => {
   // In a real application, this would be an API call
@@ -159,6 +277,14 @@ export const getShipmentLogs = async (shipmentId: number): Promise<ShipmentLog[]
     setTimeout(() => resolve(mockShipmentLogs), 500);
   });
 };
+
+export const getClientShipments = async (clientId: number): Promise<Shipment[]> => {
+  // In a real application, this would be an API call filtering by clientId
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(mockClientShipments), 800);
+  });
+};
+
 
 // Calculate estimated percentage of journey completed
 export const calculateDeliveryProgress = (updates: ShipmentUpdate[]): number => {

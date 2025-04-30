@@ -1,9 +1,9 @@
 import React from 'react'
-import InternalPage from '@/features/shippings/add_shipping'
+import AddShipment from '@/features/shippings/AddShipment'
 const AddNewShipmentForm = () => {
   return (
     <div>
-     <InternalPage/>
+     <AddShipment />
     </div>
   )
 }
